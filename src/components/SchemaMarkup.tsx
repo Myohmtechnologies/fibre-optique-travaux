@@ -1,0 +1,222 @@
+import React from 'react';
+
+interface SchemaMarkupProps {
+  pageType: 'home' | 'services' | 'about' | 'contact';
+  pageUrl: string;
+}
+
+const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
+  // Schéma de base pour l'organisation
+  const organizationSchema = {
+    "@type": "LocalBusiness",
+    "@id": "https://fibreoptiquetravaux.fr/#organization",
+    "name": "Fibre Optique Travaux",
+    "url": "https://fibreoptiquetravaux.fr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fibreoptiquetravaux.fr/images/logo-fibre-optique-travaux.png",
+      "width": 180,
+      "height": 60
+    },
+    "image": "https://fibreoptiquetravaux.fr/images/og-image.jpg",
+    "description": "Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation et finaliser les travaux nécessaires.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "544 Av. Frédéric Mistral",
+      "addressLocality": "Manosque",
+      "postalCode": "04100",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.8361,
+      "longitude": 5.7836
+    },
+    "telephone": "+33123456789",
+    "email": "contact@fibreoptiquetravaux.fr",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "priceRange": "€€"
+  };
+
+  // Schéma pour les services
+  const servicesSchema = [
+    {
+      "@type": "Service",
+      "@id": "https://fibreoptiquetravaux.fr/nos-services#installation",
+      "name": "Installation Fibre Optique Complexe",
+      "url": "https://fibreoptiquetravaux.fr/nos-services#installation",
+      "provider": {
+        "@id": "https://fibreoptiquetravaux.fr/#organization"
+      },
+      "description": "Installation complète de votre raccordement fibre optique, du point de branchement jusqu'à votre domicile.",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.8361,
+          "longitude": 5.7836
+        },
+        "geoRadius": 50000
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://fibreoptiquetravaux.fr/nos-services#depannage",
+      "name": "Dépannage & Réparation Fibre Optique",
+      "url": "https://fibreoptiquetravaux.fr/nos-services#depannage",
+      "provider": {
+        "@id": "https://fibreoptiquetravaux.fr/#organization"
+      },
+      "description": "Diagnostic et résolution rapide des problèmes de connexion fibre optique pour rétablir votre service internet.",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.8361,
+          "longitude": 5.7836
+        },
+        "geoRadius": 50000
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://fibreoptiquetravaux.fr/nos-services#deblocage",
+      "name": "Déblocage Installation Fibre",
+      "url": "https://fibreoptiquetravaux.fr/nos-services#deblocage",
+      "provider": {
+        "@id": "https://fibreoptiquetravaux.fr/#organization"
+      },
+      "description": "Service spécifique pour débloquer les installations de fibre optique lorsque le technicien de l'opérateur ne peut pas finaliser l'installation en raison de travaux nécessaires (perçage, passage de gaines, etc.).",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.8361,
+          "longitude": 5.7836
+        },
+        "geoRadius": 50000
+      }
+    }
+  ];
+
+  // Schéma pour la page web
+  const websiteSchema = {
+    "@type": "WebSite",
+    "@id": "https://fibreoptiquetravaux.fr/#website",
+    "url": "https://fibreoptiquetravaux.fr",
+    "name": "Fibre Optique Travaux",
+    "description": "Services professionnels de déblocage et d'installation de fibre optique",
+    "publisher": {
+      "@id": "https://fibreoptiquetravaux.fr/#organization"
+    }
+  };
+
+  // Schéma pour la page web actuelle
+  const webPageSchema = {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    "url": pageUrl,
+    "name": pageType === 'home' 
+      ? "Fibre Optique Travaux | Déblocage et Installation" 
+      : pageType === 'services'
+      ? "Nos Services | Fibre Optique Travaux"
+      : pageType === 'about'
+      ? "À Propos | Fibre Optique Travaux"
+      : "Contact | Fibre Optique Travaux",
+    "isPartOf": {
+      "@id": "https://fibreoptiquetravaux.fr/#website"
+    },
+    "about": {
+      "@id": "https://fibreoptiquetravaux.fr/#organization"
+    },
+    "description": pageType === 'home'
+      ? "Services professionnels de déblocage et d'installation de fibre optique. Résolution rapide des problèmes de raccordement pour particuliers et professionnels."
+      : pageType === 'services'
+      ? "Découvrez nos services spécialisés pour débloquer vos installations de fibre optique lorsque des travaux supplémentaires sont nécessaires."
+      : pageType === 'about'
+      ? "Découvrez notre entreprise spécialisée dans le déblocage et l'installation de fibre optique. Plus de 11 ans d'expérience dans le domaine des télécoms."
+      : "Contactez-nous pour toute demande concernant vos besoins en fibre optique. Notre équipe d'experts est à votre disposition."
+  };
+
+  // Schéma FAQ pour la page d'accueil
+  const faqSchema = {
+    "@type": "FAQPage",
+    "@id": "https://fibreoptiquetravaux.fr/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Que faire si le technicien de mon opérateur ne peut pas finaliser l'installation de ma fibre ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si le technicien de votre opérateur ne peut pas finaliser l'installation de votre fibre en raison de travaux nécessaires (perçage, passage de gaines, etc.), notre service de déblocage d'installation fibre peut prendre le relais pour vous éviter d'attendre un nouveau rendez-vous avec votre opérateur."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment se déroule une intervention de déblocage fibre ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Notre intervention se déroule en plusieurs étapes : 1) Nous déterminons avec précision le point de blocage et sa profondeur à l'aide d'un détecteur innovant. 2) Nous effectuons un diagnostic complet et vous proposons un devis pour réaliser les travaux nécessaires. 3) Nos techniciens qualifiés interviennent rapidement pour vous permettre d'accéder à internet en très haut débit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Est-ce un service d'urgence pour la fibre optique ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non, ce n'est pas un service d'urgence mais plutôt un service de déblocage qui permet au client de ne pas attendre un nouveau rendez-vous avec son opérateur. Nous intervenons lorsque des travaux spécifiques sont nécessaires pour finaliser l'installation (perçage, passage de gaines, etc.)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la zone d'intervention de Fibre Optique Travaux ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nous intervenons principalement à Manosque et dans la région PACA, dans un rayon d'environ 50 km autour de notre siège social."
+        }
+      }
+    ]
+  };
+
+  // Construction du schéma complet en fonction du type de page
+  let fullSchema: any = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationSchema,
+      websiteSchema,
+      webPageSchema
+    ]
+  };
+
+  // Ajout des services pour la page d'accueil et la page services
+  if (pageType === 'home' || pageType === 'services') {
+    fullSchema["@graph"] = [...fullSchema["@graph"], ...servicesSchema];
+  }
+
+  // Ajout de la FAQ pour la page d'accueil
+  if (pageType === 'home') {
+    fullSchema["@graph"].push(faqSchema);
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(fullSchema) }}
+    />
+  );
+};
+
+export default SchemaMarkup;

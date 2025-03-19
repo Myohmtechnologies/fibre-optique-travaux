@@ -1,0 +1,27 @@
+# robots.txt pour fibreoptiquetravaux.fr
+User-agent: *
+Allow: /
+
+# Permettre l'accès à tous les répertoires publics
+Allow: /images/
+Allow: /favicon/
+Allow: /public/
+
+# Bloquer l'accès aux pages administratives ou en développement
+Disallow: /admin/
+Disallow: /dev/
+Disallow: /test/
+
+# Bloquer l'accès aux fichiers spécifiques
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+
+# Autoriser l'accès au sitemap
+Allow: /sitemap.xml
+
+# Définir le délai de crawl pour éviter de surcharger le serveur
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://fibreoptiquetravaux.fr/sitemap.xml
