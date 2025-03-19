@@ -191,13 +191,48 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
     ]
   };
 
+  // Schéma pour les offres de services
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Travaux en fibre optique",
+    "provider": {
+      "@type": "Organization",
+      "name": "Fibre Optique Travaux",
+      "url": "https://fibreoptiquetravaux.fr/"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Diagnostic",
+        "description": "Analyse complète de l'installation, Détection précise des points de blocage, Évaluation des travaux nécessaires, Proposition de solutions adaptées."
+      },
+      {
+        "@type": "Offer",
+        "name": "Travaux surface molle",
+        "description": "Travaux sur surface molle uniquement de la terre, Identification du réseau cuivre en partie privative et publique, Aiguillage du fourreau à l’aide d’aiguille traçable et de sondes, Contre aiguillage réalisé pour cibler si un ou plusieurs points bloquants, Localisation du ou des blocages (regard ou fourreau bouché), Débouchage et réparation de fourreau ou de gaine, Terrassement pour rendre accessible un regard (1m max), Passage d’une ficelle de tirage une fois le problème résolu, Garantie sur le résultat des travaux, ligne fibre 100% raccordable, Compte rendu d’intervention transmis par e-mail."
+      },
+      {
+        "@type": "Offer",
+        "name": "Travaux surface dure",
+        "description": "Travaux sur surface dure (béton, enrobé, pavé), Identification du réseau cuivre en partie privative et publique, Aiguillage du fourreau à l’aide d’aiguille traçable et de sondes, Contre aiguillage réalisé pour cibler si un ou plusieurs points bloquants, Localisation du ou des blocages (regard ou fourreau bouché), Débouchage et réparation de fourreau ou de gaine, Terrassement pour rendre accessible un regard (1m max), Passage d’une ficelle de tirage une fois le problème résolu, Travaux de maçonnerie pour la remise en état en fin d’intervention, Garantie sur le résultat des travaux, ligne fibre 100% raccordable, Compte rendu d’intervention transmis par e-mail."
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "100"
+    }
+  };
+
   // Construction du schéma complet en fonction du type de page
   let fullSchema: any = {
     "@context": "https://schema.org",
     "@graph": [
       organizationSchema,
       websiteSchema,
-      webPageSchema
+      webPageSchema,
+      serviceSchema
     ]
   };
 
