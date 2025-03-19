@@ -83,6 +83,7 @@ export default function RootLayout({
         <meta name="twitter:description" content="Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ?" />
         <meta name="twitter:image" content="/images/og-image.jpg" />
         <link rel="canonical" href="https://fibreoptiquetravaux.fr" />
+        <meta name="google-site-verification" content="t5cB7Vw0ZQU4Q7Mt9dluJs5oiky10IRkfo5ZTbJ_48I" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
