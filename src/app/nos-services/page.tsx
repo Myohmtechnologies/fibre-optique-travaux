@@ -104,7 +104,7 @@ const NosServicesPage = () => {
                 </p>
               </div>
               <Link 
-                href="/contact" 
+                href="/demande-de-devis-travaux-de-fibre-optique" 
                 className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Besoin d'un devis

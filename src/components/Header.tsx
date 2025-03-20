@@ -34,8 +34,8 @@ const Header: React.FC = () => {
             <Link href="/tarifs" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
               Tarifs
             </Link>
-            <Link href="/services" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
-              travaux realiser
+            <Link href="/nos-services" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
+              Nos Services
             </Link>
             <Link href="/realisations" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
               Réalisations
