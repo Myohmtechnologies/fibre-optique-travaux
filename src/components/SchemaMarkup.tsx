@@ -225,6 +225,29 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
     }
   };
 
+  // Schéma pour les extraits d'avis
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Service", 
+      "name": "Service de débloquage d'installation de fibre optique",
+      "description": "Service permettant de débloquer les installations de fibre optique.",
+      "image": "https://fibreoptiquetravaux.fr/images/og-image.jpg"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Client satisfait"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "datePublished": "2025-03-20",
+    "reviewBody": "Une excellente expérience avec le service de débloquage de fibre optique."
+  };
+
   // Construction du schéma complet en fonction du type de page
   let fullSchema: any = {
     "@context": "https://schema.org",
@@ -232,7 +255,8 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
       organizationSchema,
       websiteSchema,
       webPageSchema,
-      serviceSchema
+      serviceSchema,
+      reviewSchema
     ]
   };
 

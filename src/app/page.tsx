@@ -23,10 +23,10 @@ export default function Home() {
    
         <Process />
         <Testimonials />
+
         <Contact />
       </main>
       <Footer />
     </div>
   );
 }
- 
