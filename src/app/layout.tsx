@@ -103,15 +103,7 @@ export default function RootLayout({
         className={`${montserrat.variable} ${poppins.variable} font-montserrat antialiased`}
       >
         {children}
-        <footer className="bg-gray-800 text-white py-4">
-          <div className="container mx-auto text-center">
-            <p className="mb-2"> {new Date().getFullYear()} Fibre Optique Travaux. Tous droits réservés.</p>
-            <nav>
-              <Link href="/mentions-legales" className="text-gray-400 hover:text-gray-300">Mentions Légales</Link> | 
-              <Link href="/conditions-generales-de-vente" className="text-gray-400 hover:text-gray-300">Conditions Générales de Vente</Link>
-            </nav>
-          </div>
-        </footer>
+        
       </body>
     </html>
   );

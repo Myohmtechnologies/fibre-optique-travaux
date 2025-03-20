@@ -166,7 +166,7 @@ const Footer = () => {
             <Link href="/politique-confidentialite" className="text-gray-400 hover:text-white text-sm transition-colors">
               Politique de Confidentialité
             </Link>
-            <Link href="/cgv" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href="/conditions-generales-de-vente" className="text-gray-400 hover:text-white text-sm transition-colors">
               CGV
             </Link>
           </div>

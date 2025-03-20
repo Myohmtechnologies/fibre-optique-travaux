@@ -124,6 +124,30 @@ export default async function RealizationPage({ params }: Props) {
                 Demander un devis gratuit
               </Link>
             </div>
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "serviceType": "Demande de devis pour travaux de fibre optique",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Fibre Optique Travaux",
+                  "url": "https://www.fibreoptiquetravaux.fr"
+                },
+                "itemReviewed": {
+                  "@type": "Product",
+                  "name": "Service de Déblocage",
+                  "description": "Service pour débloquer les installations de fibre optique.",
+                  "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "EUR",
+                    "price": "100.00",
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "availability": "https://schema.org/InStock"
+                  }
+                }
+              })}
+            </script>
           </div>
         </div>
       </main>
