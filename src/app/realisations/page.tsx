@@ -8,8 +8,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Nos réalisations | Fibre Optique Travaux',
-  description: 'Découvrez nos réalisations de déblocage d\'installation de fibre optique dans la région PACA. Passage de gaines, perçage et installation complète.',
+  title: 'Travaux Réalisés | Fibre Optique Travaux',
+  description: 'Découvrez nos réalisations de déblocage d\'installation de fibre optique dans la région PACA.',
 };
 
 async function fetchRealizations() {
@@ -22,17 +22,17 @@ async function fetchRealizations() {
   return JSON.parse(JSON.stringify(realizations));
 }
 
-export default async function RealizationsPage() {
+export default async function TravauxRealiser() {
   const realizations = await fetchRealizations();
 
   return (
-    <>
+    <div>
       <Header />
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Nos réalisations</h1>
+            <h1>Travaux Réalisés</h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Découvrez nos interventions de déblocage d'installation de fibre optique. 
               Nous intervenons rapidement pour résoudre les problèmes de passage de câbles, 
@@ -72,7 +72,7 @@ export default async function RealizationsPage() {
                     </h2>
                     <p className="text-gray-600 mb-4 line-clamp-3" 
                       dangerouslySetInnerHTML={{ 
-                        __html: realization.description.substring(0, 150) + '...'
+                        __html: realization.description.substring(0, 150) + '...' 
                       }} 
                     />
                     <div className="flex justify-between items-center">
@@ -92,6 +92,6 @@ export default async function RealizationsPage() {
       </main>
       
       <Footer />
-    </>
+    </div>
   );
 }
