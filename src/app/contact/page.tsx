@@ -1,16 +1,73 @@
-import React from 'react';
+"use client"; // Ajoutez cette ligne
+
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import SchemaMarkup from '@/components/SchemaMarkup';
 
-export const metadata = {
-  title: 'Contact | Fibre Optique Travaux',
-  description: 'Contactez notre équipe spécialisée pour vos travaux de fibre optique. Nous intervenons rapidement pour débloquer votre installation fibre.',
-};
-
 const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+
+  const [alert, setAlert] = useState({
+    type: '',
+    message: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = {
+      name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    console.log('Données envoyées:', data); // Log des données envoyées
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'enregistrement du message.');
+      }
+
+      const result = await response.json();
+      console.log('Message enregistré:', result); // Log du résultat
+      setAlert({
+        type: 'success',
+        message: 'Votre message a été envoyé avec succès.',
+      });
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Erreur:', error); // Log de l'erreur
+      setAlert({
+        type: 'error',
+        message: 'Une erreur est survenue lors de l’envoi de votre message.',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <SchemaMarkup pageType="contact" pageUrl="https://fibreoptiquetravaux.fr/contact" />
@@ -46,15 +103,19 @@ const ContactPage = () => {
                 <div className="w-full lg:w-2/3">
                   <div className="bg-white rounded-lg shadow-md p-8">
                     <h3 className="text-2xl font-semibold mb-6">Envoyez-nous un message</h3>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                           <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">Prénom</label>
                           <input 
                             type="text" 
                             id="firstName" 
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                             placeholder="Votre prénom"
+                            required
                           />
                         </div>
                         <div>
@@ -62,18 +123,26 @@ const ContactPage = () => {
                           <input 
                             type="text" 
                             id="lastName" 
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                             placeholder="Votre nom"
+                            required
                           />
                         </div>
                       </div>
                       <div className="mb-6">
                         <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
                         <input 
-                          type="email" 
-                          id="email" 
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                           placeholder="votre.email@exemple.com"
+                          required
                         />
                       </div>
                       <div className="mb-6">
@@ -81,15 +150,23 @@ const ContactPage = () => {
                         <input 
                           type="tel" 
                           id="phone" 
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
                           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                           placeholder="Votre numéro de téléphone"
+                          required
                         />
                       </div>
                       <div className="mb-6">
                         <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Sujet</label>
                         <select 
                           id="subject" 
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
                           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                          required
                         >
                           <option value="">Sélectionnez un sujet</option>
                           <option value="devis">Demande de devis</option>
@@ -102,9 +179,13 @@ const ContactPage = () => {
                         <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
                         <textarea 
                           id="message" 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
                           rows={6} 
                           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                           placeholder="Décrivez votre besoin en détail..."
+                          required
                         ></textarea>
                       </div>
                       <div className="mb-6">
@@ -120,6 +201,16 @@ const ContactPage = () => {
                         Envoyer ma demande
                       </button>
                     </form>
+                    {alert.type === 'success' && (
+                      <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-6" role="alert">
+                        <span className="block sm:inline">{alert.message}</span>
+                      </div>
+                    )}
+                    {alert.type === 'error' && (
+                      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-6" role="alert">
+                        <span className="block sm:inline">{alert.message}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -160,8 +251,7 @@ const ContactPage = () => {
                       <div className="flex items-start">
                         <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
                           <svg className="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
                           </svg>
                         </div>
                         <div>

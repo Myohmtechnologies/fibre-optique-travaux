@@ -96,6 +96,7 @@ export default function Dashboard() {
   const [quoteRequests, setQuoteRequests] = useState<IQuote[]>(mockQuoteRequests);
   const [selectedRequest, setSelectedRequest] = useState<IQuote | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [contactMessages, setContactMessages] = useState<any[]>([]);
   const router = useRouter();
 
   // Calcul des statistiques
@@ -128,9 +129,32 @@ export default function Dashboard() {
     }
   };
 
+  // Fonction pour récupérer les messages de contact
+  const fetchContactMessages = async () => {
+    try {
+      const response = await fetch('/api/contact');
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des messages de contact.');
+      }
+      const messages = await response.json();
+      return messages; 
+    } catch (error) {
+      console.error('Erreur:', error);
+      return []; 
+    }
+  };
+
   // Charger les demandes au chargement de la page
   useEffect(() => {
     fetchQuotes();
+  }, []);
+
+  useEffect(() => {
+    const loadMessages = async () => {
+      const messages = await fetchContactMessages();
+      setContactMessages(messages);
+    };
+    loadMessages();
   }, []);
 
   // Fonction pour mettre à jour le statut d'une demande
@@ -233,6 +257,37 @@ export default function Dashboard() {
                 updateRequestStatus={updateRequestStatus}
                 setSelectedRequest={setSelectedRequest}
               />
+            )}
+          </div>
+
+          {/* Messages de contact */}
+          <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+              <h2 className="text-xl font-semibold text-gray-800">Messages de Contact</h2>
+              <Link 
+                href="/dashboard/contact"
+                className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium"
+              >
+                Voir tous les messages
+              </Link>
+            </div>
+            
+            {contactMessages.length > 0 ? (
+              <ul className="space-y-4 p-6">
+                {contactMessages.slice(0, 5).map((message) => (
+                  <li key={message._id} className="p-4 bg-gray-50 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <h3 className="text-lg font-semibold text-gray-800">{message.name}</h3>
+                    <p className="text-gray-600">Email: <a href={`mailto:${message.email}`} className="text-blue-500 hover:underline">{message.email}</a></p>
+                    <p className="text-gray-600">Téléphone: {message.phone}</p>
+                    <p className="text-gray-600">Message: {message.message}</p>
+                    <p className="text-gray-500 text-sm">Date: {new Date(message.createdAt).toLocaleString()}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex justify-center items-center p-12">
+                <p className="text-gray-600">Aucun message de contact pour le moment.</p>
+              </div>
             )}
           </div>
 
