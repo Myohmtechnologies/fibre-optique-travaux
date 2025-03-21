@@ -153,6 +153,26 @@
           }
         }
       ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "@id": "https://fibreoptiquetravaux.fr/#organization",
+        "name": "Fibre Optique Travaux",
+        "description": "Services professionnels de déblocage et d'installation de fibre optique"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Client satisfait"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "datePublished": "2025-03-20",
+      "reviewBody": "Une excellente expérience avec le service de débloquage de fibre optique."
     }
   ]
 }
