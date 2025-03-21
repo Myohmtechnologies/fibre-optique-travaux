@@ -152,7 +152,13 @@ export default function Dashboard() {
   useEffect(() => {
     const loadMessages = async () => {
       const messages = await fetchContactMessages();
-      setContactMessages(messages);
+      // Tri des messages par date (du plus ancien au plus récent)
+      const sortedMessages = messages.sort((a: any, b: any) => {
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        return dateA - dateB;
+      });
+      setContactMessages(sortedMessages);
     };
     loadMessages();
   }, []);
@@ -261,34 +267,138 @@ export default function Dashboard() {
           </div>
 
           {/* Messages de contact */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          {contactMessages && contactMessages.length > 0 ? (
+            <div className="mt-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-800">Messages de Contact</h3>
+                <Link 
+                  href="/dashboard/contact" 
+                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors"
+                >
+                  Voir tous les messages
+                </Link>
+              </div>
+              
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Expéditeur
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Email
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {contactMessages.slice(0, 5).map((message, index) => (
+                      <tr key={index} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-10 w-10 bg-fiber-orange/10 rounded-full flex items-center justify-center">
+                              <span className="text-fiber-orange text-lg font-semibold">
+                                {message.name.charAt(0).toUpperCase()}
+                              </span>
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900">
+                                {message.name}
+                              </div>
+                              {message.phone && (
+                                <div className="text-sm text-gray-500">
+                                  {message.phone}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                            <a href={`mailto:${message.email}`} className="text-blue-500 hover:underline">
+                              {message.email}
+                            </a>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(message.createdAt).toLocaleDateString('fr-FR')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <button
+                            className="text-fiber-orange hover:text-fiber-orange/80 mr-3"
+                            onClick={() => {
+                              // Fonction pour visualiser le message
+                              // À implémenter plus tard
+                            }}
+                          >
+                            Voir
+                          </button>
+                          <button
+                            className="text-green-500 hover:text-green-700"
+                            onClick={() => {
+                              // Fonction pour marquer comme traité
+                              // À implémenter plus tard
+                            }}
+                          >
+                            Traité
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-800">Messages de Contact</h3>
+                <Link 
+                  href="/dashboard/contact" 
+                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors"
+                >
+                  Voir tous les messages
+                </Link>
+              </div>
+              <p className="text-gray-500 p-4 bg-white rounded-lg text-center">
+                Aucun message de contact pour le moment.
+              </p>
+            </div>
+          )}
+
+          {/* Réalisations */}
+          <div className="mt-6 bg-white rounded-xl shadow-md overflow-hidden mb-8">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-800">Messages de Contact</h2>
+              <h2 className="text-xl font-semibold text-gray-800">Réalisations</h2>
               <Link 
-                href="/dashboard/contact"
+                href="/dashboard/realizations"
                 className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium"
               >
-                Voir tous les messages
+                Gérer les réalisations
               </Link>
             </div>
-            
-            {contactMessages.length > 0 ? (
-              <ul className="space-y-4 p-6">
-                {contactMessages.slice(0, 5).map((message) => (
-                  <li key={message._id} className="p-4 bg-gray-50 rounded-lg shadow hover:shadow-lg transition-shadow">
-                    <h3 className="text-lg font-semibold text-gray-800">{message.name}</h3>
-                    <p className="text-gray-600">Email: <a href={`mailto:${message.email}`} className="text-blue-500 hover:underline">{message.email}</a></p>
-                    <p className="text-gray-600">Téléphone: {message.phone}</p>
-                    <p className="text-gray-600">Message: {message.message}</p>
-                    <p className="text-gray-500 text-sm">Date: {new Date(message.createdAt).toLocaleString()}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="flex justify-center items-center p-12">
-                <p className="text-gray-600">Aucun message de contact pour le moment.</p>
+            <div className="p-6">
+              <p className="text-gray-600">
+                Gérez vos réalisations et projets terminés pour les mettre en avant sur votre site.
+              </p>
+              <div className="mt-4">
+                <Link 
+                  href="/dashboard/realizations"
+                  className="inline-flex items-center px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  Ajouter une réalisation
+                </Link>
               </div>
-            )}
+            </div>
           </div>
 
           {/* Information sur le service de déblocage d'installation fibre */}

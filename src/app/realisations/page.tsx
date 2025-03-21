@@ -8,7 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Travaux Réalisés | Fibre Optique Travaux',
+  title: 'Travaux Réalisés | Entreprise Fibre Optique Travaux',
   description: 'Découvrez nos réalisations de déblocage d\'installation de fibre optique dans la région PACA.',
 };
 

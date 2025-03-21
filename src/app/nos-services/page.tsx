@@ -6,7 +6,7 @@ import Link from 'next/link';
 import SchemaMarkup from '@/components/SchemaMarkup';
 
 export const metadata = {
-  title: 'Nos Services | Fibre Optique Travaux',
+  title: 'Nos Services | Entreprise Travaux Fibre Optique ',
   description: 'Découvrez nos services spécialisés pour débloquer vos installations de fibre optique lorsque des travaux supplémentaires sont nécessaires.',
 };
 

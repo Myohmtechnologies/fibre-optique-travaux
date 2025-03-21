@@ -17,15 +17,15 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Fibre Optique Travaux | Détection regard, fourreau bouché, localisation blocage fibre",
+  title: "Entreprise Travaux Fibre Optique  | Détection regard, fourreau bouché, localisation blocage fibre",
   description: "Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation.",
-  keywords: "fibre optique, déblocage fibre, installation fibre, fourreau bouché, regard fibre, travaux fibre",
+  keywords: "fibre optique travaux,entreprise travaux fibre, déblocage fibre, installation fibre, fourreau bouché, regard fibre, travaux fibre",
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://fibreoptiquetravaux.fr',
     siteName: 'Fibre Optique Travaux',
-    title: 'Fibre Optique Travaux | Déblocage et Installation',
+    title: 'Entreprise Travaux Fibre Optique  | Déblocage et Installation',
     description: 'Vous n\'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation.',
     images: [
       {
