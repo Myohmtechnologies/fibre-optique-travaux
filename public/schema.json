@@ -173,6 +173,16 @@
       },
       "datePublished": "2025-03-20",
       "reviewBody": "Une excellente expérience avec le service de débloquage de fibre optique."
+    },
+    {
+      "@type": "AggregateRating",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "@id": "https://fibreoptiquetravaux.fr/#organization",
+        "name": "Fibre Optique Travaux"
+      },
+      "ratingValue": "5",
+      "reviewCount": "100"
     }
   ]
 }

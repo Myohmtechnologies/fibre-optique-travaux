@@ -217,12 +217,20 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
         "name": "Travaux surface dure",
         "description": "Travaux sur surface dure (béton, enrobé, pavé), Identification du réseau cuivre en partie privative et publique, Aiguillage du fourreau à l'aide d'aiguille traçable et de sondes, Contre aiguillage réalisé pour cibler si un ou plusieurs points bloquants, Localisation du ou des blocages (regard ou fourreau bouché), Débouchage et réparation de fourreau ou de gaine, Terrassement pour rendre accessible un regard (1m max), Passage d'une ficelle de tirage une fois le problème résolu, Travaux de maçonnerie pour la remise en état en fin d'intervention, Garantie sur le résultat des travaux, ligne fibre 100% raccordable, Compte rendu d'intervention transmis par e-mail."
       }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "100"
-    }
+    ]
+  };
+
+  // Schéma pour les notes agrégées
+  const aggregateRatingSchema = {
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "@id": "https://fibreoptiquetravaux.fr/#organization",
+      "name": "Fibre Optique Travaux"
+    },
+    "ratingValue": "5",
+    "reviewCount": "100"
   };
 
   // Schéma pour les extraits d'avis
@@ -256,6 +264,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
       websiteSchema,
       webPageSchema,
       serviceSchema,
+      aggregateRatingSchema,
       reviewSchema
     ]
   };
