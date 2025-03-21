@@ -17,29 +17,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Entreprise Travaux Fibre Optique  | Détection regard, fourreau bouché, localisation blocage fibre",
-  description: "Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation.",
-  keywords: "fibre optique travaux,entreprise travaux fibre, déblocage fibre, installation fibre, fourreau bouché, regard fibre, travaux fibre",
+  title: "Travaux Fibre Optique | Installation et Déblocage Fibre en PACA",
+  description: "Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA. Devis gratuit sous 48h.",
+  keywords: "travaux fibre optique, installation fibre, déblocage fibre, perçage fibre, tirage fibre, fibre PACA, travaux fibre, installation fibre optique, déblocage fibre optique",
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://fibreoptiquetravaux.fr',
     siteName: 'Fibre Optique Travaux',
-    title: 'Entreprise Travaux Fibre Optique  | Déblocage et Installation',
-    description: 'Vous n\'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation.',
+    title: 'Travaux Fibre Optique | Installation et Déblocage Fibre en PACA',
+    description: 'Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA.',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Fibre Optique Travaux - Services professionnels de fibre optique',
+        alt: 'Fibre Optique Travaux - Expert en travaux fibre optique',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fibre Optique Travaux |Détection regard, fourreau bouché, localisation blocage fibre',
-    description: 'Vous n\'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ?',
+    title: 'Travaux Fibre Optique | Installation et Déblocage Fibre en PACA',
+    description: 'Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA.',
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -73,15 +73,15 @@ export default function RootLayout({
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:url" content="https://fibreoptiquetravaux.fr" />
         <meta property="og:site_name" content="Fibre Optique Travaux" />
-        <meta property="og:title" content="Fibre Optique Travaux | Déblocage et Installation" />
-        <meta property="og:description" content="Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation." />
+        <meta property="og:title" content="Travaux Fibre Optique | Installation et Déblocage Fibre en PACA" />
+        <meta property="og:description" content="Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA." />
         <meta property="og:image" content="/images/og-image.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Fibre Optique Travaux - Services professionnels de fibre optique" />
+        <meta property="og:image:alt" content="Fibre Optique Travaux - Expert en travaux fibre optique" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Fibre Optique Travaux | Déblocage et Installation" />
-        <meta name="twitter:description" content="Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ?" />
+        <meta name="twitter:title" content="Travaux Fibre Optique | Installation et Déblocage Fibre en PACA" />
+        <meta name="twitter:description" content="Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA." />
         <meta name="twitter:image" content="/images/og-image.jpg" />
         <link rel="canonical" href="https://fibreoptiquetravaux.fr" />
         <meta name="google-site-verification" content="t5cB7Vw0ZQU4Q7Mt9dluJs5oiky10IRkfo5ZTbJ_48I" />
@@ -94,7 +94,7 @@ export default function RootLayout({
               "@id": "https://fibreoptiquetravaux.fr/#website",
               "url": "https://fibreoptiquetravaux.fr",
               "name": "Fibre Optique Travaux",
-              "description": "Vous n'arrivez pas à vous faire raccorder à la fibre optique, il y a un blocage et le technicien ne parvient pas à effectuer le branchement ? Nous intervenons pour débloquer votre installation."
+              "description": "Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA."
             })
           }}
         />
