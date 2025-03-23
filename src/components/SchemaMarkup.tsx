@@ -1,11 +1,27 @@
 import React from 'react';
+import Head from 'next/head';
 
 interface SchemaMarkupProps {
-  pageType: 'home' | 'services' | 'about' | 'contact';
+  pageType: 'home' | 'realization' | 'blog' | 'contact' | 'about';
   pageUrl: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  date?: string;
 }
 
-const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
+const SchemaMarkup = ({ pageType, pageUrl, title, description, image, date }: SchemaMarkupProps) => {
+  // S'assurer que l'URL est absolue
+  const absoluteUrl = pageUrl.startsWith('http') ? pageUrl : `https://fibreoptiquetravaux.fr${pageUrl}`;
+  
+  // Titre par défaut si non fourni
+  const defaultTitle = 'Fibre Optique Travaux - Expert en travaux fibre optique';
+  const pageTitle = title || defaultTitle;
+  
+  // Description par défaut si non fournie
+  const defaultDescription = 'Expert en travaux fibre optique pour particuliers et professionnels. Installation, déblocage et maintenance fibre optique pour tous opérateurs.';
+  const pageDescription = description || defaultDescription;
+
   // Schéma de base pour l'organisation
   const organizationSchema = {
     "@type": "LocalBusiness",
@@ -127,28 +143,16 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
   // Schéma pour la page web actuelle
   const webPageSchema = {
     "@type": "WebPage",
-    "@id": `${pageUrl}#webpage`,
-    "url": pageUrl,
-    "name": pageType === 'home' 
-      ? "Fibre Optique Travaux | Déblocage et Installation" 
-      : pageType === 'services'
-      ? "Nos Services | Fibre Optique Travaux"
-      : pageType === 'about'
-      ? "À Propos | Fibre Optique Travaux"
-      : "Contact | Fibre Optique Travaux",
+    "@id": `${absoluteUrl}#webpage`,
+    "url": absoluteUrl,
+    "name": pageTitle,
     "isPartOf": {
       "@id": "https://fibreoptiquetravaux.fr/#website"
     },
     "about": {
       "@id": "https://fibreoptiquetravaux.fr/#organization"
     },
-    "description": pageType === 'home'
-      ? "Services professionnels de déblocage et d'installation de fibre optique. Résolution rapide des problèmes de raccordement pour particuliers et professionnels."
-      : pageType === 'services'
-      ? "Découvrez nos services spécialisés pour débloquer vos installations de fibre optique lorsque des travaux supplémentaires sont nécessaires."
-      : pageType === 'about'
-      ? "Découvrez notre entreprise spécialisée dans le déblocage et l'installation de fibre optique. Plus de 11 ans d'expérience dans le domaine des télécoms."
-      : "Contactez-nous pour toute demande concernant vos besoins en fibre optique. Notre équipe d'experts est à votre disposition."
+    "description": pageDescription
   };
 
   // Schéma FAQ pour la page d'accueil
@@ -280,10 +284,51 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ pageType, pageUrl }) => {
   }
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(fullSchema) }}
-    />
+    <Head>
+      {/* Balise canonique */}
+      <link rel="canonical" href={absoluteUrl} />
+      
+      {/* Balises meta essentielles */}
+      <title>{pageTitle}</title>
+      <meta name="description" content={pageDescription} />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={absoluteUrl} />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
+      {image && <meta property="og:image" content={image} />}
+      
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={absoluteUrl} />
+      <meta property="twitter:title" content={pageTitle} />
+      <meta property="twitter:description" content={pageDescription} />
+      {image && <meta property="twitter:image" content={image} />}
+
+      {/* Schema.org markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": pageType === 'home' ? "WebSite" : 
+                     pageType === 'blog' ? "BlogPosting" : 
+                     pageType === 'realization' ? "Article" : "WebPage",
+            "url": absoluteUrl,
+            "name": pageTitle,
+            "description": pageDescription,
+            ...(image && { "image": image }),
+            ...(date && { "datePublished": date }),
+            "publisher": {
+              "@type": "Organization",
+              "name": "Fibre Optique Travaux",
+              "url": "https://fibreoptiquetravaux.fr"
+            }
+          })
+        }}
+      />
+    </Head>
   );
 };
 

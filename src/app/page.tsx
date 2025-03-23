@@ -55,7 +55,12 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SchemaMarkup pageType="home" pageUrl="https://fibreoptiquetravaux.fr/" />
+      <SchemaMarkup 
+        pageType="home" 
+        pageUrl="https://fibreoptiquetravaux.fr/"
+        title="Fibre Optique Travaux - Expert en travaux fibre optique"
+        description="Expert en travaux fibre optique pour particuliers et professionnels. Installation, déblocage et maintenance fibre optique pour tous opérateurs."
+      />
       <Header />
       <main>
         <Hero />
