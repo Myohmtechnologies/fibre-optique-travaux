@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 interface SchemaMarkupProps {
-  pageType: 'home' | 'realization' | 'blog' | 'contact' | 'about';
+  pageType: 'home' | 'about' | 'contact' | 'realization' | 'blog' | 'services';
   pageUrl: string;
   title?: string;
   description?: string;
