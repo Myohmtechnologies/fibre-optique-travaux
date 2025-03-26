@@ -29,7 +29,7 @@ export default function Tarifs() {
             {/* En-tête de la page */}
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold text-neutral-dark mb-4">
-                Nos Tarifs
+              Nos tarifs pour la détection de point de blocage
               </h1>
               <div className="w-24 h-1 bg-construction-orange mx-auto mb-6"></div>
               <p className="text-lg max-w-2xl mx-auto text-neutral-dark">

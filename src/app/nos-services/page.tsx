@@ -6,8 +6,8 @@ import Link from 'next/link';
 import SchemaMarkup from '@/components/SchemaMarkup';
 
 export const metadata = {
-  title: 'Nos Services | Entreprise Travaux Fibre Optique ',
-  description: 'Découvrez nos services spécialisés pour débloquer vos installations de fibre optique lorsque des travaux supplémentaires sont nécessaires.',
+  title: 'Entreprise de débouchage de fourreau et recherche de regard FT ',
+  description: 'Vous recherchez une entreprise spécialisée dans la fibre optique pour réaliser le débouchage d&#039;un fourreau ou la recherche d&#039;un regard ?.',
 };
 
 const ServiceCard = ({ 
@@ -89,7 +89,7 @@ const NosServicesPage = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-gray-300">FIBRE</span><span className="text-orange-500">OPTIQUE TRAVAUX</span>
+                Besoin de travaux pour débloquer votre fibre optique ?
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold mb-6">Nos Services Spécialisés</h2>
               <div className="text-base text-gray-300 mb-8 max-w-3xl mx-auto">

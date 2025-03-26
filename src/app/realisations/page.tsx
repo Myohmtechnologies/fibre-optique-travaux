@@ -8,8 +8,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Travaux Réalisés | Entreprise Fibre Optique Travaux',
-  description: 'Découvrez nos réalisations de déblocage d\'installation de fibre optique dans la région PACA.',
+  title: 'Fourreau télécom bouché, gaine ptt bloqué, regard introuvable ?',
+  description: 'Votre fourreau télécom est bouché, votre gaine est bloqué, impossible de trouver votre regard pour la fibre ? Nous avons la solution',
 };
 
 async function fetchRealizations() {
@@ -32,7 +32,7 @@ export default async function TravauxRealiser() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1>Travaux Réalisés</h1>
+            <h1>Quelques exemples deTravaux Réalisés</h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Découvrez nos interventions de déblocage d'installation de fibre optique. 
               Nous intervenons rapidement pour résoudre les problèmes de passage de câbles, 
