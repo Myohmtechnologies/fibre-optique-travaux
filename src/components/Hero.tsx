@@ -58,8 +58,8 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6">
         {/* Titre H1 optimisé pour SEO - prend toute la largeur en desktop */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-center lg:text-left lg:mb-8">
-          <span className="text-black block lg:inline-block">Des techniciens sont intervenus</span> 
-          <span className="text-orange-500 block lg:inline-block">mais l'installation n'a pas abouti ?</span>
+          <span className="text-black block lg:inline-block">Localisation Précise des Blocages Fibre</span> 
+          <span className="text-orange-500 block lg:inline-block">| Regard Introuvable, Fourreau Bouché ?</span>
         </h1>
         
         {/* Structure principale en colonnes sur desktop, empilées sur mobile */}

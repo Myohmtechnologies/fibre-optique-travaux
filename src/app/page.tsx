@@ -58,8 +58,8 @@ export default async function Home() {
       <SchemaMarkup 
         pageType="home" 
         pageUrl="https://fibreoptiquetravaux.fr/"
-        title="Fibre Optique Travaux - Expert en travaux fibre optique"
-        description="Expert en travaux fibre optique pour particuliers et professionnels. Installation, déblocage et maintenance fibre optique pour tous opérateurs."
+        title="Détection Blocage Fibre Optique | Fourreau Bouché, Regard Introuvable - Solution Rapide"
+        description="Le technicien de votre opérateur ne peut pas finaliser votre raccordement fibre à cause d'un blocage ? Notre équipement spécialisé localise précisément le point de blocage et nous intervenons sous 48h."
       />
       <Header />
       <main>
@@ -103,7 +103,7 @@ export default async function Home() {
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>
                       </div>
                     )}
@@ -209,4 +209,3 @@ export default async function Home() {
     </div>
   );
 }
- 
