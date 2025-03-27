@@ -2,15 +2,20 @@ import React from 'react';
 import Head from 'next/head';
 
 interface SchemaMarkupProps {
-  pageType: 'home' | 'about' | 'contact' | 'realization' | 'blog' | 'services';
+  pageType: 'home' | 'about' | 'contact' | 'realization' | 'blog' | 'services' | 'local';
   pageUrl: string;
   title?: string;
   description?: string;
   image?: string;
   date?: string;
+  localBusiness?: {
+    name: string;
+    city: string;
+    region: string;
+  };
 }
 
-const SchemaMarkup = ({ pageType, pageUrl, title, description, image, date }: SchemaMarkupProps) => {
+const SchemaMarkup = ({ pageType, pageUrl, title, description, image, date, localBusiness }: SchemaMarkupProps) => {
   // S'assurer que l'URL est absolue
   const absoluteUrl = pageUrl.startsWith('http') ? pageUrl : `https://fibreoptiquetravaux.fr${pageUrl}`;
   
@@ -260,6 +265,69 @@ const SchemaMarkup = ({ pageType, pageUrl, title, description, image, date }: Sc
     "reviewBody": "Une excellente expérience avec le service de débloquage de fibre optique."
   };
 
+  // Schéma spécifique pour les pages locales (villes)
+  const localBusinessSchema = localBusiness ? {
+    "@type": "LocalBusiness",
+    "@id": `${absoluteUrl}#localbusiness`,
+    "name": `${localBusiness.name} ${localBusiness.city}`,
+    "url": absoluteUrl,
+    "image": "https://fibreoptiquetravaux.fr/images/og-image.jpg",
+    "description": pageDescription,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": localBusiness.city,
+      "addressRegion": localBusiness.region,
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.8361,
+      "longitude": 5.7836
+    },
+    "telephone": "+33123456789",
+    "email": "contact@fibreoptiquetravaux.fr",
+    "areaServed": {
+      "@type": "City",
+      "name": localBusiness.city
+    },
+    "priceRange": "€€",
+    "parentOrganization": {
+      "@id": "https://fibreoptiquetravaux.fr/#organization"
+    }
+  } : null;
+
+  // Schéma pour les services locaux
+  const localServicesSchema = localBusiness ? [
+    {
+      "@type": "Service",
+      "@id": `${absoluteUrl}#installation`,
+      "name": `Installation Fibre Optique à ${localBusiness.city}`,
+      "url": absoluteUrl,
+      "provider": {
+        "@id": `${absoluteUrl}#localbusiness`
+      },
+      "description": `Installation complète de votre raccordement fibre optique à ${localBusiness.city}, du point de branchement jusqu'à votre domicile.`,
+      "areaServed": {
+        "@type": "City",
+        "name": localBusiness.city
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": `${absoluteUrl}#deblocage`,
+      "name": `Déblocage Fibre Optique à ${localBusiness.city}`,
+      "url": absoluteUrl,
+      "provider": {
+        "@id": `${absoluteUrl}#localbusiness`
+      },
+      "description": `Service spécifique pour débloquer les installations de fibre optique à ${localBusiness.city} lorsque le technicien de l'opérateur ne peut pas finaliser l'installation en raison de travaux nécessaires.`,
+      "areaServed": {
+        "@type": "City",
+        "name": localBusiness.city
+      }
+    }
+  ] : [];
+
   // Construction du schéma complet en fonction du type de page
   let fullSchema: any = {
     "@context": "https://schema.org",
@@ -283,49 +351,38 @@ const SchemaMarkup = ({ pageType, pageUrl, title, description, image, date }: Sc
     fullSchema["@graph"].push(faqSchema);
   }
 
+  // Ajout des schémas spécifiques pour les pages locales
+  if (pageType === 'local' && localBusiness && localBusinessSchema) {
+    fullSchema["@graph"].push(localBusinessSchema);
+    if (localServicesSchema.length > 0) {
+      fullSchema["@graph"] = [...fullSchema["@graph"], ...localServicesSchema];
+    }
+  }
+
   return (
     <Head>
-      {/* Balise canonique */}
-      <link rel="canonical" href={absoluteUrl} />
-      
-      {/* Balises meta essentielles */}
+      {/* Balises meta standard */}
       <title>{pageTitle}</title>
       <meta name="description" content={pageDescription} />
       
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={absoluteUrl} />
+      {/* Open Graph */}
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={pageDescription} />
+      <meta property="og:url" content={absoluteUrl} />
+      <meta property="og:type" content={pageType === 'blog' || pageType === 'realization' ? 'article' : 'website'} />
       {image && <meta property="og:image" content={image} />}
       
-      {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={absoluteUrl} />
-      <meta property="twitter:title" content={pageTitle} />
-      <meta property="twitter:description" content={pageDescription} />
-      {image && <meta property="twitter:image" content={image} />}
-
-      {/* Schema.org markup */}
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
+      {image && <meta name="twitter:image" content={image} />}
+      
+      {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": pageType === 'home' ? "WebSite" : 
-                     pageType === 'blog' ? "BlogPosting" : 
-                     pageType === 'realization' ? "Article" : "WebPage",
-            "url": absoluteUrl,
-            "name": pageTitle,
-            "description": pageDescription,
-            ...(image && { "image": image }),
-            ...(date && { "datePublished": date }),
-            "publisher": {
-              "@type": "Organization",
-              "name": "Fibre Optique Travaux",
-              "url": "https://fibreoptiquetravaux.fr"
-            }
-          })
+          __html: JSON.stringify(fullSchema)
         }}
       />
     </Head>
