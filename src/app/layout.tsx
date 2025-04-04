@@ -84,7 +84,7 @@ export default function RootLayout({
         <meta name="twitter:description" content="Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA." />
         <meta name="twitter:image" content="/images/og-image.jpg" />
         <link rel="canonical" href="https://fibreoptiquetravaux.fr" />
-        <meta name="google-site-verification" content="t5cB7Vw0ZQU4Q7Mt9dluJs5oiky10IRkfo5ZTbJ_48I" />
+        <meta name="google-site-verification" content="bshllqo6MIhoBv2oLuo-5lh9FzoXSYWFaQmCOzx62rA" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
