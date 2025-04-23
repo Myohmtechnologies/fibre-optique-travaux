@@ -135,14 +135,29 @@ export default async function RealizationPage({ params }: Props) {
                   "url": "https://www.fibreoptiquetravaux.fr"
                 },
                 "itemReviewed": {
-                  "@type": "Product",
-                  "name": "Service de Déblocage",
-                  "description": "Service pour débloquer les installations de fibre optique.",
+                  "@type": "Service",
+                  "name": "Service de Déblocage de Fibre Optique",
+                  "description": "Service professionnel pour débloquer les installations de fibre optique.",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "Fibre Optique Travaux",
+                    "url": "https://www.fibreoptiquetravaux.fr",
+                    "logo": "https://www.fibreoptiquetravaux.fr/images/logo-fibre-optique-travaux.png"
+                  },
+                  "serviceType": "Déblocage Fibre Optique",
+                  "areaServed": {
+                    "@type": "GeoCircle",
+                    "geoMidpoint": {
+                      "@type": "GeoCoordinates",
+                      "latitude": 43.8361,
+                      "longitude": 5.7836
+                    },
+                    "geoRadius": 50000
+                  },
                   "offers": {
                     "@type": "Offer",
                     "priceCurrency": "EUR",
-                    "price": "100.00",
-                    "itemCondition": "https://schema.org/NewCondition",
+                    "price": "230.00",
                     "availability": "https://schema.org/InStock"
                   }
                 }

@@ -7,19 +7,20 @@ import Image from 'next/image';
 import { villes } from '../data/villes';
 import { getTemoignagesVille } from '../data/temoignages';
 import { getPhotosRealisationsVille } from '../data/photos-realisations';
+import { getExpertiseVille } from '../data/expertise-ville';
 import SchemaMarkup from '@/components/SchemaMarkup';
 
 // Générer les métadonnées dynamiquement pour chaque ville
 export async function generateMetadata({ params }: { params: { ville: string } }) {
   const villeData = villes.find(v => v.slug === params.ville);
-  
+
   if (!villeData) {
     return {
       title: 'Ville non trouvée | Fibre Optique Travaux',
       description: 'La page que vous recherchez n\'existe pas.'
     };
   }
-  
+
   return {
     title: villeData.titre,
     description: villeData.description,
@@ -37,20 +38,23 @@ export async function generateStaticParams() {
 export default function VillePage({ params }: { params: { ville: string } }) {
   // Trouver les données de la ville
   const villeData = villes.find(v => v.slug === params.ville);
-  
+
   // Si la ville n'existe pas, afficher une page 404
   if (!villeData) {
     notFound();
   }
-  
+
   // Récupérer les témoignages pour cette ville
   const temoignagesVille = getTemoignagesVille(params.ville);
-  
+
+  // Récupérer les données d'expertise pour cette ville
+  const expertiseVilleData = getExpertiseVille(params.ville);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Schéma pour le SEO local */}
-      <SchemaMarkup 
-        pageType="local" 
+      <SchemaMarkup
+        pageType="local"
         pageUrl={`https://fibreoptiquetravaux.fr/travaux-fibre-optique/${villeData.slug}`}
         title={villeData.titre}
         description={villeData.description}
@@ -60,9 +64,9 @@ export default function VillePage({ params }: { params: { ville: string } }) {
           region: "PACA"
         }}
       />
-      
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative bg-gray-900 text-white py-20">
@@ -71,7 +75,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-fiber-glow opacity-30 blur-3xl"></div>
             <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-construction-glow opacity-20 blur-2xl"></div>
           </div>
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -86,14 +90,14 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg"
                 >
                   Demander un diagnostic
                 </Link>
-                <Link 
-                  href="/tarifs" 
+                <Link
+                  href="/tarifs"
                   className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg"
                 >
                   Voir nos tarifs
@@ -104,53 +108,130 @@ export default function VillePage({ params }: { params: { ville: string } }) {
         </section>
 
         {/* Logos des opérateurs partenaires */}
-        <div className="mt-12 pt-6 border-t border-gray-200 container mx-auto px-4">
+        <div className="mt-12 pt-6  container mx-auto px-4">
           <div className="text-center mb-4">
             <p className="text-sm text-gray-500 font-medium">Nous intervenons pour tous les opérateurs</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             <div className="w-24 h-16 relative transition-all duration-300 hover:scale-110">
-              <Image 
-                src="/images/partnair-logo/Orange_logo.svg.png" 
-                alt="Logo Orange" 
+              <Image
+                src="/images/partnair-logo/Orange_logo.svg.png"
+                alt="Logo Orange"
                 fill
                 style={{ objectFit: 'contain' }}
               />
             </div>
             <div className="w-24 h-16 relative transition-all duration-300 hover:scale-110">
-              <Image 
-                src="/images/partnair-logo/SFR-2022-logo.svg.png" 
-                alt="Logo SFR" 
+              <Image
+                src="/images/partnair-logo/SFR-2022-logo.svg.png"
+                alt="Logo SFR"
                 fill
                 style={{ objectFit: 'contain' }}
               />
             </div>
             <div className="w-24 h-16 relative transition-all duration-300 hover:scale-110">
-              <Image 
-                src="/images/partnair-logo/Free_logo.svg.png" 
-                alt="Logo Free" 
+              <Image
+                src="/images/partnair-logo/Free_logo.svg.png"
+                alt="Logo Free"
                 fill
                 style={{ objectFit: 'contain' }}
               />
             </div>
             <div className="w-24 h-16 relative transition-all duration-300 hover:scale-110">
-              <Image 
-                src="/images/partnair-logo/Bouygues_Télécom.png" 
-                alt="Logo Bouygues Telecom" 
+              <Image
+                src="/images/partnair-logo/Bouygues_Télécom.png"
+                alt="Logo Bouygues Telecom"
                 fill
                 style={{ objectFit: 'contain' }}
               />
             </div>
             <div className="w-24 h-16 relative transition-all duration-300 hover:scale-110">
-              <Image 
-                src="/images/partnair-logo/sosh.png" 
-                alt="Logo Sosh" 
+              <Image
+                src="/images/partnair-logo/sosh.png"
+                alt="Logo Sosh"
                 fill
                 style={{ objectFit: 'contain' }}
               />
             </div>
           </div>
         </div>
+        {/* Section expertise ville */}
+        {expertiseVilleData && (
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl font-bold text-center mb-12">
+                {expertiseVilleData.titre}
+              </h2>
+
+              <div className="max-w-4xl mx-auto mb-12">
+                <p className="text-lg text-gray-700 mb-6">
+                  {expertiseVilleData.introduction}
+                </p>
+
+                <div className="grid md:grid-cols-3 gap-8 my-12">
+                  <div className="relative rounded-xl overflow-hidden shadow-lg h-64">
+                    <Image
+                      src={expertiseVilleData.photo1.src}
+                      alt={expertiseVilleData.photo1.alt}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-3 text-sm">
+                      {expertiseVilleData.photo1.legende}
+                    </div>
+                  </div>
+
+                  <div className="relative rounded-xl overflow-hidden shadow-lg h-64">
+                    <Image
+                      src={expertiseVilleData.photo2.src}
+                      alt={expertiseVilleData.photo2.alt}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-3 text-sm">
+                      {expertiseVilleData.photo2.legende}
+                    </div>
+                  </div>
+
+                  <div className="relative rounded-xl overflow-hidden shadow-lg h-64">
+                    <Image
+                      src={expertiseVilleData.photo3.src}
+                      alt={expertiseVilleData.photo3.alt}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-3 text-sm">
+                      {expertiseVilleData.photo3.legende}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <p className="text-gray-700">{expertiseVilleData.paragraphe1}</p>
+                  <p className="text-gray-700">{expertiseVilleData.paragraphe2}</p>
+                  <p className="text-gray-700">{expertiseVilleData.paragraphe3}</p>
+                </div>
+
+                <div className="mt-10 bg-orange-50 p-6 rounded-xl">
+                  <h3 className="text-xl font-semibold mb-4 text-orange-700">Notre expertise à {villeData.nom}</h3>
+                  <ul className="space-y-3">
+                    {expertiseVilleData.pointsForts.map((point, index) => (
+                      <li key={index} className="flex items-start">
+                        <svg className="h-6 w-6 text-orange-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Problèmes spécifiques à la ville */}
         <section className="py-16 bg-white">
@@ -158,7 +239,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             <h2 className="text-3xl font-bold text-center mb-12">
               Problèmes courants de fibre optique à {villeData.nom}
             </h2>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {villeData.problemes_communs.map((probleme, index) => (
                 <div key={index} className="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -174,40 +255,185 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             </div>
           </div>
         </section>
-        
-        {/* Quartiers desservis */}
+
+        {/* Pourquoi nous choisir */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Nous intervenons dans tous les quartiers de {villeData.nom}
+              Pourquoi choisir Fibre Optique Travaux pour vos travaux à {villeData.nom} ?
             </h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {villeData.quartiers.map((quartier, index) => (
-                <div key={index} className="bg-white rounded-lg p-4 text-center shadow-sm">
-                  <span className="font-medium">{quartier}</span>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Expertise locale à {villeData.nom}</h3>
+                    <p className="text-gray-600">Notre équipe connaît parfaitement les spécificités du réseau fibre à {villeData.nom} et ses quartiers. Cette connaissance locale nous permet d'intervenir avec précision et efficacité sur tous types de blocages.</p>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Intervention rapide</h3>
+                    <p className="text-gray-600">Nous intervenons sous 48h à {villeData.nom}, et parfois même le jour même en cas d'urgence. Notre réactivité est l'une des raisons pour lesquelles les habitants de {villeData.nom} nous font confiance.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Techniciens expérimentés</h3>
+                    <p className="text-gray-600">Nos techniciens sont des experts en fibre optique, formés aux dernières techniques et équipés d'outils spécialisés. Ils ont déjà résolu des centaines de problèmes similaires à {villeData.nom}.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Garantie de résultat</h3>
+                    <p className="text-gray-600">Nous nous engageons sur le résultat : si nous ne parvenons pas à débloquer votre installation fibre à {villeData.nom}, vous ne payez rien. C'est notre promesse de satisfaction.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div className="mt-12 text-center">
-              <p className="text-lg mb-6">
-                Population de {villeData.nom}: <strong>{villeData.population.toLocaleString('fr-FR')}</strong> habitants
-              </p>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                Notre équipe intervient rapidement dans toute la ville de {villeData.nom} et ses environs pour débloquer votre installation fibre optique. Nous connaissons parfaitement les spécificités de chaque quartier et les problèmes récurrents qui peuvent survenir lors de l'installation de la fibre.
-              </p>
+
+            <div className="bg-white p-6 rounded-xl shadow-md mt-8">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 bg-orange-100 rounded-full p-3 mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Notre engagement envers les habitants de {villeData.nom}</h3>
+                  <p className="text-gray-600 mb-4">
+                    Notre engagement est simple : résoudre efficacement les problèmes de raccordement fibre optique à {villeData.nom} avec professionnalisme et transparence. Nous comprenons l'importance d'une connexion internet stable et rapide, surtout dans une ville dynamique comme {villeData.nom}.
+                  </p>
+                  <p className="text-gray-600">
+                    Contrairement aux grands opérateurs qui peuvent vous faire attendre des semaines, nous intervenons rapidement et nous nous concentrons sur une solution durable. Les {temoignagesVille.length} témoignages de nos clients satisfaits à {villeData.nom} témoignent de notre sérieux et de notre efficacité.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-        
+
+        {/* Une expertise pour tout type de travaux */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Une expertise pour tout type de travaux à {villeData.nom}
+            </h2>
+
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img
+                    src="/images/travaux-fibre-optique-expertise.jpg"
+                    alt={`Travaux de fibre optique à ${villeData.nom}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="lg:w-1/2">
+                <div className="bg-gray-50 p-6 rounded-xl shadow-md">
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-800">Des solutions complètes pour tous vos besoins</h3>
+
+                  <p className="text-gray-700 mb-4">
+                    En plus de nos interventions souterraines, Fibre Optique Travaux est également parfaitement équipé pour effectuer des travaux de terrassement en extérieur, tout comme des interventions plus précises à l'intérieur des bâtiments à {villeData.nom}.
+                  </p>
+
+                  <p className="text-gray-700 mb-4">
+                    Que vous habitiez un pavillon ou un immeuble à {villeData.nom}, notre objectif est de proposer un service complet, accessible à tous les habitants, qu'il s'agisse de particuliers ou de professionnels.
+                  </p>
+
+                  <div className="mt-6 space-y-3">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-6 w-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                        <svg className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700">Travaux de terrassement extérieur</span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-6 w-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                        <svg className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700">Interventions intérieures précises</span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-6 w-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                        <svg className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700">Solutions pour pavillons et immeubles</span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-6 w-6 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                        <svg className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700">Services pour particuliers et professionnels</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md"
+                    >
+                      Demander un devis personnalisé
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Notre processus d'intervention */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">
               Notre processus d'intervention à {villeData.nom}
             </h2>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -216,7 +442,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 <h3 className="text-xl font-semibold mb-2">Diagnostic</h3>
                 <p className="text-gray-600">Analyse complète de votre installation pour localiser précisément le point de blocage.</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-orange-500">2</span>
@@ -224,7 +450,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 <h3 className="text-xl font-semibold mb-2">Devis</h3>
                 <p className="text-gray-600">Proposition d'une solution adaptée avec un devis transparent et sans surprise.</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-orange-500">3</span>
@@ -232,7 +458,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 <h3 className="text-xl font-semibold mb-2">Intervention</h3>
                 <p className="text-gray-600">Réalisation des travaux nécessaires par nos techniciens experts en fibre optique.</p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-orange-500">4</span>
@@ -241,10 +467,10 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 <p className="text-gray-600">Tests complets pour garantir que votre installation fibre est parfaitement fonctionnelle.</p>
               </div>
             </div>
-            
+
             <div className="mt-12 text-center">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md"
               >
                 Demander une intervention à {villeData.nom}
@@ -252,14 +478,14 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             </div>
           </div>
         </section>
-        
+
         {/* Tarifs */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">
               Nos tarifs pour le déblocage fibre optique à {villeData.nom}
             </h2>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
                 <div className="bg-gray-800 text-white p-6 text-center">
@@ -296,8 +522,8 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Link 
-                      href="/contact" 
+                    <Link
+                      href="/contact"
                       className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un diagnostic
@@ -305,7 +531,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 transform scale-105 z-10">
                 <div className="bg-orange-500 text-white p-6 text-center relative">
                   <div className="absolute top-0 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
@@ -350,8 +576,8 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Link 
-                      href="/contact" 
+                    <Link
+                      href="/contact"
                       className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
@@ -359,7 +585,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
                 <div className="bg-gray-800 text-white p-6 text-center">
                   <h3 className="text-xl font-bold">Intervention complexe</h3>
@@ -401,8 +627,8 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Link 
-                      href="/contact" 
+                    <Link
+                      href="/contact"
                       className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
@@ -411,7 +637,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-6 mt-8">
               <h3 className="text-xl font-semibold mb-4">Autres prestations sur devis à {villeData.nom}</h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -452,7 +678,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             </div>
           </div>
         </section>
-        
+
         {/* Section Photos avant/après */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -470,9 +696,9 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     <div className="relative">
                       <div className="grid grid-cols-2 gap-1">
                         <div className="relative">
-                          <img 
-                            src={photo.photoAvant} 
-                            alt={`Avant: ${photo.probleme} à ${photo.quartier}`} 
+                          <img
+                            src={photo.photoAvant}
+                            alt={`Avant: ${photo.probleme} à ${photo.quartier}`}
                             className="w-full h-48 object-cover"
                           />
                           <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
@@ -480,9 +706,9 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                           </div>
                         </div>
                         <div className="relative">
-                          <img 
-                            src={photo.photoApres} 
-                            alt={`Après: ${photo.probleme} à ${photo.quartier}`} 
+                          <img
+                            src={photo.photoApres}
+                            alt={`Après: ${photo.probleme} à ${photo.quartier}`}
                             className="w-full h-48 object-cover"
                           />
                           <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
@@ -533,7 +759,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   Découvrez les témoignages de nos clients satisfaits dans différents quartiers de {villeData.nom} suite à nos interventions de déblocage de fibre optique.
                 </p>
               </div>
-              
+
               {temoignagesVille.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {temoignagesVille.map((temoignage, index) => (
@@ -554,26 +780,26 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                             <span className="text-orange-600 font-bold">{temoignage.note}/5</span>
                           </div>
                         </div>
-                        
+
                         <div className="bg-orange-50 rounded-lg px-4 py-2 mb-4 inline-block">
                           <span className="text-sm font-medium text-orange-800">
                             {temoignage.probleme}
                           </span>
                         </div>
-                        
+
                         <p className="text-gray-600 mb-3">
                           "{temoignage.commentaire}"
                         </p>
-                        
+
                         <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
                           <span>{temoignage.date}</span>
                           <div className="flex">
                             {[...Array(5)].map((_, i) => (
-                              <svg 
-                                key={i} 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                className={`h-4 w-4 ${i < temoignage.note ? 'text-yellow-400' : 'text-gray-300'}`} 
-                                viewBox="0 0 20 20" 
+                              <svg
+                                key={i}
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`h-4 w-4 ${i < temoignage.note ? 'text-yellow-400' : 'text-gray-300'}`}
+                                viewBox="0 0 20 20"
                                 fill="currentColor"
                               >
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292z" />
@@ -591,10 +817,10 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   <p className="text-gray-600">Soyez le premier à partager votre expérience après notre intervention !</p>
                 </div>
               )}
-              
+
               <div className="mt-10 text-center">
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md"
                 >
                   Demander une intervention à {villeData.nom}
@@ -620,7 +846,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   Retrouvez les réponses aux questions les plus fréquemment posées par nos clients à {villeData.nom} concernant le déblocage de fibre optique.
                 </p>
               </div>
-              
+
               <div className="space-y-4">
                 {/* Question 1 */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
@@ -646,7 +872,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </div>
                   </details>
                 </div>
-                
+
                 {/* Question 2 */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <details className="group">
@@ -685,7 +911,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </div>
                   </details>
                 </div>
-                
+
                 {/* Question 3 */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <details className="group">
@@ -721,8 +947,8 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                         </ul>
                         <p className="mt-3">Pour des interventions plus spécifiques, nous établissons un devis personnalisé gratuit.</p>
                         <div className="mt-4">
-                          <Link 
-                            href="/tarifs" 
+                          <Link
+                            href="/tarifs"
                             className="text-orange-500 hover:text-orange-600 font-medium flex items-center"
                           >
                             Voir tous nos tarifs
@@ -735,7 +961,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </div>
                   </details>
                 </div>
-                
+
                 {/* Question 4 */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <details className="group">
@@ -760,7 +986,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                     </div>
                   </details>
                 </div>
-                
+
                 {/* Question 5 */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <details className="group">
@@ -791,11 +1017,11 @@ export default function VillePage({ params }: { params: { ville: string } }) {
                   </details>
                 </div>
               </div>
-              
+
               <div className="mt-10 text-center">
                 <p className="text-gray-600 mb-4">Vous avez d'autres questions sur nos interventions à {villeData.nom} ?</p>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md"
                 >
                   Contactez-nous
@@ -807,7 +1033,33 @@ export default function VillePage({ params }: { params: { ville: string } }) {
             </div>
           </div>
         </section>
-        
+
+        {/* Quartiers */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Nous intervenons dans tous les quartiers de {villeData.nom}
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {villeData.quartiers.map((quartier, index) => (
+                <div key={index} className="bg-white rounded-lg p-4 text-center shadow-sm">
+                  <span className="font-medium">{quartier}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-lg mb-6">
+                Population de {villeData.nom}: <strong>{villeData.population.toLocaleString('fr-FR')}</strong> habitants
+              </p>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Notre équipe intervient rapidement dans toute la ville de {villeData.nom} et ses environs pour débloquer votre installation fibre optique. Nous connaissons parfaitement les spécificités de chaque quartier et les problèmes récurrents qui peuvent survenir lors de l'installation de la fibre.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA final */}
         <section className="py-16 bg-gray-900 text-white">
           <div className="container mx-auto px-4 text-center">
@@ -818,14 +1070,14 @@ export default function VillePage({ params }: { params: { ville: string } }) {
               Ne restez pas bloqué avec une installation fibre inachevée. Notre équipe d'experts intervient rapidement à {villeData.nom} pour résoudre tous vos problèmes de raccordement.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg"
               >
                 Demander un diagnostic
               </Link>
-              <Link 
-                href="/tarifs" 
+              <Link
+                href="/tarifs"
                 className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg"
               >
                 Voir nos tarifs
@@ -834,7 +1086,7 @@ export default function VillePage({ params }: { params: { ville: string } }) {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );
