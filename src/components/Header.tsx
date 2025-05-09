@@ -55,7 +55,7 @@ const Header: React.FC = () => {
               className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition-colors"
             >
               <FiPhone className="mr-2" />
-              01 23 45 67 89
+              07 87 17 91 86
             </a>
             
             <Link
@@ -77,11 +77,11 @@ const Header: React.FC = () => {
           {/* Bouton de menu mobile */}
           <div className="md:hidden flex items-center">
             <a 
-              href="tel:+33123456789" 
+              href="tel:+33787179186" 
               className="mr-4 px-3 py-1 bg-orange-500 text-white font-medium rounded-lg text-sm flex items-center"
             >
               <FiPhone className="mr-1" />
-              01 23 45 67 89
+              07 87 17 91 86
             </a>
             <button
               type="button"
