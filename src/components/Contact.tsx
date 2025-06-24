@@ -73,7 +73,7 @@ const Contact = () => {
           <div className="fiber-card p-8 rounded-lg shadow-lg glow-effect">
             <h3 className="text-2xl font-bold mb-6">Nos coordonnées</h3>
             
-            <div className="space-y-6">
+            <div className="space-y-6"> 
               <div className="flex items-start">
                 <div className="fiber-icon mr-4 flex-shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,7 +83,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold mb-1">Adresse</h4>
-                  <p className="text-neutral-dark">123 Avenue de la Fibre, 75000 Paris</p>
+                  <p className="text-neutral-dark">544 Avenue Frédéric Mistral, 04100 Manosque</p>
                 </div>
               </div>
               
@@ -95,7 +95,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold mb-1">Téléphone</h4>
-                  <p className="text-neutral-dark">01 23 45 67 89</p>
+                  <p className="text-neutral-dark">07 87 17 91 86</p>
                 </div>
               </div>
               
@@ -244,7 +244,7 @@ const Contact = () => {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="btn-primary glow-effect"
+                  className="btn-secondary glow-effect"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}

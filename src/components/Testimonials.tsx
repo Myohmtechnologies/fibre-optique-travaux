@@ -185,6 +185,22 @@ const Testimonials = () => {
               />
             ))}
           </div>
+          
+          {/* Bouton CTA */}
+          <div className="mt-12 text-center">
+            <a
+              href="/demande-de-devis-travaux-de-fibre-optique"
+              className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-orange-300 hover:border-orange-400"
+            >
+              <div className="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Demandez votre devis gratuit
+              </div>
+            </a>
+            <p className="text-gray-600 mt-3 text-sm">Réponse sous 24h - Sans engagement</p>
+          </div>
         </div>
       </div>
     </section>

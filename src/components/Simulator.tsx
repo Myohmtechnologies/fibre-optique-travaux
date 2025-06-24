@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 // Interface pour les données du formulaire
 interface FormData {
@@ -16,6 +17,7 @@ interface FormData {
 }
 
 const Simulator = () => {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     environment: '',
@@ -117,11 +119,8 @@ const Simulator = () => {
         message: ''
       });
       
-      // Afficher un message de succès
-      setSubmitSuccess(true);
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
+      // Redirection instantanée vers la page de remerciement
+      router.push('/merci');
       
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire:', error);
@@ -156,7 +155,7 @@ const Simulator = () => {
     <section id="simulator" className="py-12 relative overflow-hidden mx-auto max-w-5xl my-8">
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 py-4 px-6 bg-gradient-to-b from-yellow-400 via-orange-400 to-orange-500 text-white rounded-xl shadow-md">
               Demande de devis pour vos travaux de fibre optique
             </h1>
           <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">

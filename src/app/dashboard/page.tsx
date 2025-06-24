@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { isAuthenticated } from '@/utils/authService';
 import Sidebar from '@/components/admin/Sidebar';
 import QuoteRequestsTable from '@/components/admin/QuoteRequestsTable';
 import StatsCards from '@/components/admin/StatsCards';
@@ -144,10 +145,18 @@ export default function Dashboard() {
     }
   };
 
-  // Charger les demandes au chargement de la page
+  // Vérifier l'authentification et charger les demandes au chargement de la page
   useEffect(() => {
+    // Vérifier si l'utilisateur est authentifié
+    if (typeof window !== 'undefined') {
+      if (!isAuthenticated()) {
+        router.push('/login');
+        return;
+      }
+    }
+    
     fetchQuotes();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const loadMessages = async () => {

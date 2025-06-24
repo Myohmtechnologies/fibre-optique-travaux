@@ -52,7 +52,7 @@ const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             <a 
               href="tel:+33123456789" 
-              className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition-colors"
+              className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-colors"
             >
               <FiPhone className="mr-2" />
               07 87 17 91 86
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
             
             <Link
               href="/demande-de-devis-travaux-de-fibre-optique"
-              className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg shadow-md transition-all duration-300"
+              className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-full shadow-md transition-all duration-300"
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 

@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Link from 'next/link';
 
-const Hero = () => {
+function Hero() {
   // État pour le texte SEO expansible
   const [isTextExpanded, setIsTextExpanded] = useState(false);
 
@@ -51,118 +51,118 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-white to-gray-50 pt-6 pb-12 md:pt-10 md:pb-16">
-      {/* Effet de fond subtil */}
-      <div className="absolute inset-0 bg-fiber-pattern opacity-5"></div>
+    <section className="relative pt-8 pb-12 md:pt-12 md:pb-20 bg-gradient-to-br from-gray-50 to-white">
+      {/* Motif de réseau lumineux évoquant la fibre optique */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <div className="absolute inset-0" style={{ background: `radial-gradient(circle at 30% 20%, rgba(255, 107, 0, 0.05) 0%, rgba(255, 107, 0, 0) 60%),
+                                                  radial-gradient(circle at 70% 60%, rgba(0, 112, 243, 0.05) 0%, rgba(0, 112, 243, 0) 60%)` }}></div>
+        <div className="network-lines absolute inset-0">
+          <svg 
+            className="absolute h-full w-full opacity-10" 
+            viewBox="0 0 100 100" 
+            preserveAspectRatio="none"
+          >
+            {/* Points de connexion */}
+            <circle cx="20" cy="20" r="0.7" fill="#FF6B00" />
+            <circle cx="40" cy="25" r="0.7" fill="#FF6B00" />
+            <circle cx="65" cy="15" r="0.7" fill="#FF6B00" />
+            <circle cx="80" cy="30" r="0.7" fill="#FF6B00" />
+            <circle cx="15" cy="60" r="0.7" fill="#0070F3" />
+            <circle cx="30" cy="70" r="0.7" fill="#0070F3" />
+            <circle cx="55" cy="65" r="0.7" fill="#0070F3" />
+            <circle cx="75" cy="75" r="0.7" fill="#0070F3" />
+            <circle cx="90" cy="50" r="0.7" fill="#0070F3" />
+            
+            {/* Lignes de connexion */}
+            <line x1="20" y1="20" x2="40" y2="25" stroke="#FF6B00" strokeWidth="0.3" />
+            <line x1="40" y1="25" x2="65" y2="15" stroke="#FF6B00" strokeWidth="0.3" />
+            <line x1="65" y1="15" x2="80" y2="30" stroke="#FF6B00" strokeWidth="0.3" />
+            <line x1="15" y1="60" x2="30" y2="70" stroke="#0070F3" strokeWidth="0.3" />
+            <line x1="30" y1="70" x2="55" y2="65" stroke="#0070F3" strokeWidth="0.3" />
+            <line x1="55" y1="65" x2="75" y2="75" stroke="#0070F3" strokeWidth="0.3" />
+            <line x1="75" y1="75" x2="90" y2="50" stroke="#0070F3" strokeWidth="0.3" />
+            
+            {/* Connexions croisées */}
+            <line x1="40" y1="25" x2="55" y2="65" stroke="#9333EA" strokeWidth="0.2" strokeDasharray="1,1" />
+            <line x1="65" y1="15" x2="30" y2="70" stroke="#9333EA" strokeWidth="0.2" strokeDasharray="1,1" />
+          </svg>
+        </div>
+      </div>
       
+      <style jsx>{`
+        .network-lines {
+          transform: scale(1.2);
+        }
+        @media (min-width: 768px) {
+          .network-lines {
+            transform: scale(1.5);
+          }
+        }
+      `}</style>
       <div className="container mx-auto px-4 sm:px-6">
-        {/* Titre H1 optimisé pour SEO - prend toute la largeur en desktop */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-center lg:text-left lg:mb-8">
-          <span className="text-black block lg:inline-block">Localisation Précise des Blocages Fibre</span> 
-          <span className="text-orange-500 block lg:inline-block">| Regard Introuvable, Fourreau Bouché ?</span>
-        </h1>
-        
-        {/* Structure principale en colonnes sur desktop, empilées sur mobile */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-12">
-          
+        <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-12">
+
           {/* Colonne de gauche: Contenu textuel */}
-          <div className="lg:w-1/2 mb-8 lg:mb-0">
-            {/* Sous-titre */}
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-black mb-5">
-              Nous débloquons votre raccordement fibre.
+          <div className="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-4">
+              Déblocage Fibre Optique <span className="text-orange-500">Express</span>
+            </h1>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+              Fourreau Bouché ? Regard Introuvable ?
             </h2>
-            
-            {/* Cartes d'information - toujours visibles sur mobile */}
-            <div className="mb-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="bg-white rounded-xl shadow-sm p-3 border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-center mb-2">
-                    <div className="flex-shrink-0 w-7 h-7 bg-orange-100 rounded-full flex items-center justify-center mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 text-sm">Raccordement bloqué ?</h3>
-                  </div>
-                  <p className="text-xs text-gray-600 leading-relaxed">Obstacle technique que votre opérateur ne peut pas résoudre ? Notre expertise débloque votre installation.</p>
-                </div>
+            <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 mb-8">
+              <span className="block font-bold text-orange-500 mb-2">Là où votre opérateur abandonne, nous intervenons.</span>
+              Intervention sous 24h dans toute la région PACA.
+            </p>
 
-                <div className="bg-white rounded-xl shadow-sm p-3 border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-center mb-2">
-                    <div className="flex-shrink-0 w-7 h-7 bg-orange-100 rounded-full flex items-center justify-center mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 text-sm">Diagnostic précis</h3>
-                  </div>
-                  <p className="text-xs text-gray-600 leading-relaxed">Nos équipements spécialisés localisent exactement le point de blocage pour une intervention efficace.</p>
-                </div>
-
-                <div className="bg-white rounded-xl shadow-sm p-3 border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-center mb-2">
-                    <div className="flex-shrink-0 w-7 h-7 bg-orange-100 rounded-full flex items-center justify-center mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 text-sm">Solution sur mesure</h3>
-                  </div>
-                  <p className="text-xs text-gray-600 leading-relaxed">Devis personnalisé et travaux nécessaires pour vous connecter au très haut débit rapidement.</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* CTA principal avec texte sur une seule ligne */}
-            <Link
-              href="/demande-de-devis-travaux-de-fibre-optique"
-              className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-3xl shadow-lg transition-all duration-300 flex items-center justify-center text-base whitespace-nowrap mb-5 relative overflow-hidden group border-2 border-orange-300 hover:border-orange-400"
-            >
-              {/* Effet de halo subtil */}
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl"></span>
-              
-              {/* Effet de bordure qui s'illumine */}
-              <span className="absolute inset-0 border-2 border-orange-300 opacity-0 group-hover:opacity-100 rounded-3xl scale-105 transition-all duration-500"></span>
-              
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 mr-2 relative z-10 group-hover:scale-110 transition-transform duration-300" 
-                viewBox="0 0 20 20" 
-                fill="currentColor"
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
+              <Link
+                href="/demande-de-devis-travaux-de-fibre-optique"
+                className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-105"
               >
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-              </svg>
-              <span className="relative z-10 group-hover:tracking-wider transition-all duration-300">DEMANDER UNE INTERVENTION</span>
-            </Link>
-            
-            {/* Badge de confiance - après le CTA */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              <div className="inline-flex items-center bg-orange-50 rounded-full px-3 py-1.5 text-xs font-medium text-orange-700">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                11 ans d'expérience
+                Demander une intervention rapide
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 text-center lg:text-left">
+              <div className="bg-gray-50 rounded-lg p-3 transition-all duration-300 hover:shadow-lg hover:bg-white transform hover:-translate-y-1">
+                <div className="flex items-center justify-center lg:justify-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                  </svg>
+                  <p className="font-semibold text-gray-800 text-sm">+10 ans d'expérience</p>
+                </div>
               </div>
-              <div className="inline-flex items-center bg-orange-50 rounded-full px-3 py-1.5 text-xs font-medium text-orange-700">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-                Intervention sous 48h
+              <div className="flex items-center text-sm text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  <p className="font-semibold text-gray-800 text-sm">Intervention sous 24h</p>
+                </div>
+              <div className="bg-gray-50 rounded-lg p-3 transition-all duration-300 hover:shadow-lg hover:bg-white transform hover:-translate-y-1">
+                <div className="flex items-center justify-center lg:justify-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="font-semibold text-gray-800 text-sm">+500 blocages résolus</p>
+                </div>
               </div>
             </div>
           </div>
-          
+
           {/* Colonne de droite: Carrousel d'images */}
           <div className="lg:w-1/2">
-            <div className="relative rounded-xl overflow-hidden shadow-xl lg:mt-10">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl border-4 border-gray-100">
               <Swiper
                 modules={[Pagination, Autoplay, Navigation]}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                pagination={{ clickable: true, dynamicBullets: true }}
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
                 navigation
                 loop={true}
-                className="w-full h-56 sm:h-64 md:h-72 lg:h-80"
+                className="w-full h-64 sm:h-72 md:h-80 lg:h-96"
               >
                 {interventionImages.map((image, index) => (
                   <SwiperSlide key={index}>
@@ -175,8 +175,9 @@ const Hero = () => {
                         style={{ objectFit: 'cover' }}
                         priority={index < 2}
                       />
-                      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black to-transparent">
-                        <p className="text-white font-medium text-xs sm:text-sm">{image.caption}</p>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 p-4">
+                        <p className="text-white font-semibold text-sm sm:text-base drop-shadow-md">{image.caption}</p>
                       </div>
                     </div>
                   </SwiperSlide>
@@ -188,7 +189,7 @@ const Hero = () => {
       </div>
       
       {/* Logos des opérateurs partenaires */}
-      <div className="mt-12 pt-6 border-t border-gray-200">
+      <div className="mt-12 pt-6">
         <div className="text-center mb-4">
           <p className="text-sm text-gray-500 font-medium">Nous intervenons pour tous les opérateurs</p>
         </div>
@@ -237,6 +238,6 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Hero;

@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// Import dynamique du composant CookieBanner pour éviter les erreurs SSR
+const CookieBanner = dynamic(
+  () => import('@/components/CookieBanner'),
+  { ssr: false }
+);
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -17,8 +24,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Travaux Fibre Optique | Installation et Déblocage Fibre en PACA",
-  description: "Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA. Devis gratuit sous 48h.",
+  title: "Déblocage Fibre Optique PACA | Intervention Rapide Fourreau Bouché & Regard Introuvable",
+  description: "Spécialiste du déblocage fibre optique en PACA. Fourreau bouché, regard introuvable ou passage impossible ? Intervention sous 24h, équipement spécialisé et 10+ ans d'expérience. Devis gratuit et diagnostic précis.",
   keywords: "travaux fibre optique, installation fibre, déblocage fibre, perçage fibre, tirage fibre, fibre PACA, travaux fibre, installation fibre optique, déblocage fibre optique",
   openGraph: {
     type: 'website',
@@ -73,15 +80,15 @@ export default function RootLayout({
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:url" content="https://fibreoptiquetravaux.fr" />
         <meta property="og:site_name" content="Fibre Optique Travaux" />
-        <meta property="og:title" content="Travaux Fibre Optique | Installation et Déblocage Fibre en PACA" />
-        <meta property="og:description" content="Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA." />
+        <meta property="og:title" content="Déblocage Fibre Optique PACA | Intervention Rapide Fourreau Bouché & Regard Introuvable" />
+        <meta property="og:description" content="Spécialiste du déblocage fibre optique en PACA. Fourreau bouché, regard introuvable ou passage impossible ? Intervention sous 24h, équipement spécialisé et 10+ ans d'expérience." />
         <meta property="og:image" content="/images/og-image.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Fibre Optique Travaux - Expert en travaux fibre optique" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Travaux Fibre Optique | Installation et Déblocage Fibre en PACA" />
-        <meta name="twitter:description" content="Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA." />
+        <meta name="twitter:title" content="Déblocage Fibre Optique PACA | Intervention Rapide Fourreau Bouché & Regard Introuvable" />
+        <meta name="twitter:description" content="Spécialiste du déblocage fibre optique en PACA. Fourreau bouché, regard introuvable ou passage impossible ? Intervention sous 24h, équipement spécialisé et 10+ ans d'expérience." />
         <meta name="twitter:image" content="/images/og-image.jpg" />
         <link rel="canonical" href="https://fibreoptiquetravaux.fr" />
         <meta name="google-site-verification" content="t5cB7Vw0ZQU4Q7Mt9dluJs5oiky10IRkfo5ZTbJ_48I" />
@@ -94,7 +101,7 @@ export default function RootLayout({
               "@id": "https://fibreoptiquetravaux.fr/#website",
               "url": "https://fibreoptiquetravaux.fr",
               "name": "Fibre Optique Travaux",
-              "description": "Expert en travaux de fibre optique : installation, déblocage, perçage de murs, tirage de câbles. Intervention rapide dans toute la région PACA."
+              "description": "Spécialiste du déblocage fibre optique en PACA. Fourreau bouché, regard introuvable ou passage impossible ? Intervention sous 24h, équipement spécialisé et 10+ ans d'expérience."
             })
           }}
         />
@@ -103,7 +110,8 @@ export default function RootLayout({
         className={`${montserrat.variable} ${poppins.variable} font-montserrat antialiased`}
       >
         {children}
-        
+        {/* Bannière de consentement aux cookies */}
+        <CookieBanner />
       </body>
     </html>
   );

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Process from "@/components/Process";
+import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SchemaMarkup from "@/components/SchemaMarkup";
-import Simulator from "@/components/Simulator";
+
 import Solutions from "@/components/Solutions";
 import Link from "next/link";
 import Image from "next/image";
@@ -58,7 +59,7 @@ export default async function Home() {
       <SchemaMarkup 
         pageType="home" 
         pageUrl="https://fibreoptiquetravaux.fr/"
-        title="Détection Blocage Fibre Optique | Fourreau Bouché, Regard Introuvable - Solution Rapide"
+        title="Fibre optique travaux | Fourreau Bouché, Regard Introuvable - Solution Rapide"
         description="Le technicien de votre opérateur ne peut pas finaliser votre raccordement fibre à cause d'un blocage ? Notre équipement spécialisé localise précisément le point de blocage et nous intervenons sous 48h."
       />
       <Header />
@@ -66,10 +67,11 @@ export default async function Home() {
         <Hero />
         <Solutions />
         <div className="container mx-auto px-4 sm:px-6">
-          <Simulator />
+        
         </div>
    
         <Process />
+        <About />
         <Testimonials />
 
         {/* Section Nos derniers chantiers */}

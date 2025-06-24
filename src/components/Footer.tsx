@@ -55,7 +55,7 @@ const Footer = () => {
           
           {/* Liens rapides */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-fiber-blue">Liens Rapides</h3>
+            <h3 className="text-lg font-bold mb-4 text-orange-500">Liens Rapides</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-300 hover:text-white transition-colors">
@@ -119,7 +119,7 @@ const Footer = () => {
           
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-fiber-blue to-construction-orange bg-clip-text text-transparent">Contact</h3>
+            <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-fiber-blue to-construction-orange bg-clip-text text-orange-500">Contact</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-gray-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
