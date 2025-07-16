@@ -141,61 +141,7 @@ const NosServicesPage = () => {
           </div>
         </section>
 
-        {/* Section Présentation avec image et texte */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Notre expertise à votre service</h2>
-              <p className="text-lg text-gray-600">
-                Spécialistes des travaux de fibre optique, nous intervenons lorsque votre technicien opérateur ne peut pas finaliser l'installation en raison de travaux nécessaires.
-              </p>
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
-              <div className="w-full md:w-1/2">
-                <Image 
-                  src="/images/nos-service.png" 
-                  alt="Installation fibre optique" 
-                  width={500} 
-                  height={350}
-                  className="rounded-lg shadow-md object-cover"
-                />
-              </div>
-              <div className="w-full md:w-1/2">
-                <h3 className="text-2xl font-semibold mb-4">Pourquoi faire appel à nos services ?</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <FaCheck className="w-5 h-5 text-orange-500 mt-1 mr-2" />
-                    <span className="text-gray-700">Intervention rapide sous 48h</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FaCheck className="w-5 h-5 text-orange-500 mt-1 mr-2" />
-                    <span className="text-gray-700">Techniciens qualifiés et expérimentés</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FaCheck className="w-5 h-5 text-orange-500 mt-1 mr-2" />
-                    <span className="text-gray-700">Travaux propres et soignés</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FaCheck className="w-5 h-5 text-orange-500 mt-1 mr-2" />
-                    <span className="text-gray-700">Coordination avec votre opérateur</span>
-                  </li>
-                  <li className="flex items-start">
-                    <FaCheck className="w-5 h-5 text-orange-500 mt-1 mr-2" />
-                    <span className="text-gray-700">Devis transparent et sans surprise</span>
-                  </li>
-                </ul>
-                <div className="mt-6">
-                  <Link 
-                    href="/contact" 
-                    className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300 text-sm">
-                    Contactez-nous
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      
 
         {/* Section Problèmes et Solutions */}
         <section className="py-16 bg-white">

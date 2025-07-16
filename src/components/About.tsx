@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { FiTool, FiHeart, FiUser } from 'react-icons/fi';
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -29,7 +30,7 @@ const About = () => {
               Derrière chaque intervention, une passion pour la connectivité
             </h2>
             <p className="text-orange-500 font-semibold text-xl mb-6">
-              Riadh, votre artisan de la fibre optique
+              Julien, votre artisan en travaux de fibre optique
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               Frustré de voir tant de personnes laissées pour compte par les grands opérateurs face à un problème de raccordement, j'ai fondé cette entreprise avec une mission simple : apporter une solution rapide, humaine et définitive. Chaque câble que je connecte, chaque fourreau que je débouche, c'est une famille ou une entreprise qui retrouve l'accès au monde numérique. C'est cette satisfaction qui me motive chaque jour.
@@ -73,16 +74,26 @@ const About = () => {
             
             {/* Bouton CTA */}
             <div className="mt-10 flex justify-center md:justify-start">
-              <a
-                href="/demande-de-devis-travaux-de-fibre-optique"
-                className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center text-base whitespace-nowrap relative overflow-hidden group border-2 border-orange-300 hover:border-orange-400"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-                Découvrez notre expertise
-                <span className="absolute right-0 top-0 h-full w-12 -ml-12 bg-gradient-to-r from-transparent to-white/20 transform skew-x-30 transition-all duration-1000 group-hover:translate-x-full ease-out"></span>
-              </a>
+            <Link
+              href="/demande-de-devis-travaux-de-fibre-optique"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-3xl shadow-lg transition-all duration-300 text-base whitespace-nowrap relative overflow-hidden group border-2 border-orange-300 hover:border-orange-400"
+            >
+            {/* Effet de halo subtil */}
+            <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl"></span>
+            
+            {/* Effet de bordure qui s'illumine */}
+            <span className="absolute inset-0 border-2 border-orange-300 opacity-0 group-hover:opacity-100 rounded-3xl scale-105 transition-all duration-500"></span>
+            
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 mr-2 relative z-10 group-hover:scale-110 transition-transform duration-300" 
+              viewBox="0 0 20 20" 
+              fill="currentColor"
+            >
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+            </svg>
+            <span className="relative z-10 group-hover:tracking-wider transition-all duration-300">DEMANDER UNE INTERVENTION</span>
+            </Link>
             </div>
           </div>
         </div>

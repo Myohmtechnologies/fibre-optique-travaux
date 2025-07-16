@@ -132,7 +132,7 @@ const Simulator = () => {
 
   const environments = [
     { id: 'terre', name: 'Terre', icon: '🌱', description: 'Terrain naturel sans aménagement' },
-    { id: 'beton', name: 'Béton', icon: '🧱', description: 'Surface en béton ou ciment' },
+    { id: 'beton', name: 'Béton/Gravel', icon: '🧱', description: 'Surface en béton' },
     { id: 'pave', name: 'Pavé', icon: '🧩', description: 'Surface en pavés ou dalles' }
   ];
 

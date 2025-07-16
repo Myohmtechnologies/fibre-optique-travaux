@@ -86,13 +86,13 @@ export default function CookieBanner() {
           <div className="flex space-x-3">
             <button
               onClick={declineCookies}
-              className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
+              className="px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors"
             >
               Refuser
             </button>
             <button
               onClick={acceptCookies}
-              className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
+              className="px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors"
             >
               Accepter
             </button>

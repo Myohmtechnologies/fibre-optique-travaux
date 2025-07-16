@@ -65,13 +65,14 @@ export default async function Home() {
       <Header />
       <main>
         <Hero />
+        <About />
         <Solutions />
         <div className="container mx-auto px-4 sm:px-6">
         
         </div>
    
         <Process />
-        <About />
+       
         <Testimonials />
 
         {/* Section Nos derniers chantiers */}

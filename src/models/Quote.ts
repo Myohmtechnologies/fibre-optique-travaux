@@ -9,7 +9,9 @@ export interface IQuote extends Document {
   address: string;
   postalCode: string;
   message?: string;
-  status: 'new' | 'contacted' | 'in_progress' | 'completed' | 'cancelled';
+  status: 'new' | 'contacted' | 'scheduled' | 'completed' | 'cancelled';
+  notes?: string;
+  appointmentDate?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,9 +27,11 @@ const QuoteSchema: Schema = new Schema({
   message: { type: String, default: '' },
   status: { 
     type: String, 
-    enum: ['new', 'contacted', 'in_progress', 'completed', 'cancelled'],
+    enum: ['new', 'contacted', 'scheduled', 'completed', 'cancelled'],
     default: 'new'
-  }
+  },
+  notes: { type: String, required: false },
+  appointmentDate: { type: Date, required: false }
 }, { timestamps: true });
 
 // Vérifier si le modèle existe déjà pour éviter les erreurs de redéfinition
