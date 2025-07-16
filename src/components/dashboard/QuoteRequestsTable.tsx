@@ -67,13 +67,13 @@ export default function QuoteRequestsTable({
                   px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                   ${request.status === 'new' ? 'bg-blue-100 text-blue-800' : ''}
                   ${request.status === 'contacted' ? 'bg-yellow-100 text-yellow-800' : ''}
-                  ${request.status === 'in_progress' ? 'bg-purple-100 text-purple-800' : ''}
+                  ${request.status === 'scheduled' ? 'bg-purple-100 text-purple-800' : ''}
                   ${request.status === 'completed' ? 'bg-green-100 text-green-800' : ''}
                   ${request.status === 'cancelled' ? 'bg-red-100 text-red-800' : ''}
                 `}>
                   {request.status === 'new' && 'Nouveau'}
                   {request.status === 'contacted' && 'Contacté'}
-                  {request.status === 'in_progress' && 'En cours'}
+                  {request.status === 'scheduled' && 'En cours'}
                   {request.status === 'completed' && 'Terminé'}
                   {request.status === 'cancelled' && 'Annulé'}
                 </span>
@@ -94,8 +94,8 @@ export default function QuoteRequestsTable({
                       e.stopPropagation();
                       const nextStatus = 
                         request.status === 'new' ? 'contacted' as const :
-                        request.status === 'contacted' ? 'in_progress' as const :
-                        request.status === 'in_progress' ? 'completed' as const : 'completed' as const;
+                        request.status === 'contacted' ? 'scheduled' as const :
+                        request.status === 'scheduled' ? 'completed' as const : 'completed' as const;
                       
                       updateRequestStatus(request._id?.toString() || '', nextStatus);
                     }}
@@ -106,7 +106,7 @@ export default function QuoteRequestsTable({
                   >
                     {request.status === 'new' && 'Contacter'}
                     {request.status === 'contacted' && 'En cours'}
-                    {request.status === 'in_progress' && 'Terminer'}
+                    {request.status === 'scheduled' && 'Terminer'}
                     {request.status === 'completed' && 'Terminé'}
                     {request.status === 'cancelled' && 'Annulé'}
                   </button>
