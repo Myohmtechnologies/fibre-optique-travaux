@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Quote } from '@/models/Quote';
+import { Resend } from 'resend';
 
 // POST /api/quotes - Créer une nouvelle demande de devis
 export async function POST(request: NextRequest) {
@@ -81,6 +82,54 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Envoi d'un email de notification
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY || '');
+      
+      // Préparation du contenu HTML de l'email
+      const emailHtml = `
+        <h1>Nouvelle demande de devis reçue</h1>
+        <p>Une nouvelle demande de devis a été soumise sur votre site web.</p>
+        
+        <h2>Informations client</h2>
+        <ul>
+          <li><strong>Nom complet:</strong> ${data.fullName}</li>
+          <li><strong>Téléphone:</strong> ${data.phone}</li>
+          <li><strong>Adresse:</strong> ${data.address}</li>
+          <li><strong>Code postal:</strong> ${data.postalCode}</li>
+        </ul>
+        
+        <h2>Détails de la demande</h2>
+        <ul>
+          <li><strong>Environnement:</strong> ${data.environment}</li>
+          <li><strong>Type de logement:</strong> ${data.housingType}</li>
+          <li><strong>Opérateur:</strong> ${data.operator}</li>
+        </ul>
+        
+        ${data.message ? `<h2>Message</h2><p>${data.message}</p>` : ''}
+        
+        <p>Connectez-vous à votre <a href="https://fibreoptiquetravaux.fr/dashboard/quotes">tableau de bord</a> pour gérer cette demande.</p>
+      `;
+      
+      // Utilisation de l'adresse par défaut de Resend pour les tests
+      const { data: emailData, error } = await resend.emails.send({
+        from: 'onboarding@resend.dev', // Adresse vérifiée par défaut
+        to: 'fibreoptiquetravaux1@gmail.com',
+        subject: `Nouvelle demande de devis - ${data.fullName}`,
+        html: emailHtml,
+        text: `Nouvelle demande de devis de ${data.fullName} (${data.phone}). Connectez-vous au tableau de bord pour plus de détails.`
+      });
+      
+      if (error) {
+        console.error('Erreur Resend lors de l\'envoi de l\'email:', error);
+      } else {
+        console.log('Email de notification envoyé avec succès, ID:', emailData?.id);
+      }
+    } catch (emailError) {
+      // On ne bloque pas la création de la demande si l'envoi d'email échoue
+      console.error('Exception lors de l\'envoi de l\'email de notification:', emailError);
+    }
+    
     // Réponse avec la demande créée
     return NextResponse.json(
       { success: true, quote: newQuote },

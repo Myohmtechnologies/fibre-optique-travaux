@@ -8,6 +8,11 @@ import { IQuote } from '@/models/Quote';
 export default function QuotesPage() {
   const [quoteRequests, setQuoteRequests] = useState<IQuote[]>([]);
   const [selectedRequest, setSelectedRequest] = useState<IQuote | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    notes: '',
+    appointmentDate: ''
+  });
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterEnvironment, setFilterEnvironment] = useState<string>('all');
   const [filterHousingType, setFilterHousingType] = useState<string>('all');
@@ -46,7 +51,7 @@ export default function QuotesPage() {
   const statuses = [
     { id: 'new', name: 'Nouveau', color: 'bg-blue-100 text-blue-800' },
     { id: 'contacted', name: 'Contacté', color: 'bg-yellow-100 text-yellow-800' },
-    { id: 'in_progress', name: 'En cours', color: 'bg-purple-100 text-purple-800' },
+    { id: 'scheduled', name: 'RDV Planifié', color: 'bg-purple-100 text-purple-800' },
     { id: 'completed', name: 'Terminé', color: 'bg-green-100 text-green-800' },
     { id: 'cancelled', name: 'Annulé', color: 'bg-red-100 text-red-800' }
   ];
@@ -75,8 +80,60 @@ export default function QuotesPage() {
     fetchQuotes();
   }, []);
 
+  // Fonctions pour gérer la modale d'édition
+  const openEditModal = (quote: IQuote) => {
+    setSelectedRequest(quote);
+    setEditFormData({
+      notes: quote.notes || '',
+      appointmentDate: quote.appointmentDate ? new Date(quote.appointmentDate).toISOString().substring(0, 16) : ''
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setEditFormData({ notes: '', appointmentDate: '' });
+  };
+
+  const handleUpdateQuote = async () => {
+    if (!selectedRequest) return;
+    
+    try {
+      const updateData: Partial<IQuote> = {
+        notes: editFormData.notes,
+        status: 'scheduled' // Passage automatique au statut RDV Planifié
+      };
+      
+      if (editFormData.appointmentDate) {
+        updateData.appointmentDate = new Date(editFormData.appointmentDate);
+      }
+      
+      const response = await fetch(`/api/quotes/${selectedRequest._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update quote');
+      }
+      
+      // Mettre à jour l'état local
+      setQuoteRequests(prev => 
+        prev.map(req => 
+          req._id === selectedRequest._id ? { ...req, ...updateData } : req
+        ) as IQuote[]
+      );
+      
+      closeEditModal();
+    } catch (error) {
+      console.error('Error updating quote:', error);
+      alert('Une erreur est survenue lors de la mise à jour.');
+    }
+  };
+
   // Fonction pour mettre à jour le statut d'une demande
-  const updateRequestStatus = async (id: string, newStatus: 'new' | 'contacted' | 'in_progress' | 'completed' | 'cancelled') => {
+  const updateRequestStatus = async (id: string, newStatus: 'new' | 'contacted' | 'scheduled' | 'completed' | 'cancelled') => {
     try {
       const response = await fetch(`/api/quotes/${id}`, {
         method: 'PUT',
@@ -376,6 +433,30 @@ export default function QuotesPage() {
                           >
                             Voir
                           </button>
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const nextStatus = 
+                                request.status === 'new' ? 'contacted' :
+                                request.status === 'contacted' ? 'scheduled' :
+                                request.status === 'scheduled' ? 'completed' : 'completed';
+                              
+                              // Si on passe à scheduled, ouvrir la modale d'édition
+                              if (request.status === 'contacted' && nextStatus === 'scheduled') {
+                                openEditModal(request);
+                              } else {
+                                updateRequestStatus(request._id?.toString() || '', nextStatus);
+                              }
+                            }} 
+                            className="text-blue-600 hover:text-blue-900"
+                            disabled={request.status === 'completed' || request.status === 'cancelled'}
+                          >
+                            {request.status === 'new' && 'Contacter'}
+                            {request.status === 'contacted' && 'En cours'}
+                            {request.status === 'scheduled' && 'Terminer'}
+                            {request.status === 'completed' && 'Terminé'}
+                            {request.status === 'cancelled' && 'Annulé'}
+                          </button>
                         </td>
                       </tr>
                     );
@@ -388,7 +469,7 @@ export default function QuotesPage() {
       </div>
 
       {/* Modal de détail de la demande */}
-      {selectedRequest && (
+      {selectedRequest && !isEditModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
@@ -473,13 +554,50 @@ export default function QuotesPage() {
                 </div>
               )}
               
+              {/* Affichage des notes et de la date de rendez-vous si le statut est "scheduled" */}
+              {selectedRequest.status === 'scheduled' && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">Informations du rendez-vous</h3>
+                  <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    {selectedRequest.appointmentDate && (
+                      <div className="mb-3">
+                        <p className="text-sm font-medium text-purple-800">Date du rendez-vous :</p>
+                        <p className="text-gray-700">{new Date(selectedRequest.appointmentDate).toLocaleString('fr-FR', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}</p>
+                      </div>
+                    )}
+                    {selectedRequest.notes && (
+                      <div>
+                        <p className="text-sm font-medium text-purple-800">Notes :</p>
+                        <p className="text-gray-700 whitespace-pre-line">{selectedRequest.notes}</p>
+                      </div>
+                    )}
+                    {!selectedRequest.appointmentDate && !selectedRequest.notes && (
+                      <p className="text-gray-500 italic">Aucune information de rendez-vous disponible</p>
+                    )}
+                  </div>
+                </div>
+              )}
+              
               <div className="border-t border-gray-200 pt-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Changer le statut</h3>
                 <div className="flex flex-wrap gap-2">
                   {statuses.map(status => (
                     <button
                       key={status.id}
-                      onClick={() => updateRequestStatus(selectedRequest._id?.toString() || '', status.id as 'new' | 'contacted' | 'in_progress' | 'completed' | 'cancelled')}
+                      onClick={() => {
+                        // Si on passe de contacté à scheduled, ouvrir la modale d'édition
+                        if (selectedRequest.status === 'contacted' && status.id === 'scheduled') {
+                          openEditModal(selectedRequest);
+                        } else {
+                          updateRequestStatus(selectedRequest._id?.toString() || '', status.id as 'new' | 'contacted' | 'scheduled' | 'completed' | 'cancelled');
+                        }
+                      }}
                       disabled={selectedRequest.status === status.id}
                       className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                         selectedRequest.status === status.id
@@ -503,6 +621,44 @@ export default function QuotesPage() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+      
+      {/* Modal d'édition pour planifier un RDV */}
+      {isEditModalOpen && selectedRequest && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <motion.div 
+            className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-6"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+          >
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Planifier un RDV pour {selectedRequest.fullName}</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Notes</label>
+                <textarea
+                  rows={4}
+                  value={editFormData.notes}
+                  onChange={(e) => setEditFormData({ ...editFormData, notes: e.target.value })}
+                  className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Date du RDV</label>
+                <input
+                  type="datetime-local"
+                  value={editFormData.appointmentDate}
+                  onChange={(e) => setEditFormData({ ...editFormData, appointmentDate: e.target.value })}
+                  className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end space-x-3">
+              <button onClick={closeEditModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annuler</button>
+              <button onClick={handleUpdateQuote} className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90">Enregistrer</button>
+            </div>
+          </motion.div>
         </div>
       )}
     </motion.div>

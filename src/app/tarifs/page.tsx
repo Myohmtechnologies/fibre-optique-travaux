@@ -273,18 +273,15 @@ export default function Tarifs() {
               <div className="space-y-6">
                 <div>
                   <h3 className="font-bold text-lg text-neutral-dark mb-2">Le diagnostic est-il vraiment gratuit ?</h3>
-                  <p>Oui, le diagnostic initial est totalement gratuit si vous nous confiez ensuite les travaux. Si vous décidez de ne pas faire les travaux après le diagnostic, des frais de déplacement de 50€ seront facturés.</p>
+                  <p>Oui, le diagnostic initial est totalement gratuit si vous nous confiez ensuite les travaux. Si vous décidez de ne pas faire les travaux après le diagnostic.</p>
                 </div>
                 
                 <div>
                   <h3 className="font-bold text-lg text-neutral-dark mb-2">Comment se déroule le paiement ?</h3>
-                  <p>Nous acceptons les paiements par carte bancaire, virement ou chèque. Un acompte de 30% est demandé à la signature du devis, le solde étant payable à la fin des travaux.</p>
+                  <p>Nous acceptons les paiements par virement ou chèque. Un acompte de 30% est demandé à la signature du devis, le solde étant payable à la fin des travaux.</p>
                 </div>
                 
-                <div>
-                  <h3 className="font-bold text-lg text-neutral-dark mb-2">Proposez-vous des facilités de paiement ?</h3>
-                  <p>Oui, pour les interventions dépassant 500€, nous proposons un paiement en 2 ou 3 fois sans frais. N'hésitez pas à nous demander les modalités lors de l'établissement du devis.</p>
-                </div>
+                
                 
                 <div>
                   <h3 className="font-bold text-lg text-neutral-dark mb-2">Les prix indiqués incluent-ils la TVA ?</h3>

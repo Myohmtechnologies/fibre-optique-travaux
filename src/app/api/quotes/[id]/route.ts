@@ -63,7 +63,7 @@ export async function PUT(
     const data = await request.json();
 
     // Vérification des champs autorisés pour la mise à jour
-    const allowedFields = ['status', 'fullName', 'phone', 'address', 'postalCode', 'message'];
+    const allowedFields = ['status', 'fullName', 'phone', 'address', 'postalCode', 'message', 'notes', 'appointmentDate'];
     const updateData: Record<string, any> = {};
 
     for (const [key, value] of Object.entries(data)) {
