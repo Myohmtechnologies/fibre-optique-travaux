@@ -1,11 +1,21 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Resend } from 'resend';
-// Importer le modèle avec une syntaxe compatible avec les deux modes d'exportation
-import * as ContactMessageModule from '@/models/ContactMessage';
+import mongoose from 'mongoose';
+import { IContactMessage } from '@/models/ContactMessage';
 
-// Utiliser le modèle, qu'il soit exporté par défaut ou comme membre nommé
-const ContactMessage = (ContactMessageModule.default || ContactMessageModule) as any;
+// Récréer le modèle directement ici pour éviter les problèmes d'importation
+const ContactMessage = mongoose.models.ContactMessage || mongoose.model<IContactMessage>('ContactMessage', new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  email: { type: String, required: true, trim: true, lowercase: true },
+  phone: { type: String, required: true, trim: true },
+  address: { type: String, required: true, trim: true },
+  postalCode: { type: String, required: true, trim: true },
+  message: { type: String, required: true, trim: true },
+  status: { type: String, enum: ['new', 'contacted', 'scheduled', 'completed', 'archived'], default: 'new' },
+  notes: { type: String, trim: true },
+  appointmentDate: { type: Date },
+}, { timestamps: true }));
 
 export async function POST(request: Request) {
   try {
