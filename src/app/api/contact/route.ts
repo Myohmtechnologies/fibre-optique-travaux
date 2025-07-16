@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import ContactMessage from '@/models/ContactMessage';
 import { Resend } from 'resend';
+// Importer le modèle avec une syntaxe compatible avec les deux modes d'exportation
+import * as ContactMessageModule from '@/models/ContactMessage';
+
+// Utiliser le modèle, qu'il soit exporté par défaut ou comme membre nommé
+const ContactMessage = (ContactMessageModule.default || ContactMessageModule) as any;
 
 export async function POST(request: Request) {
   try {
