@@ -59,8 +59,8 @@ export default async function Home() {
       <SchemaMarkup 
         pageType="home" 
         pageUrl="https://fibreoptiquetravaux.fr/"
-        title="Fibre optique travaux | Fourreau Bouché, Regard Introuvable - Solution Rapide"
-        description="Le technicien de votre opérateur ne peut pas finaliser votre raccordement fibre à cause d'un blocage ? Notre équipement spécialisé localise précisément le point de blocage et nous intervenons sous 48h."
+        title="Détection de regard, fourreau bouché, tirage de fibre et débouchage"
+        description="Spécialiste du débouchage de fourreau, détection de regard introuvable, tirage de fibre optique et interventions rapides pour débloquer votre raccordement fibre. Intervention sous 48h, devis gratuit."
       />
       <Header />
       <main>
