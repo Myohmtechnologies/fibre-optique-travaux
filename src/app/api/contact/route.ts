@@ -1,11 +1,12 @@
-import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Resend } from 'resend';
 import mongoose from 'mongoose';
-import { IContactMessage } from '@/models/ContactMessage';
 
-// Récréer le modèle directement ici pour éviter les problèmes d'importation
-const ContactMessage = mongoose.models.ContactMessage || mongoose.model<IContactMessage>('ContactMessage', new mongoose.Schema({
+// Initialiser Resend avec la clé API
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Définir le schéma pour les messages de contact
+const contactMessageSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true, lowercase: true },
   phone: { type: String, required: true, trim: true },
@@ -15,86 +16,88 @@ const ContactMessage = mongoose.models.ContactMessage || mongoose.model<IContact
   status: { type: String, enum: ['new', 'contacted', 'scheduled', 'completed', 'archived'], default: 'new' },
   notes: { type: String, trim: true },
   appointmentDate: { type: Date },
-}, { timestamps: true }));
+}, { timestamps: true });
+
+// Fonction pour obtenir le modèle (pour éviter les erreurs de compilation)
+const getContactMessageModel = () => {
+  return mongoose.models.ContactMessage || mongoose.model('ContactMessage', contactMessageSchema);
+};
 
 export async function POST(request: Request) {
   try {
+    // Connexion à la base de données
     await connectToDatabase();
 
-    const body = await request.json();
-    console.log('--- REQUÊTE REÇUE (API) ---', body);
+    // Récupération des données du formulaire
+    const data = await request.json();
+    const { name, email, phone, address, postalCode, message } = data;
 
-    const { name, email, phone, address, postalCode, message } = body;
-
-    // Validation côté serveur
-    if (!name || !email || !phone || !address || !postalCode || !message) {
-      return NextResponse.json({ success: false, message: 'Tous les champs sont obligatoires.' }, { status: 400 });
+    // Validation des données
+    if (!name || !email || !phone || !message) {
+      return Response.json(
+        { error: "Tous les champs obligatoires doivent être remplis" },
+        { status: 400 }
+      );
     }
 
-    const newMessage = new ContactMessage({
+    // Création d'un nouveau message de contact
+    const ContactMessageModel = getContactMessageModel();
+    
+    const newContactMessage = new ContactMessageModel({
       name,
       email,
       phone,
-      address,
-      postalCode,
+      address: address || "",
+      postalCode: postalCode || "",
       message,
+      status: "new",
     });
 
-    console.log('--- OBJET AVANT SAUVEGARDE ---', newMessage);
+    // Sauvegarde du message dans la base de données
+    await newContactMessage.save();
 
-    await newMessage.save();
-    
     // Envoi d'un email de notification
     try {
-      const resend = new Resend(process.env.RESEND_API_KEY || '');
-      
-      // Préparation du contenu HTML de l'email
-      const emailHtml = `
-        <h1>Nouveau message de contact reçu</h1>
-        <p>Un nouveau message de contact a été soumis sur votre site web.</p>
-        
-        <h2>Informations client</h2>
-        <ul>
-          <li><strong>Nom:</strong> ${name}</li>
-          <li><strong>Email:</strong> ${email}</li>
-          <li><strong>Téléphone:</strong> ${phone}</li>
-          <li><strong>Adresse:</strong> ${address}</li>
-          <li><strong>Code postal:</strong> ${postalCode}</li>
-        </ul>
-        
-        <h2>Message</h2>
-        <p>${message}</p>
-        
-        <p>Connectez-vous à votre tableau de bord pour gérer vos messages.</p>
-      `;
-      
-      const { data: emailData, error } = await resend.emails.send({
-        from: 'onboarding@resend.dev', // Adresse vérifiée par défaut
-        to: 'fibreoptiquetravaux1@gmail.com',
-        subject: `Nouveau message de contact - ${name}`,
-        html: emailHtml,
-        text: `Nouveau message de contact de ${name} (${email}, ${phone}). Message: ${message}`
+      const { data: emailData, error: emailError } = await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: "fibreoptiquetravaux1@gmail.com",
+        subject: "Nouveau message de contact",
+        html: `
+          <h1>Nouveau message de contact</h1>
+          <p><strong>Nom:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Téléphone:</strong> ${phone}</p>
+          <p><strong>Adresse:</strong> ${address || "Non renseignée"}</p>
+          <p><strong>Code postal:</strong> ${postalCode || "Non renseigné"}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `,
       });
-      
-      if (error) {
-        console.error('Erreur Resend lors de l\'envoi de l\'email:', error);
-      } else {
-        console.log('Email de notification envoyé avec succès, ID:', emailData?.id);
+
+      if (emailError) {
+        console.error("Erreur lors de l'envoi de l'email:", emailError);
       }
     } catch (emailError) {
       // On ne bloque pas la création du message si l'envoi d'email échoue
       console.error('Exception lors de l\'envoi de l\'email de notification:', emailError);
     }
 
-    return NextResponse.json({ success: true, message: 'Message envoyé avec succès !' }, { status: 201 });
-
+    return Response.json(
+      { success: true, message: "Message envoyé avec succès" },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Erreur API Contact:', error);
     // Gérer les erreurs de validation Mongoose
     if (error instanceof Error && error.name === 'ValidationError') {
-      return NextResponse.json({ success: false, message: 'Erreur de validation des données.', details: error.message }, { status: 400 });
+      return Response.json(
+        { success: false, message: 'Erreur de validation des données.', details: error.message },
+        { status: 400 }
+      );
     }
-    return NextResponse.json({ success: false, message: 'Erreur interne du serveur.' }, { status: 500 });
+    return Response.json(
+      { success: false, message: 'Erreur interne du serveur.' },
+      { status: 500 }
+    );
   }
 }
 
@@ -102,10 +105,17 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     await connectToDatabase();
-    const messages = await ContactMessage.find({}).sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, data: messages }, { status: 200 });
+    const ContactMessageModel = getContactMessageModel();
+    const messages = await ContactMessageModel.find({}).sort({ createdAt: -1 });
+    return Response.json(
+      { success: true, data: messages },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Erreur lors de la récupération des messages:', error);
-    return NextResponse.json({ success: false, message: 'Erreur interne du serveur.' }, { status: 500 });
+    return Response.json(
+      { success: false, message: 'Erreur interne du serveur.' },
+      { status: 500 }
+    );
   }
 }
