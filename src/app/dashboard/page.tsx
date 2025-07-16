@@ -9,7 +9,7 @@ import Sidebar from '@/components/admin/Sidebar';
 import QuoteRequestsTable from '@/components/admin/QuoteRequestsTable';
 import StatsCards from '@/components/admin/StatsCards';
 import { IQuote } from '@/models/Quote';
-import { IContactMessage } from '@/models/ContactMessage';
+import { IContactMessage, ContactMessageStatus } from '@/models/ContactMessage';
 
 // Données fictives pour les demandes de devis (format IQuote)
 const mockQuoteRequests: IQuote[] = [
@@ -200,12 +200,12 @@ export default function Dashboard() {
   };
 
   const renderActionButtons = (message: IContactMessage) => {
-    const status = message.status || 'new';
+    const status = message.status || ContactMessageStatus.new;
 
-    const handleContact = () => handleStatusChange(message, 'contacted');
+    const handleContact = () => handleStatusChange(message, ContactMessageStatus.contacted);
     const handleSchedule = () => openEditModal(message);
-    const handleComplete = () => handleStatusChange(message, 'completed');
-    const handleArchive = () => handleStatusChange(message, 'archived');
+    const handleComplete = () => handleStatusChange(message, ContactMessageStatus.completed);
+    const handleArchive = () => handleStatusChange(message, ContactMessageStatus.archived);
 
     return (
       <div className="flex items-center gap-4">
