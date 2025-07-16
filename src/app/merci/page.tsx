@@ -20,7 +20,7 @@ export default function MerciPage() {
       <Header />
       
       <main className="flex-grow">
-        <div className="bg-gradient-to-b from-orange-50 to-white py-12">
+        <div className="bg-white py-12">
           <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
             <div className="mb-8">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
@@ -30,49 +30,15 @@ export default function MerciPage() {
               </div>
               
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                Demande de devis bien reçue !
+                Votre demande à bien été reçue !
               </h1>
               
               <p className="text-xl text-gray-600 mb-6">
-                Un technicien spécialisé vous contactera dans les prochaines 24h.
+                Un technicien spécialisé vous contactera dans les plus brefs délais.
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Prochaines étapes</h2>
-              
-              <div className="space-y-4 text-left">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-orange-100 rounded-full mr-4">
-                    <span className="font-bold text-orange-600">1</span>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-800">Analyse technique</h3>
-                    <p className="text-gray-600">Notre équipe étudie votre demande pour préparer la meilleure solution de déblocage.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-orange-100 rounded-full mr-4">
-                    <span className="font-bold text-orange-600">2</span>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-800">Appel sous 24h</h3>
-                    <p className="text-gray-600">Un technicien vous appellera pour discuter des détails et planifier l'intervention.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-orange-100 rounded-full mr-4">
-                    <span className="font-bold text-orange-600">3</span>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-800">Intervention rapide</h3>
-                    <p className="text-gray-600">Nous intervenons généralement sous 48h après validation du devis pour rétablir votre connexion.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
             
             <div className="bg-orange-50 p-6 rounded-lg border border-orange-100 mb-8">
               <h2 className="text-xl font-semibold text-gray-800 mb-3">Besoin d'une intervention urgente ?</h2>
@@ -81,7 +47,7 @@ export default function MerciPage() {
               </p>
               <a 
                 href="tel:0787179186" 
-                className="inline-flex items-center px-5 py-2 bg-orange-600 text-white font-medium rounded-lg hover:bg-orange-700 transition-colors"
+                className="inline-flex items-center px-5 py-2 bg-orange-600 text-white font-bold text-xl md:text-2xl rounded-lg hover:bg-orange-700 transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
