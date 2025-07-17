@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Contact = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -62,8 +64,7 @@ const Contact = () => {
         throw new Error(result.message || 'Une erreur est survenue lors de l\'envoi.');
       }
 
-      setStatus({ isSubmitting: false, success: true, error: '' });
-      setFormData({ name: '', email: '', phone: '', address: '', postalCode: '', message: '' });
+      router.push('/merci');
 
     } catch (error: any) {
       setStatus({ isSubmitting: false, success: false, error: error.message });
@@ -110,12 +111,6 @@ const Contact = () => {
 
           {/* Colonne de droite : Formulaire */}
           <div className="bg-white p-8 md:p-10 rounded-lg shadow-lg">
-            {status.success ? (
-              <div className="text-center p-8 bg-green-100 text-green-800 rounded-lg">
-                <h3 className="text-2xl font-bold mb-2">Message envoyé !</h3>
-                <p>Merci de nous avoir contactés. Nous reviendrons vers vous dans les plus brefs délais.</p>
-              </div>
-            ) : (
               <form onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
@@ -154,7 +149,6 @@ const Contact = () => {
                   </button>
                 </div>
               </form>
-            )}
           </div>
         </div>
       </div>
