@@ -1,4 +1,5 @@
 import React from 'react';
+import GoogleAdsConversion from '@/components/GoogleAdsConversion';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
@@ -22,6 +23,7 @@ export default function MerciPage() {
       <main className="flex-grow">
         <div className="bg-white py-12">
           <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
+            <GoogleAdsConversion />
             <div className="mb-8">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

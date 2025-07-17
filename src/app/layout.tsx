@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from 'next/script';
 import "./globals.css";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -111,6 +113,22 @@ export default function RootLayout({
       >
         {children}
         {/* Bannière de consentement aux cookies */}
+        <GoogleAnalytics gaId="G-1NDV50024M" />
+
+        {/* Google Ads Global Site Tag */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17366889216"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17366889216');
+          `}
+        </Script>
         <CookieBanner />
       </body>
     </html>
