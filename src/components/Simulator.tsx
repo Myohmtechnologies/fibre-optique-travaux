@@ -144,7 +144,6 @@ const Simulator = () => {
 
   const operators = [
     { id: 'orange', name: 'Orange', logo: '/images/partnair-logo/Orange_logo.svg.png' },
-    { id: 'sosh', name: 'Sosh', logo: '/images/partnair-logo/Sosh.png' },
     { id: 'free', name: 'Free', logo: '/images/partnair-logo/Free_logo.svg.png' },
     { id: 'bouygues', name: 'Bouygues', logo: '/images/partnair-logo/Bouygues_Télécom.png' },
     { id: 'sfr', name: 'SFR', logo: '/images/partnair-logo/SFR-2022-logo.svg.png' },
@@ -247,23 +246,24 @@ const Simulator = () => {
                     <div 
                       key={op.id}
                       onClick={() => handleOptionSelect('operator', op.id)}
-                      className={`cursor-pointer p-4 rounded-lg border-2 transition-all hover:shadow-md ${
+                      className={`cursor-pointer p-4 rounded-lg border-2 transition-all hover:shadow-md flex flex-col justify-center items-center ${
                         formData.operator === op.id 
                           ? 'border-orange-500 bg-orange-50' 
                           : 'border-gray-200 hover:border-orange-200'
                       }`}
                     >
-                      <div className="flex flex-col items-center justify-center h-16">
-                        <div className="relative h-10 w-16">
-                          <Image 
-                            src={op.logo} 
-                            alt={op.name} 
-                            fill
-                            style={{ objectFit: 'contain' }}
-                          />
+                      {op.id !== 'autre' ? (
+                        <>
+                          <div className="flex items-center justify-center h-16">
+                            <Image src={op.logo} alt={op.name} width={(op.id === 'orange' || op.id === 'sfr') ? 70 : 100} height={40} className="object-contain" />
+                          </div>
+                          <p className="text-center mt-2 font-medium">{op.name}</p>
+                        </>
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <p className="text-center font-medium">{op.name}</p>
                         </div>
-                        <h4 className="font-medium text-sm mt-2">{op.name}</h4>
-                      </div>
+                      )}
                     </div>
                   ))}
                 </div>
