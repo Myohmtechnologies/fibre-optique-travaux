@@ -302,12 +302,12 @@ export default function Tarifs() {
                 Chaque installation de fibre optique est unique. Contactez-nous pour obtenir un devis précis et adapté à votre situation spécifique dans toute la région PACA.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
-                  onClick={() => openModal('devis')}
+                <Link 
+                  href="/demande-de-devis-travaux-de-fibre-optique"
                   className="bg-construction-orange hover:bg-construction-orange-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300"
                 >
                   Demander un devis gratuit
-                </button>
+                </Link>
                 <a href="tel:+33123456789" className="bg-neutral-dark hover:bg-neutral-darker text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
