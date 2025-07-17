@@ -50,8 +50,9 @@ const Header: React.FC = () => {
 
           {/* Numéro de téléphone et bouton d'intervention */}
           <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="tel:+33123456789" 
+                        <a 
+              href="tel:+33787179186"
+              onClick={() => (window as any).gtag_report_conversion ? (window as any).gtag_report_conversion('tel:+33787179186') : true}
               className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-colors"
             >
               <FiPhone className="mr-2" />
@@ -76,8 +77,9 @@ const Header: React.FC = () => {
 
           {/* Bouton de menu mobile */}
           <div className="md:hidden flex items-center">
-            <a 
+                        <a 
               href="tel:+33787179186" 
+              onClick={() => (window as any).gtag_report_conversion ? (window as any).gtag_report_conversion('tel:+33787179186') : true}
               className="mr-4 px-3 py-1 bg-orange-500 text-white font-medium rounded-lg text-sm flex items-center"
             >
               <FiPhone className="mr-1" />

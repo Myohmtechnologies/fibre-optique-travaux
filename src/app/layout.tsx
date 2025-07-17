@@ -129,6 +129,26 @@ export default function RootLayout({
             gtag('config', 'AW-17366889216');
           `}
         </Script>
+
+        {/* Event snippet for phone call conversion */}
+        <Script id="google-ads-call-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17366889216/d8l5CNrz0vIaEIDmltlA',
+                  'value': 1.0,
+                  'currency': 'EUR',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
         <CookieBanner />
       </body>
     </html>
