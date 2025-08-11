@@ -30,6 +30,21 @@ function Hero() {
       alt: 'Réparation de raccordement fibre',
       caption: 'Réparation d\'un raccordement défectueux'
     },
+    {
+      src: '/images/interventions/intervention-traveaux-fibre-optique-4.png',
+      alt: 'Réparation de fourreau bouché fibre',
+      caption: 'Réparation d\'un fourreau bouché'
+    },
+    {
+      src: '/images/interventions/intervention-traveaux-fibre-optique-5.png',
+      alt: 'Réparation de gaine bouché fibre',
+      caption: 'Réparation d\'un gaine bouché'
+    },
+    {
+      src: '/images/interventions/intervention-traveaux-fibre-optique-7.png',
+      alt: 'Réparation de fourreau bouché fibre',
+      caption: 'Réparation d\'un fourreau bouché'
+    },
    
   ];
 
