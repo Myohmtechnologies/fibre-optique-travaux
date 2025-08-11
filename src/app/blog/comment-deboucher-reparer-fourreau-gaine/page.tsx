@@ -214,28 +214,48 @@ export default function DeboucherReparerFourreau() {
                   </div>
                 </div>
 
-              {/* Articles similaires */}
+              {/* À lire également */}
               <div className="border-t border-gray-200 pt-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">À lire également</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  {/* Card 1 */}
+                  <article className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border">
                     <Link href="/blog/detection-regard-ptt" className="block">
-                      <div className="relative h-48"><Image src="/images/blog/detection-regard-ptt.jpeg" alt="Détection regard PTT" fill style={{objectFit: "cover"}}/></div>
-                      <div className="p-4"><h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Pourquoi réaliser la détection de votre regard PTT ?</h3><p className="text-sm text-gray-600 mt-2">Un regard PTT introuvable bloque votre raccordement ? Découvrez pourquoi et comment nos experts le localisent rapidement.</p></div>
+                      <div className="relative h-48">
+                        <Image src="/images/blog/detection-regard-ptt.jpeg" alt="Pourquoi réaliser la détection de votre regard PTT ?" fill className="object-cover" />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-bold text-lg text-gray-800 mb-1">Pourquoi réaliser la détection de votre regard PTT ?</h3>
+                        <p className="text-sm text-gray-600">Un regard PTT introuvable bloque votre raccordement ? Découvrez pourquoi et comment nos experts le localisent rapidement.</p>
+                      </div>
                     </Link>
-                  </div>
-                  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  </article>
+
+                  {/* Card 2 */}
+                  <article className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border">
                     <Link href="/blog/comment-trouver-regard-france-telecom" className="block">
-                      <div className="relative h-48"><Image src="/images/blog/regard-france-telecom.jpg" alt="Trouver un regard France Télécom" fill style={{objectFit: "cover"}}/></div>
-                      <div className="p-4"><h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Comment trouver un regard France Télécom ?</h3><p className="text-sm text-gray-600 mt-2">Le technicien vous demande de trouver le regard France Télécom ? Suivez notre guide pour le localiser sur votre propriété.</p></div>
+                      <div className="relative h-48">
+                        <Image src="/images/blog/regard-france-telecom.jpg" alt="Comment trouver un regard France Télécom ?" fill className="object-cover" />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-bold text-lg text-gray-800 mb-1">Comment trouver un regard France Télécom ?</h3>
+                        <p className="text-sm text-gray-600">Le technicien vous demande de trouver le regard France Télécom ? Suivez notre guide pour le localiser sur votre propriété.</p>
+                      </div>
                     </Link>
-                                    <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  </article>
+
+                  {/* Card 3 */}
+                  <article className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border">
                     <Link href="/nos-services" className="block">
-                      <div className="relative h-48"><Image src="/images/nos-service.png" alt="Nos services fibre optique" fill style={{objectFit: "cover"}}/></div>
-                      <div className="p-4"><h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Découvrez tous nos services</h3><p className="text-sm text-gray-600 mt-2">Du débouchage de fourreau à la recherche de regard, découvrez l'ensemble de nos solutions pour la fibre optique.</p></div>
+                      <div className="relative h-48">
+                        <Image src="/images/nos-service.png" alt="Découvrez tous nos services" fill className="object-cover" />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-bold text-lg text-gray-800 mb-1">Découvrez tous nos services</h3>
+                        <p className="text-sm text-gray-600">Du débouchage de fourreau à la recherche de regard, découvrez toutes nos solutions fibre optique.</p>
+                      </div>
                     </Link>
-                  </div>
-                </div>
+                  </article>
                 </div>
               </div>
             </div>
