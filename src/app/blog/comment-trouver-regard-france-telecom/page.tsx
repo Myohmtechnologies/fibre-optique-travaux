@@ -175,15 +175,7 @@ export default function TrouverRegardFranceTelecom() {
                   Il est important de noter que ce regard est exclusivement dédié à vos lignes de communication. Il ne peut en aucun cas accueillir les conduites de transport d'énergie électrique, qui disposent de leurs propres infrastructures distinctes.
                 </p>
                 
-                <div className="relative w-full h-64 rounded-lg overflow-hidden mb-6">
-                  <Image 
-                    src="/images/blog/regard-telecom-ouvert.jpg" 
-                    alt="Regard France Télécom ouvert montrant les fourreaux et câbles" 
-                    fill
-                    style={{objectFit: "cover"}}
-                    className="rounded-lg"
-                  />
-                </div>
+              
                 
                 <p className="mb-4">
                   Contrairement aux autres réseaux (eau, électricité), le regard télécom est souvent méconnu des propriétaires car il ne nécessite généralement pas d'interventions régulières. C'est pourquoi sa localisation peut devenir problématique lorsque vient le moment d'installer la fibre optique.
@@ -306,15 +298,7 @@ export default function TrouverRegardFranceTelecom() {
                   Si vous n'avez pas préalablement repéré votre regard, le technicien ne pourra pas procéder au raccordement. Il vous mettra en attente et vous devrez fixer un rendez-vous ultérieur, ce qui retarde d'autant votre accès à une connexion fibre de qualité.
                 </p>
                 
-                <div className="relative w-full h-64 rounded-lg overflow-hidden mb-6">
-                  <Image 
-                    src="/images/blog/technicien-fibre-optique.jpg" 
-                    alt="Technicien installant la fibre optique via un regard France Télécom" 
-                    fill
-                    style={{objectFit: "cover"}}
-                    className="rounded-lg"
-                  />
-                </div>
+               
                 
                 <h3 className="text-lg font-semibold mb-3">Conséquences d'un regard non localisé</h3>
                 
@@ -406,15 +390,7 @@ export default function TrouverRegardFranceTelecom() {
                   <li>Sous la végétation ou les aménagements récents</li>
                 </ul>
                 
-                <div className="relative w-full h-64 rounded-lg overflow-hidden mb-6">
-                  <Image 
-                    src="/images/blog/recherche-regard-telecom.jpg" 
-                    alt="Recherche d'un regard France Télécom dans un jardin" 
-                    fill
-                    style={{objectFit: "cover"}}
-                    className="rounded-lg"
-                  />
-                </div>
+             
                 
                 <h3 className="text-lg font-semibold mb-3">Faire passer une aiguille dans le fourreau PTT</h3>
                 
@@ -495,16 +471,7 @@ export default function TrouverRegardFranceTelecom() {
                   </p>
                 </div>
                 
-                <div className="relative w-full h-64 rounded-lg overflow-hidden mb-6">
-                  <Image 
-                    src="/images/blog/detecteur-regard-telecom.jpg" 
-                    alt="Détection professionnelle d'un regard France Télécom avec équipement spécialisé" 
-                    fill
-                    style={{objectFit: "cover"}}
-                    className="rounded-lg"
-                  />
-                </div>
-                
+              
                 <h3 className="text-lg font-semibold mb-3">Faire appel à une société spécialisée</h3>
                 
                 <p className="mb-4">
@@ -559,15 +526,7 @@ export default function TrouverRegardFranceTelecom() {
               
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="md:w-2/5">
-                  <div className="relative w-full h-96 rounded-lg overflow-hidden">
-                    <Image 
-                      src="/images/carte-paca.png" 
-                      alt="Carte de France - Zone d'intervention pour la détection de regards France Télécom" 
-                      fill
-                      style={{objectFit: "contain"}}
-                      className="drop-shadow-md"
-                    />
-                  </div>
+             
                   <div className="mt-6 bg-construction-orange text-white p-4 rounded-lg text-center">
                     <div className="flex items-center justify-center mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
