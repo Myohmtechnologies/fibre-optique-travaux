@@ -216,13 +216,7 @@ export default function CommentReparerCableFibreOptique() {
                   Si un dysfonctionnement survient sur le réseau public, atteignant votre limite de propriété, votre opérateur doit résoudre 
                   le problème, car il est le seul habilité à intervenir sur les réseaux et les infrastructures télécoms du domaine public.
                 </p>
-                <Image 
-                  src="/images/blog/reseau-fibre-public.jpg" 
-                  alt="Réseau fibre optique sur le domaine public" 
-                  width={600} 
-                  height={400} 
-                  className="rounded-lg my-4"
-                />
+               
               </div>
 
               <div>
@@ -317,13 +311,7 @@ export default function CommentReparerCableFibreOptique() {
                     du câble de fibre optique. Cette technologie permet de localiser avec précision le problème, même à travers les murs 
                     ou sous terre.
                   </p>
-                  <Image 
-                    src="/images/blog/diagnostic-laser-fibre.jpg" 
-                    alt="Diagnostic avec laser pour fibre optique" 
-                    width={600} 
-                    height={400} 
-                    className="rounded-lg my-4"
-                  />
+                
                 </div>
               </div>
 
@@ -356,13 +344,7 @@ export default function CommentReparerCableFibreOptique() {
                       Protéger la zone de fusion avec une protection thermique
                     </li>
                   </ul>
-                  <Image 
-                    src="/images/blog/soudeuse-fibre-optique.jpg" 
-                    alt="Soudeuse de fibre optique en action" 
-                    width={600} 
-                    height={400} 
-                    className="rounded-lg my-4"
-                  />
+                 
                 </div>
               </div>
 
@@ -450,13 +432,7 @@ export default function CommentReparerCableFibreOptique() {
                     Effectuer les travaux de maçonnerie et de terrassement pour réhabiliter vos embellissements
                   </li>
                 </ul>
-                <Image 
-                  src="/images/blog/reparation-fourreau-telecom.jpg" 
-                  alt="Réparation d'un fourreau télécom endommagé" 
-                  width={600} 
-                  height={400} 
-                  className="rounded-lg my-4"
-                />
+                
               </div>
             </div>
 
@@ -479,13 +455,7 @@ export default function CommentReparerCableFibreOptique() {
                     Utilisation d'un photomètre pour mesurer la puissance lumineuse, assurant ainsi un contrôle 
                     efficace du signal et garantissant une réparation optimale.
                   </p>
-                  <Image 
-                    src="/images/blog/releve-puissance-fibre-photometre.jpg" 
-                    alt="Relevé de puissance fibre avec photomètre" 
-                    width={600} 
-                    height={400} 
-                    className="rounded-lg my-4"
-                  />
+                  
                 </div>
               </div>
 
@@ -619,12 +589,7 @@ export default function CommentReparerCableFibreOptique() {
                 <li>
                   <Link href="/blog/pourquoi-aiguille-cable-bloquent-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
                     <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                      <Image
-                        src="/images/blog/cable-bloque-fourreau-telecom.jpg"
-                        alt="Câble bloqué dans fourreau télécom"
-                        fill
-                        className="object-cover rounded"
-                      />
+                    
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800 leading-tight">Pourquoi l'aiguille et le câble bloquent dans le fourreau télécom ?</h4>
@@ -635,12 +600,7 @@ export default function CommentReparerCableFibreOptique() {
                 <li>
                   <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
                     <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                      <Image
-                        src="/images/blog/debouchage-fourreau-telecom.jpg"
-                        alt="Débouchage fourreau télécom"
-                        fill
-                        className="object-cover rounded"
-                      />
+                    
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800 leading-tight">Qui appeler pour le débouchage d'un fourreau télécom ?</h4>
@@ -651,12 +611,7 @@ export default function CommentReparerCableFibreOptique() {
                 <li>
                   <Link href="/blog/quand-realiser-tranchee-fibre-optique" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
                     <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                      <Image
-                        src="/images/blog/tranchee-fibre-optique.jpg"
-                        alt="Tranchée fibre optique"
-                        fill
-                        className="object-cover rounded"
-                      />
+                    
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800 leading-tight">Quand faut-il réaliser une tranchée pour la fibre ?</h4>
