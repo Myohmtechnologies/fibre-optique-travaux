@@ -13,6 +13,17 @@ export type StaticBlogPost = {
 // Ajoutez ici toute nouvelle page statique pour qu'elle remonte dans /blog
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
   {
+    _id: 'static-travaux-raccordement-fibre-optique-guide-complet',
+    title: 'Travaux pour le raccordement fibre optique : guide complet',
+    slug: 'travaux-raccordement-fibre-optique-guide-complet',
+    excerpt:
+      'Le guide complet des travaux nécessaires pour le raccordement à la fibre optique : tranchée, débouchage de fourreau, réparation de câble et détection de regard.',
+    image: '/images/blog/tranchee-fibre-optique.jpg',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-14T00:00:00.000Z',
+    categories: ['fibre optique', 'travaux', 'guide', 'infrastructure'],
+  },
+  {
     _id: 'static-regard-introuvable-installation-fibre-optique',
     title: "Regard introuvable pour installer votre fibre optique ?",
     slug: 'regard-introuvable-installation-fibre-optique',
@@ -88,6 +99,16 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
     author: 'Expert Fibre Optique',
     date: '2025-07-07T00:00:00.000Z',
     categories: ['fibre optique', 'travaux', 'entreprise'],
+  },
+  {
+    _id: 'static-quand-realiser-tranchee-fibre-optique',
+    title: 'Quand faut-il réaliser une tranchée pour la fibre ?',
+    slug: 'quand-realiser-tranchee-fibre-optique',
+    excerpt: 'Découvrez dans quels cas la création d\'une tranchée est une étape obligatoire pour le raccordement de votre logement à la fibre optique.',
+    image: '/images/blog/tranchee-fibre-optique.jpg',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-14T00:00:00.000Z',
+    categories: ['fibre optique', 'travaux', 'tranchée'],
   },
   {
     _id: 'static-prix-debouchage-fourreau-telecom',
