@@ -13,6 +13,50 @@ export type StaticBlogPost = {
 // Ajoutez ici toute nouvelle page statique pour qu'elle remonte dans /blog
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
   {
+    _id: 'static-solutions-rapides-cable-fibre-sectionne',
+    title: 'Comment sont réparées les fibres optiques coupées ou vandalisées',
+    slug: 'solutions-rapides-cable-fibre-sectionne',
+    excerpt:
+      "Découvrez les techniques professionnelles de réparation des fibres optiques coupées ou vandalisées : diagnostic, soudure par fusion et prévention. Guide complet pour comprendre et résoudre ce problème technique.",
+    image: '/images/blog/cable-fibre-sectionne.png',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-14T00:00:00.000Z',
+    categories: ['fibre optique', 'réparation', 'diagnostic', 'guide'],
+  },
+  {
+    _id: 'static-top-5-causes-blocage-fourreau-telecom',
+    title: 'Top 5 causes de blocage dans un fourreau télécom (et comment les résoudre)',
+    slug: 'top-5-causes-blocage-fourreau-telecom',
+    excerpt:
+      "Comprenez les principales causes de blocage dans un fourreau télécom (boue, écrasement, ancien câble, racines, défaut de conception) et découvrez les solutions professionnelles pour débloquer la situation rapidement.",
+    image: '/images/blog/debouchage-fourreau-telecom.jpg',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-14T00:00:00.000Z',
+    categories: ['fibre optique', 'fourreau', 'diagnostic', 'guide'],
+  },
+  {
+    _id: 'static-resoudre-blocages-installation-fibre-optique',
+    title: "Résoudre les blocages lors de l'installation de la fibre optique : Guide complet",
+    slug: 'resoudre-blocages-installation-fibre-optique',
+    excerpt:
+      "Guide complet pour résoudre les blocages lors de l'installation de la fibre optique : gaines bouchées, regards introuvables, câbles endommagés. Solutions professionnelles et outils.",
+    image: '/images/blog/blocages-installation-fibre-optique.png',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-14T00:00:00.000Z',
+    categories: ['fibre optique', 'blocage', 'installation', 'guide'],
+  },
+  {
+    _id: 'static-localisation-detection-reseaux-telecom',
+    title: "Localisation et détection des réseaux télécom : méthodes professionnelles",
+    slug: 'localisation-detection-reseaux-telecom',
+    excerpt:
+      "Découvrez les techniques et outils professionnels pour localiser avec précision les réseaux télécom enterrés : détecteurs électromagnétiques, sondes traçables et méthodes d'investigation.",
+    image: '/images/blog/localisation-regard-telecom.jpg',
+    author: 'Expert Fibre Optique',
+    date: '2025-08-13T00:00:00.000Z',
+    categories: ['réseaux télécom', 'détection', 'localisation', 'regard télécom'],
+  },
+  {
     _id: 'static-travaux-raccordement-fibre-optique-guide-complet',
     title: 'Travaux pour le raccordement fibre optique : guide complet',
     slug: 'travaux-raccordement-fibre-optique-guide-complet',
