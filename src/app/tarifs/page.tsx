@@ -152,7 +152,7 @@ export default function Tarifs() {
                   </ul>
                   <div className="mt-6">
                     <button 
-                      onClick={() => openModal('diagnostic')}
+                      href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un diagnostic
@@ -204,7 +204,7 @@ export default function Tarifs() {
                   </ul>
                   <div className="mt-6">
                     <button 
-                      onClick={() => openModal('devis')}
+                      href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-neutral-dark hover:bg-neutral-darker text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
@@ -255,7 +255,7 @@ export default function Tarifs() {
                   </ul>
                   <div className="mt-6">
                     <button 
-                      onClick={() => openModal('devis')}
+                      href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
@@ -454,19 +454,7 @@ export default function Tarifs() {
                 </div>
               </div>
               
-              {/* CTA Button */}
-              <div className="mt-12 text-center">
-                <p className="text-gray-700 mb-4">Vous avez d'autres questions sur nos tarifs ?</p>
-                <button 
-                  onClick={() => openModal('devis')}
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-construction-orange to-construction-orange-dark text-white font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Demander un devis personnalisé
-                </button>
-              </div>
+             
             </div>
 
             {/* Call to Action */}
