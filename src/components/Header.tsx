@@ -13,6 +13,16 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handlePhoneClick = () => {
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17366889216/44P-CKmnw5kbEIDmltlA',
+        'value': 1.0,
+        'currency': 'EUR',
+      });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 sm:px-6">
@@ -52,7 +62,7 @@ const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
                         <a 
               href="tel:+33631372701"
-              onClick={() => (window as any).gtag_report_conversion ? (window as any).gtag_report_conversion('tel:+33787179186') : true}
+              onClick={handlePhoneClick}
               className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-colors"
             >
               <FiPhone className="mr-2" />
@@ -79,7 +89,7 @@ const Header: React.FC = () => {
           <div className="md:hidden flex items-center">
                         <a 
               href="tel:+33631372701" 
-              onClick={() => (window as any).gtag_report_conversion ? (window as any).gtag_report_conversion('tel:+33787179186') : true}
+              onClick={handlePhoneClick}
               className="mr-4 px-3 py-1 bg-orange-500 text-white font-medium rounded-lg text-sm flex items-center"
             >
               <FiPhone className="mr-1" />
