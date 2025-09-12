@@ -123,14 +123,7 @@ export default function CableFibreSectionne() {
                       Un coup de pelle mécanique ou de pioche mal placé, et la fibre est sectionnée.
                     </p>
                   </div>
-                  <div className="relative h-48 w-full">
-                    <Image 
-                      src="/images/blog/travaux-excavation.jpg" 
-                      alt="Travaux d'excavation endommageant un câble fibre" 
-                      fill 
-                      className="object-cover" 
-                    />
-                  </div>
+                  
                 </div>
                 
                 <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -143,14 +136,7 @@ export default function CableFibreSectionne() {
                       Certains rongeurs (rats, mulots) s'attaquent aux gaines et aux câbles, provoquant des coupures aléatoires.
                     </p>
                   </div>
-                  <div className="relative h-48 w-full">
-                    <Image 
-                      src="/images/blog/rongeurs-cables.jpg" 
-                      alt="Rongeurs endommageant des câbles" 
-                      fill 
-                      className="object-cover" 
-                    />
-                  </div>
+                 
                 </div>
               </div>
               
@@ -165,14 +151,7 @@ export default function CableFibreSectionne() {
                       Avec le temps, l'enveloppe protectrice peut se fragiliser, surtout si la fibre est exposée aux intempéries.
                     </p>
                   </div>
-                  <div className="relative h-48 w-full">
-                    <Image 
-                      src="/images/blog/cable-vieillissement.jpg" 
-                      alt="Câble fibre vieillissant" 
-                      fill 
-                      className="object-cover" 
-                    />
-                  </div>
+                  
                 </div>
                 
                 <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -185,14 +164,7 @@ export default function CableFibreSectionne() {
                       Dans certains cas, des coupures intentionnelles sont commises sur les réseaux extérieurs.
                     </p>
                   </div>
-                  <div className="relative h-48 w-full">
-                    <Image 
-                      src="/images/blog/vandalisme-cables.jpg" 
-                      alt="Vandalisme sur câbles fibre optique" 
-                      fill 
-                      className="object-cover" 
-                    />
-                  </div>
+                  
                 </div>
               </div>
             </section>
@@ -422,17 +394,22 @@ export default function CableFibreSectionne() {
                       </div>
                       <div>
                         <h4 className="font-medium text-lg mb-2 text-neutral-dark">Solution définitive</h4>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 mb-4">
                           Remplacement du câble de la PTO (Prise Terminale Optique) à la box.
                         </p>
-                        <div className="mt-4">
-                          <Image 
-                            src="/images/blog/remplacement-cable-fibre.jpg" 
-                            alt="Remplacement d'un câble fibre optique" 
-                            width={400}
-                            height={250}
-                            className="rounded-lg"
-                          />
+                        <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg mb-4">
+                          <p className="text-sm text-orange-800 mb-3">
+                            <strong>Intervention spécialisée requise :</strong> Cette opération nécessite l'expertise d'un technicien qualifié pour garantir une réparation durable et conforme aux normes.
+                          </p>
+                          <Link 
+                            href="/contact" 
+                            className="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
+                          >
+                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Contacter un spécialiste
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -527,7 +504,7 @@ export default function CableFibreSectionne() {
                     </p>
                     <div className="mt-4">
                       <Image 
-                        src="/images/blog/reflectometre-otdr.jpg" 
+                        src="/images/blog/reflectometre-otdr.png" 
                         alt="Réflectomètre OTDR pour fibre optique" 
                         width={200}
                         height={150}
@@ -549,7 +526,7 @@ export default function CableFibreSectionne() {
                     </p>
                     <div className="mt-4">
                       <Image 
-                        src="/images/blog/cliveuse-fibre.jpg" 
+                        src="/images/blog/cliveuse-fibre.png" 
                         alt="Cliveuse pour fibre optique" 
                         width={200}
                         height={150}
@@ -571,7 +548,7 @@ export default function CableFibreSectionne() {
                     </p>
                     <div className="mt-4">
                       <Image 
-                        src="/images/blog/soudeuse-fibre.jpg" 
+                        src="/images/blog/soudeuse-fibre.png" 
                         alt="Soudeuse à fibre optique" 
                         width={200}
                         height={150}
@@ -593,7 +570,7 @@ export default function CableFibreSectionne() {
                     </p>
                     <div className="mt-4">
                       <Image 
-                        src="/images/blog/protection-soudure-fibre.jpg" 
+                        src="/images/blog/protection-soudure-fibre.png" 
                         alt="Protection d'une soudure fibre optique" 
                         width={200}
                         height={150}
@@ -616,30 +593,123 @@ export default function CableFibreSectionne() {
                 Combien coûte la réparation d'une fibre sectionnée ?
               </h2>
               
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type d'intervention</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix moyen TTC</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      <tr className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Coupure à l'intérieur</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-construction-orange font-semibold">80 – 150 €</td>
-                      </tr>
-                      <tr className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Coupure extérieure (privé)</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-construction-orange font-semibold">150 – 300 €</td>
-                      </tr>
-                      <tr className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Coupure domaine public (hors opérateur)</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-construction-orange font-semibold">300 – 600 €</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Soudure simple */}
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <div className="bg-green-50 px-6 py-4 border-b border-gray-200">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">Soudure simple</h3>
+                        <p className="text-sm text-gray-600">Raccordement direct des fibres</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-6 py-4">
+                    <div className="text-center mb-4">
+                      <span className="text-3xl font-bold text-construction-orange">95€</span>
+                      <span className="text-gray-500 ml-1">TTC</span>
+                    </div>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Coupure avec mou de câble suffisant
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Soudure directe des fibres optiques
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Test de qualité du signal
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Intervention rapide (2-3h)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Retirage de câble */}
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <div className="bg-orange-50 px-6 py-4 border-b border-gray-200">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">Retirage de câble</h3>
+                        <p className="text-sm text-gray-600">Remplacement de section complète</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-6 py-4">
+                    <div className="text-center mb-4">
+                      <span className="text-3xl font-bold text-construction-orange">195€</span>
+                      <span className="text-gray-500 ml-1">TTC</span>
+                    </div>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Mou de câble insuffisant pour soudure
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Tirage de nouveau câble entre poteaux
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Raccordement aux deux extrémités
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-4 h-4 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Intervention complexe (4-6h)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-blue-800">
+                      Comment savoir quel type de réparation est nécessaire ?
+                    </h3>
+                    <div className="mt-2 text-sm text-blue-700">
+                      <p>
+                        Notre technicien détermine sur place s'il reste suffisamment de mou de câble pour effectuer une soudure simple. Si la coupure se situe dans une zone tendue (entre deux points d'ancrage), un retirage complet sera nécessaire.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
               

@@ -40,7 +40,7 @@ const Solutions = () => {
               <div className="md:w-2/5 relative">
                 <div className="h-72 md:h-full relative overflow-hidden">
                   <Image 
-                    src="/images/detection-point-de-blockage.png" 
+                    src="/images/detection-point-de-blockage.JPG" 
                     alt="Diagnostic précis du point de blocage" 
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-105"
