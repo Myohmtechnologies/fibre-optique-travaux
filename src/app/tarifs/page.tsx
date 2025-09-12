@@ -151,12 +151,12 @@ export default function Tarifs() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <button 
+                    <Link 
                       href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un diagnostic
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -203,12 +203,12 @@ export default function Tarifs() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <button 
+                    <Link 
                       href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-neutral-dark hover:bg-neutral-darker text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -254,12 +254,12 @@ export default function Tarifs() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <button 
+                    <Link 
                       href="/demande-de-devis-travaux-de-fibre-optique"
                       className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
                     >
                       Demander un devis
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
