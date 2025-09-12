@@ -23,6 +23,26 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleInterventionClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const url = e.currentTarget.href;
+    
+    const callback = () => {
+      window.location.href = url;
+    };
+
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17366889216/wZF5CI-Z0JkbEIDmltlA',
+        'value': 1.0,
+        'currency': 'EUR',
+        'event_callback': callback
+      });
+    } else {
+      callback();
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 sm:px-6">
@@ -71,6 +91,7 @@ const Header: React.FC = () => {
             
             <Link
               href="/demande-de-devis-travaux-de-fibre-optique"
+              onClick={handleInterventionClick}
               className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-full shadow-md transition-all duration-300"
             >
               <svg 
@@ -154,7 +175,10 @@ const Header: React.FC = () => {
             <Link
               href="/demande-de-devis-travaux-de-fibre-optique"
               className="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg shadow-md transition-all duration-300 mx-3"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => {
+                handleInterventionClick(e);
+                setIsMenuOpen(false);
+              }}
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 

@@ -13,6 +13,26 @@ function Hero() {
   // État pour le texte SEO expansible
   const [isTextExpanded, setIsTextExpanded] = useState(false);
 
+  const handleInterventionClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const url = e.currentTarget.href;
+    
+    const callback = () => {
+      window.location.href = url;
+    };
+
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17366889216/wZF5CI-Z0JkbEIDmltlA',
+        'value': 1.0,
+        'currency': 'EUR',
+        'event_callback': callback
+      });
+    } else {
+      callback();
+    }
+  };
+
   // Images d'interventions réelles
   const interventionImages = [
     {
@@ -82,6 +102,7 @@ function Hero() {
           <div className="flex justify-center w-full">
             <Link
               href="/demande-de-devis-travaux-de-fibre-optique"
+              onClick={handleInterventionClick}
               className="inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-3xl shadow-lg transition-all duration-300 text-base whitespace-nowrap relative overflow-hidden group border-2 border-orange-300 hover:border-orange-400"
             >
             {/* Effet de halo subtil */}
