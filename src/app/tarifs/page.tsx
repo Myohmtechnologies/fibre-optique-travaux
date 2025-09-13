@@ -115,152 +115,162 @@ export default function Tarifs() {
             </div>
 
             {/* Forfaits */}
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
-                <div className="bg-neutral-dark text-white p-6 text-center">
-                  <h3 className="text-xl font-bold">Diagnostic</h3>
-                  <div className="text-3xl font-bold mt-2">
-                    <span className="text-construction-orange">230€</span>
+            <div className="grid lg:grid-cols-2 gap-12 mb-12 max-w-5xl mx-auto">
+              {/* Carte Diagnostic */}
+              <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 hover:shadow-3xl transition-all duration-500 group">
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-orange-600"></div>
+                
+                <div className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-1">Diagnostic Expert</h3>
+                      <p className="text-gray-600">Détection précise du problème</p>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Analyse complète de l'installation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Détection précise des points de blocage</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Évaluation des travaux nécessaires</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Proposition de solutions adaptées</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Link 
-                      href="/demande-de-devis-travaux-de-fibre-optique"
-                      className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
-                    >
-                      Demander un diagnostic
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 transform scale-105 z-10">
-                <div className="bg-construction-orange text-white p-6 text-center relative">
                   
-                  <h3 className="text-xl font-bold">Surface Molle</h3>
-                  <div className="text-3xl font-bold mt-2">
-                    <span>530€</span>
+                  <div className="mb-6">
+                    <div className="flex items-baseline">
+                      <span className="text-5xl font-black text-orange-600">230€</span>
+                      <span className="text-gray-500 ml-2">TTC</span>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-1">Prix transparent, aucun frais caché</p>
                   </div>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Diagnostic complet inclus</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Intervention sur terre ou pelouse</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Création de tranchée si nécessaire</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Passage de gaine et tirage de câble</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Garantie 2 ans</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Link 
-                      href="/demande-de-devis-travaux-de-fibre-optique"
-                      className="block w-full text-center bg-neutral-dark hover:bg-neutral-darker text-white font-medium py-2 px-6 rounded-lg transition-colors"
-                    >
-                      Demander un devis
-                    </Link>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Détection précise du point de blocage</p>
+                        <p className="text-sm text-gray-600">Avec équipement spécialisé et localisation GPS exacte</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Rapport détaillé avec photos</p>
+                        <p className="text-sm text-gray-600">Documentation complète de l'intervention</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Devis gratuit pour les travaux</p>
+                        <p className="text-sm text-gray-600">Conseils techniques personnalisés inclus</p>
+                      </div>
+                    </div>
                   </div>
+
+                  <Link 
+                    href="/demande-de-devis-travaux-de-fibre-optique"
+                    className="block w-full text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  >
+                    Demander un diagnostic
+                  </Link>
                 </div>
               </div>
-              
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
-                <div className="bg-neutral-dark text-white p-6 text-center">
-                  <h3 className="text-xl font-bold">Surface Dure</h3>
-                  <div className="text-3xl font-bold mt-2">
-                    <span className="text-construction-orange">710€</span>
+
+              {/* Carte Travaux Fibre */}
+              <div className="relative bg-gradient-to-br from-white to-blue-50 rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-200 hover:shadow-3xl transition-all duration-500 group">
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-blue-700"></div>
+                <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full"></div>
+                
+                <div className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-1">Travaux Fibre Complets</h3>
+                      <p className="text-blue-600 font-medium">Solution complète de A à Z</p>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Diagnostic complet inclus</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Intervention sur béton, enrobé ou pavé</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Perçage et découpe spécialisée</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Passage de gaine et tirage de câble</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="h-5 w-5 text-construction-orange mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                      <span>Garantie 2 ans</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Link 
-                      href="/demande-de-devis-travaux-de-fibre-optique"
-                      className="block w-full text-center bg-construction-orange hover:bg-construction-orange-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
-                    >
-                      Demander un devis
-                    </Link>
+                  
+                  <div className="mb-6">
+                    <div className="flex items-center">
+                      <span className="text-3xl font-bold text-blue-600">Sur devis personnalisé</span>
+                    </div>
+                    <div className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full inline-block mt-2">
+                      Diagnostic inclus (valeur 230€)
+                    </div>
                   </div>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Débouchage par aspiration haute pression</p>
+                        <p className="text-sm text-gray-600">Technique professionnelle non destructive</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Tirage du câble fibre jusqu'au point final</p>
+                        <p className="text-sm text-gray-600">Installation complète selon normes</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Remise en état des surfaces</p>
+                        <p className="text-sm text-gray-600">Terre, pelouse, enrobé léger inclus</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Garantie 6 mois sur l'intervention</p>
+                        <p className="text-sm text-gray-600">Tranquillité et qualité assurées</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link 
+                    href="/demande-de-devis-travaux-de-fibre-optique"
+                    className="block w-full text-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  >
+                    Demander un devis
+                  </Link>
                 </div>
               </div>
             </div>
