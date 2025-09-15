@@ -251,7 +251,7 @@ export default function InterventionsPage() {
                   
                   return calendarDays.map((day, index) => {
                     if (day === null) {
-                      return <div key={index} className="p-2 h-24"></div>;
+                      return <div key={index} className="p-2 h-32"></div>;
                     }
                     
                     const dayInterventions = interventions.filter(intervention => {
@@ -267,7 +267,7 @@ export default function InterventionsPage() {
                       <div 
                         key={index} 
                         className={`
-                          p-2 border rounded-md cursor-pointer hover:bg-gray-50 h-24 overflow-hidden
+                          p-2 border rounded-md cursor-pointer hover:bg-gray-50 h-32 overflow-hidden
                           ${dayInterventions.length > 0 ? 'border-fiber-orange bg-fiber-orange/5' : 'border-gray-200'}
                           ${isToday ? 'bg-blue-50 border-blue-300' : ''}
                         `}
@@ -281,7 +281,7 @@ export default function InterventionsPage() {
                         </div>
                         
                         {/* Affichage des interventions */}
-                        <div className="space-y-0.5">
+                        <div className="space-y-1.5">
                           {dayInterventions.slice(0, 2).map((intervention, idx) => {
                             const interventionDate = new Date(intervention.scheduledDate);
                             const time = interventionDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
@@ -292,14 +292,14 @@ export default function InterventionsPage() {
                             return (
                               <div 
                                 key={idx}
-                                className="bg-fiber-orange text-white text-xs px-2 py-1.5 rounded"
+                                className="bg-fiber-orange text-white text-xs px-2 py-1 rounded"
                                 title={`${intervention.clientName} - ${intervention.service}`}
                               >
-                                <div className="flex justify-between items-center mb-0.5">
-                                  <span className="font-bold">{time}</span>
+                                <div className="flex justify-between items-center">
+                                  <span className="font-bold text-xs">{time}</span>
                                   <span className="text-xs opacity-90">{postalCode}</span>
                                 </div>
-                                <div className="truncate font-medium">{intervention.clientName}</div>
+                                <div className="truncate font-medium text-xs mt-0.5">{intervention.clientName}</div>
                               </div>
                             );
                           })}
