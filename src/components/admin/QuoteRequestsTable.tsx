@@ -37,9 +37,6 @@ export default function QuoteRequestsTable({
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Statut
             </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
-            </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -79,40 +76,6 @@ export default function QuoteRequestsTable({
                   {request.status === 'completed' && 'Terminé'}
                   {request.status === 'cancelled' && 'Annulé'}
                 </span>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div className="flex space-x-2">
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedRequest(request);
-                    }}
-                    className="text-fiber-orange hover:text-fiber-orange/80"
-                  >
-                    Voir
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const nextStatus = 
-                        request.status === 'new' ? 'contacted' as const :
-                        request.status === 'contacted' ? 'scheduled' as const :
-                        request.status === 'scheduled' ? 'completed' as const : 'completed' as const;
-                      
-                      updateRequestStatus(request._id?.toString() || '', nextStatus);
-                    }}
-                    className={`
-                      ${request.status === 'completed' || request.status === 'cancelled' ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:text-blue-900'}
-                    `}
-                    disabled={request.status === 'completed' || request.status === 'cancelled'}
-                  >
-                    {request.status === 'new' && 'Contacter'}
-                    {request.status === 'contacted' && 'Planifier RDV'}
-                    {request.status === 'scheduled' && 'Terminer'}
-                    {request.status === 'completed' && 'Terminé'}
-                    {request.status === 'cancelled' && 'Annulé'}
-                  </button>
-                </div>
               </td>
             </tr>
           ))}

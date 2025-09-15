@@ -440,7 +440,6 @@ export default function Dashboard() {
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -459,9 +458,7 @@ export default function Dashboard() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {getStatusPill(message.status)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          {renderActionButtons(message)}
-                        </td>
+                       
                       </tr>
                     ))}
                   </tbody>
