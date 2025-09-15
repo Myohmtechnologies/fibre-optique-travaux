@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Sidebar from '@/components/admin/Sidebar';
 import { IQuote } from '@/models/Quote';
@@ -64,21 +64,59 @@ const mockInterventions: Intervention[] = [
 ];
 
 export default function InterventionsPage() {
-  const [interventions, setInterventions] = useState<Intervention[]>(mockInterventions);
+  const [interventions, setInterventions] = useState<Intervention[]>([]);
   const [selectedIntervention, setSelectedIntervention] = useState<Intervention | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterTechnician, setFilterTechnician] = useState<string>('all');
   const [filterDate, setFilterDate] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // Fonction pour récupérer les interventions depuis l'API
+  const fetchInterventions = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/interventions');
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des interventions');
+      }
+      const data = await response.json();
+      setInterventions(data);
+    } catch (error) {
+      console.error('Erreur:', error);
+      // Utiliser les données fictives en cas d'erreur
+      setInterventions(mockInterventions);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Fonction pour mettre à jour le statut d'une intervention
-  const updateInterventionStatus = (id: string, newStatus: Intervention['status']) => {
-    setInterventions(prev => 
-      prev.map(intervention => 
-        intervention.id === id ? { ...intervention, status: newStatus } : intervention
-      )
-    );
-    if (selectedIntervention && selectedIntervention.id === id) {
-      setSelectedIntervention({...selectedIntervention, status: newStatus});
+  const updateInterventionStatus = async (id: string, newStatus: Intervention['status']) => {
+    try {
+      const response = await fetch('/api/interventions', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la mise à jour du statut');
+      }
+
+      // Mettre à jour l'état local
+      setInterventions(prev => 
+        prev.map(intervention => 
+          intervention.id === id ? { ...intervention, status: newStatus } : intervention
+        )
+      );
+      if (selectedIntervention && selectedIntervention.id === id) {
+        setSelectedIntervention({...selectedIntervention, status: newStatus});
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Erreur lors de la mise à jour du statut. Veuillez réessayer.');
     }
   };
 
@@ -95,6 +133,11 @@ export default function InterventionsPage() {
   const sortedInterventions = [...filteredInterventions].sort((a, b) => 
     new Date(a.scheduledDate).getTime() - new Date(b.scheduledDate).getTime()
   );
+
+  // Charger les interventions au montage du composant
+  useEffect(() => {
+    fetchInterventions();
+  }, []);
 
   // Liste des techniciens uniques pour le filtre
   const uniqueTechnicians = Array.from(new Set(interventions.map(intervention => intervention.technician)));
@@ -115,9 +158,9 @@ export default function InterventionsPage() {
             <div className="flex space-x-4">
               <button 
                 className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
-                onClick={() => {/* Fonction pour ajouter une intervention */}}
+                onClick={() => fetchInterventions()}
               >
-                Nouvelle intervention
+                Actualiser
               </button>
             </div>
           </div>
@@ -179,36 +222,92 @@ export default function InterventionsPage() {
               <h2 className="text-xl font-semibold text-gray-800">Calendrier des interventions</h2>
             </div>
             <div className="p-6">
-              <div className="grid grid-cols-7 gap-4">
+              <div className="grid grid-cols-7 gap-2">
                 {['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((day, index) => (
-                  <div key={index} className="text-center font-medium text-gray-700">{day}</div>
+                  <div key={index} className="text-center font-medium text-gray-700 p-2">{day}</div>
                 ))}
                 
-                {/* Simulation d'un calendrier - à remplacer par un vrai composant de calendrier */}
-                {Array.from({ length: 35 }).map((_, index) => {
-                  const day = index + 1;
-                  const hasIntervention = interventions.some(intervention => 
-                    new Date(intervention.scheduledDate).getDate() === day && 
-                    new Date(intervention.scheduledDate).getMonth() === 2 // Mars
-                  );
+                {/* Calendrier dynamique basé sur le mois actuel */}
+                {(() => {
+                  const today = new Date();
+                  const currentMonth = today.getMonth();
+                  const currentYear = today.getFullYear();
+                  const firstDay = new Date(currentYear, currentMonth, 1);
+                  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                  const daysInMonth = lastDay.getDate();
+                  const startingDayOfWeek = firstDay.getDay() === 0 ? 7 : firstDay.getDay(); // Lundi = 1
                   
-                  return (
-                    <div 
-                      key={index} 
-                      className={`
-                        p-2 border rounded-md text-center cursor-pointer hover:bg-gray-50
-                        ${hasIntervention ? 'border-fiber-orange bg-fiber-orange/10' : 'border-gray-200'}
-                      `}
-                      onClick={() => {
-                        // Filtrer par cette date
-                        const date = new Date(2025, 2, day); // Mars 2025
-                        setFilterDate(date.toISOString().split('T')[0]);
-                      }}
-                    >
-                      {day <= 31 ? day : ''}
-                    </div>
-                  );
-                })}
+                  const calendarDays = [];
+                  
+                  // Ajouter les jours vides au début
+                  for (let i = 1; i < startingDayOfWeek; i++) {
+                    calendarDays.push(null);
+                  }
+                  
+                  // Ajouter les jours du mois
+                  for (let day = 1; day <= daysInMonth; day++) {
+                    calendarDays.push(day);
+                  }
+                  
+                  return calendarDays.map((day, index) => {
+                    if (day === null) {
+                      return <div key={index} className="p-2 h-24"></div>;
+                    }
+                    
+                    const dayInterventions = interventions.filter(intervention => {
+                      const interventionDate = new Date(intervention.scheduledDate);
+                      return interventionDate.getDate() === day && 
+                             interventionDate.getMonth() === currentMonth &&
+                             interventionDate.getFullYear() === currentYear;
+                    });
+                    
+                    const isToday = day === today.getDate() && currentMonth === today.getMonth();
+                    
+                    return (
+                      <div 
+                        key={index} 
+                        className={`
+                          p-2 border rounded-md cursor-pointer hover:bg-gray-50 h-24 overflow-hidden
+                          ${dayInterventions.length > 0 ? 'border-fiber-orange bg-fiber-orange/5' : 'border-gray-200'}
+                          ${isToday ? 'bg-blue-50 border-blue-300' : ''}
+                        `}
+                        onClick={() => {
+                          const date = new Date(currentYear, currentMonth, day);
+                          setFilterDate(date.toISOString().split('T')[0]);
+                        }}
+                      >
+                        <div className={`font-medium text-sm mb-1 ${isToday ? 'text-blue-600' : 'text-gray-800'}`}>
+                          {day}
+                        </div>
+                        
+                        {/* Affichage des interventions */}
+                        <div className="space-y-0.5">
+                          {dayInterventions.slice(0, 2).map((intervention, idx) => {
+                            const interventionDate = new Date(intervention.scheduledDate);
+                            const time = interventionDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+                            
+                            // Extraire le code postal de l'adresse
+                            const postalCode = intervention.address.split(', ').pop() || '';
+                            
+                            return (
+                              <div 
+                                key={idx}
+                                className="bg-fiber-orange text-white text-xs px-2 py-1.5 rounded"
+                                title={`${intervention.clientName} - ${intervention.service}`}
+                              >
+                                <div className="flex justify-between items-center mb-0.5">
+                                  <span className="font-bold">{time}</span>
+                                  <span className="text-xs opacity-90">{postalCode}</span>
+                                </div>
+                                <div className="truncate font-medium">{intervention.clientName}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  });
+                })()}
               </div>
             </div>
           </div>
@@ -218,98 +317,104 @@ export default function InterventionsPage() {
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-800">Liste des interventions</h2>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Client
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Service
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date & Heure
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Technicien
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Statut
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {sortedInterventions.map((intervention) => (
-                    <tr key={intervention.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">{intervention.clientName}</div>
-                            <div className="text-sm text-gray-500">{intervention.clientEmail}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{intervention.service}</div>
-                        <div className="text-sm text-gray-500 truncate max-w-xs">{intervention.address}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(intervention.scheduledDate).toLocaleDateString('fr-FR')}
-                        <br />
-                        {new Date(intervention.scheduledDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {intervention.technician}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`
-                          px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                          ${intervention.status === 'scheduled' ? 'bg-blue-100 text-blue-800' : ''}
-                          ${intervention.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' : ''}
-                          ${intervention.status === 'completed' ? 'bg-green-100 text-green-800' : ''}
-                          ${intervention.status === 'cancelled' ? 'bg-red-100 text-red-800' : ''}
-                        `}>
-                          {intervention.status === 'scheduled' && 'Programmé'}
-                          {intervention.status === 'in-progress' && 'En cours'}
-                          {intervention.status === 'completed' && 'Terminé'}
-                          {intervention.status === 'cancelled' && 'Annulé'}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button 
-                          onClick={() => setSelectedIntervention(intervention)}
-                          className="text-fiber-orange hover:text-fiber-orange/80 mr-4"
-                        >
-                          Voir détails
-                        </button>
-                        <button 
-                          onClick={() => {
-                            const nextStatus = 
-                              intervention.status === 'scheduled' ? 'in-progress' :
-                              intervention.status === 'in-progress' ? 'completed' : 'completed';
-                            
-                            updateInterventionStatus(intervention.id, nextStatus);
-                          }}
-                          className={`
-                            ${intervention.status === 'completed' || intervention.status === 'cancelled' ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:text-green-900'}
-                          `}
-                          disabled={intervention.status === 'completed' || intervention.status === 'cancelled'}
-                        >
-                          {intervention.status === 'scheduled' && 'Démarrer'}
-                          {intervention.status === 'in-progress' && 'Terminer'}
-                          {intervention.status === 'completed' && 'Terminé'}
-                          {intervention.status === 'cancelled' && 'Annulé'}
-                        </button>
-                      </td>
+            {isLoading ? (
+              <div className="flex justify-center items-center p-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-fiber-orange"></div>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Client
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Service
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date & Heure
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Technicien
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Statut
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {sortedInterventions.map((intervention) => (
+                      <tr key={intervention.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{intervention.clientName}</div>
+                              <div className="text-sm text-gray-500">{intervention.clientEmail}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">{intervention.service}</div>
+                          <div className="text-sm text-gray-500 truncate max-w-xs">{intervention.address}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(intervention.scheduledDate).toLocaleDateString('fr-FR')}
+                          <br />
+                          {new Date(intervention.scheduledDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {intervention.technician}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`
+                            px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                            ${intervention.status === 'scheduled' ? 'bg-blue-100 text-blue-800' : ''}
+                            ${intervention.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' : ''}
+                            ${intervention.status === 'completed' ? 'bg-green-100 text-green-800' : ''}
+                            ${intervention.status === 'cancelled' ? 'bg-red-100 text-red-800' : ''}
+                          `}>
+                            {intervention.status === 'scheduled' && 'Programmé'}
+                            {intervention.status === 'in-progress' && 'En cours'}
+                            {intervention.status === 'completed' && 'Terminé'}
+                            {intervention.status === 'cancelled' && 'Annulé'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <button 
+                            onClick={() => setSelectedIntervention(intervention)}
+                            className="text-fiber-orange hover:text-fiber-orange/80 mr-4"
+                          >
+                            Voir détails
+                          </button>
+                          <button 
+                            onClick={() => {
+                              const nextStatus = 
+                                intervention.status === 'scheduled' ? 'in-progress' :
+                                intervention.status === 'in-progress' ? 'completed' : 'completed';
+                              
+                              updateInterventionStatus(intervention.id, nextStatus);
+                            }}
+                            className={`
+                              ${intervention.status === 'completed' || intervention.status === 'cancelled' ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:text-green-900'}
+                            `}
+                            disabled={intervention.status === 'completed' || intervention.status === 'cancelled'}
+                          >
+                            {intervention.status === 'scheduled' && 'Démarrer'}
+                            {intervention.status === 'in-progress' && 'Terminer'}
+                            {intervention.status === 'completed' && 'Terminé'}
+                            {intervention.status === 'cancelled' && 'Annulé'}
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>
