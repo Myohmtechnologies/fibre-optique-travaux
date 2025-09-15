@@ -236,14 +236,7 @@ export default function TopCausesBlocageFourreau() {
                   <div>
                     <h3 className="text-xl font-semibold text-gray-700 mb-3">Pourquoi cela arrive ?</h3>
                     <p className="text-gray-600 mb-4">Des racines d'arbres/arbustes s'infiltrent par recherche d'humidité, notamment près des regards.</p>
-                    <div className="relative h-48 rounded-lg overflow-hidden my-4">
-                      <Image 
-                        src="/images/blog/racines-fourreau-telecom.jpg" 
-                        alt="Racines dans un fourreau télécom" 
-                        fill 
-                        className="object-cover" 
-                      />
-                    </div>
+                    
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gray-700 mb-3">Comment le détecter ?</h3>
@@ -301,7 +294,7 @@ export default function TopCausesBlocageFourreau() {
                         <h4 className="font-semibold text-construction-orange">Besoin d'une intervention ?</h4>
                       </div>
                       <p className="text-gray-700 text-sm">Nos techniciens spécialisés peuvent intervenir rapidement pour résoudre votre problème de fourreau télécom.</p>
-                      <Link href="/contact" className="mt-3 inline-block px-4 py-2 bg-construction-orange text-white rounded-md hover:bg-orange-600 transition-colors">
+                      <Link href="/demande-de-devis-travaux-de-fibre-optique" className="mt-3 inline-block px-4 py-2 bg-construction-orange text-white rounded-md hover:bg-orange-600 transition-colors">
                         Demander un devis gratuit
                       </Link>
                     </div>
