@@ -69,7 +69,7 @@ export default function ResoudreBlocagesFibre() {
             {/* Image principale */}
             <div className="relative w-full h-96 mb-8 rounded-xl overflow-hidden">
               <Image
-                src="/images/blog/blocages-installation-fibre-optique.jpg"
+                src="/images/blog/blocages-installation-fibre-optique.png"
                 alt="Résoudre les blocages lors de l'installation de la fibre optique"
                 fill
                 className="object-cover"
@@ -86,19 +86,49 @@ export default function ResoudreBlocagesFibre() {
                 Entre gaines bouchées, regards introuvables, câbles endommagés ou refus d'accès, les blocages techniques peuvent retarder la mise en service pendant des jours, voire des semaines.
               </p>
 
-              <p>
-                Dans cet article pilier, nous allons voir :
-              </p>
+              <div className="bg-gradient-to-r from-blue-50 to-orange-50 p-6 rounded-xl mb-8">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">🎯 Ce que vous allez découvrir dans ce guide</h3>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-construction-orange rounded-full mr-2"></span>
+                      Diagnostic et identification
+                    </h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li>• Les 7 causes principales de blocages techniques</li>
+                      <li>• Comment identifier rapidement la source du problème</li>
+                      <li>• Les signes avant-coureurs à surveiller</li>
+                    </ul>
+                  </div>
 
-              <ul>
-                <li>Les causes les plus courantes de blocages.</li>
-                <li>Les solutions professionnelles pour les lever.</li>
-                <li>Les outils utilisés sur le terrain.</li>
-                <li>Les erreurs à éviter pour ne pas aggraver la situation.</li>
-              </ul>
+                  <div>
+                    <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-construction-orange rounded-full mr-2"></span>
+                      Solutions professionnelles
+                    </h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li>• Les techniques de déblocage éprouvées</li>
+                      <li>• Les outils spécialisés et leur utilisation</li>
+                      <li>• Quand faire appel aux services d'urgence</li>
+                    </ul>
+                  </div>
+                </div>
 
-              <p>
-                L'objectif : vous donner une feuille de route claire pour débloquer votre raccordement fibre, que vous soyez particulier, syndic, entreprise ou même technicien sous-traitant.
+                <div className="mt-6 p-4 bg-white rounded-lg border-l-4 border-construction-orange">
+                  <p className="text-sm text-gray-700">
+                    <strong>💡 Notre objectif :</strong> Vous fournir une méthode step-by-step pour résoudre 90% des blocages d'installation fibre, 
+                    économiser des semaines d'attente et éviter les interventions coûteuses inutiles.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-600 font-medium">
+                Que vous soyez <span className="text-construction-orange">particulier en attente de raccordement</span>, 
+                <span className="text-construction-orange"> syndic gérant un immeuble</span>, 
+                <span className="text-construction-orange"> entreprise pressée</span> ou 
+                <span className="text-construction-orange"> technicien sur le terrain</span>, 
+                ce guide vous donnera les clés pour débloquer efficacement la situation.
               </p>
             </div>
 
