@@ -20,6 +20,22 @@ export default function QuotesPage() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
+  const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
+  const [newLeadFormData, setNewLeadFormData] = useState({
+    fullName: '',
+    phone: '',
+    address: '',
+    postalCode: '',
+    environment: 'terre',
+    housingType: 'pavillon',
+    operator: 'orange',
+    message: ''
+  });
+  const [notification, setNotification] = useState<{
+    show: boolean;
+    type: 'success' | 'error';
+    message: string;
+  }>({ show: false, type: 'success', message: '' });
 
   // Environnements pour le filtre et l'affichage
   const environments = [
@@ -225,6 +241,66 @@ export default function QuotesPage() {
     return status ? { name: status.name, color: status.color } : { name: id, color: 'bg-gray-100 text-gray-800' };
   };
 
+  // Fonctions pour gérer l'ajout de lead manuel
+  const openAddLeadModal = () => {
+    setIsAddLeadModalOpen(true);
+  };
+
+  const closeAddLeadModal = () => {
+    setIsAddLeadModalOpen(false);
+    setNewLeadFormData({
+      fullName: '',
+      phone: '',
+      address: '',
+      postalCode: '',
+      environment: 'terre',
+      housingType: 'pavillon',
+      operator: 'orange',
+      message: ''
+    });
+  };
+
+  const showNotification = (type: 'success' | 'error', message: string) => {
+    setNotification({ show: true, type, message });
+    setTimeout(() => {
+      setNotification({ show: false, type: 'success', message: '' });
+    }, 4000);
+  };
+
+  const handleAddLead = async () => {
+    // Validation des champs obligatoires
+    if (!newLeadFormData.fullName || !newLeadFormData.phone || !newLeadFormData.address || !newLeadFormData.postalCode) {
+      showNotification('error', 'Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...newLeadFormData,
+          status: 'new',
+          createdAt: new Date().toISOString()
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'ajout du lead');
+      }
+
+      // Recharger les données
+      await fetchQuotes();
+      closeAddLeadModal();
+      showNotification('success', `Lead "${newLeadFormData.fullName}" ajouté avec succès !`);
+    } catch (error) {
+      console.error('Erreur:', error);
+      showNotification('error', 'Erreur lors de l\'ajout du lead. Veuillez réessayer.');
+    }
+  };
+
   return (
     <motion.div 
       className="flex h-screen bg-gray-100"
@@ -239,6 +315,15 @@ export default function QuotesPage() {
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-800">Demandes de devis</h1>
             <div className="flex space-x-4">
+              <button 
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors flex items-center"
+                onClick={openAddLeadModal}
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Ajouter un lead
+              </button>
               <button 
                 className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
                 onClick={() => fetchQuotes()}
@@ -660,6 +745,235 @@ export default function QuotesPage() {
             </div>
           </motion.div>
         </div>
+      )}
+
+      {/* Modal d'ajout de lead manuel */}
+      {isAddLeadModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <motion.div 
+            className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+          >
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-800">Ajouter un lead manuellement</h2>
+                <button 
+                  onClick={closeAddLeadModal}
+                  className="text-gray-400 hover:text-gray-500"
+                >
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Informations client */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium text-gray-900">Informations client</h3>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Nom complet <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={newLeadFormData.fullName}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, fullName: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                      placeholder="Nom et prénom du client"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Téléphone <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      value={newLeadFormData.phone}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, phone: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                      placeholder="06 12 34 56 78"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Adresse <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={newLeadFormData.address}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, address: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                      placeholder="123 rue de la République"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Code postal <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={newLeadFormData.postalCode}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, postalCode: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                      placeholder="04100"
+                    />
+                  </div>
+                </div>
+
+                {/* Informations techniques */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium text-gray-900">Informations techniques</h3>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Environnement
+                    </label>
+                    <select
+                      value={newLeadFormData.environment}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, environment: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                    >
+                      {environments.map(env => (
+                        <option key={env.id} value={env.id}>{env.icon} {env.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Type de logement
+                    </label>
+                    <select
+                      value={newLeadFormData.housingType}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, housingType: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                    >
+                      {housingTypes.map(type => (
+                        <option key={type.id} value={type.id}>{type.icon} {type.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Opérateur
+                    </label>
+                    <select
+                      value={newLeadFormData.operator}
+                      onChange={(e) => setNewLeadFormData({...newLeadFormData, operator: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                    >
+                      {operators.map(op => (
+                        <option key={op.id} value={op.id}>{op.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Message */}
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Message / Description du problème
+                </label>
+                <textarea
+                  rows={4}
+                  value={newLeadFormData.message}
+                  onChange={(e) => setNewLeadFormData({...newLeadFormData, message: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fiber-orange"
+                  placeholder="Décrivez le problème rencontré ou les détails de la demande..."
+                />
+              </div>
+
+              <div className="mt-4 text-sm text-gray-500">
+                <span className="text-red-500">*</span> Champs obligatoires
+              </div>
+            </div>
+            
+            <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
+              <button
+                onClick={closeAddLeadModal}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleAddLead}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+              >
+                Ajouter le lead
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Toast de notification */}
+      {notification.show && (
+        <motion.div 
+          className="fixed top-4 right-4 z-[60] max-w-sm w-full"
+          initial={{ opacity: 0, x: 100, scale: 0.8 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          exit={{ opacity: 0, x: 100, scale: 0.8 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className={`
+            rounded-xl shadow-lg border p-4 flex items-start space-x-3
+            ${notification.type === 'success' 
+              ? 'bg-green-50 border-green-200 text-green-800' 
+              : 'bg-red-50 border-red-200 text-red-800'
+            }
+          `}>
+            <div className="flex-shrink-0 mt-0.5">
+              {notification.type === 'success' ? (
+                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+            </div>
+            
+            <div className="flex-1">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h4 className={`text-sm font-semibold ${
+                    notification.type === 'success' ? 'text-green-800' : 'text-red-800'
+                  }`}>
+                    {notification.type === 'success' ? 'Succès !' : 'Erreur'}
+                  </h4>
+                  <p className={`text-sm mt-1 ${
+                    notification.type === 'success' ? 'text-green-700' : 'text-red-700'
+                  }`}>
+                    {notification.message}
+                  </p>
+                </div>
+                
+                <button
+                  onClick={() => setNotification({ show: false, type: 'success', message: '' })}
+                  className={`ml-4 text-sm font-medium hover:opacity-70 transition-opacity ${
+                    notification.type === 'success' ? 'text-green-600' : 'text-red-600'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       )}
     </motion.div>
   );
