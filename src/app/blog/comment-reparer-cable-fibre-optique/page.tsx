@@ -564,17 +564,17 @@ export default function CommentReparerCableFibreOptique() {
                 et rétablir votre connexion internet.
               </p>
               <div className="flex flex-col space-y-3">
-                <a href="tel:+33400000000" className="flex items-center text-blue-600 hover:text-orange-500 transition-colors">
+                <a href="tel:+33631372701" className="flex items-center text-blue-600 hover:text-orange-500 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  04 00 00 00 00
+                  06 31 37 27 01
                 </a>
                 <a href="mailto:contact@fibre-optique-travaux.fr" className="flex items-center text-blue-600 hover:text-orange-500 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  contact@fibre-optique-travaux.fr
+                  fibreoptiquetravaux1@gmail.com
                 </a>
               </div>
               <Link href="/contact" className="block bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg text-center mt-4 transition-colors">
@@ -585,41 +585,52 @@ export default function CommentReparerCableFibreOptique() {
             {/* Articles liés */}
             <div className="bg-white rounded-lg shadow-md p-6 mb-8">
               <h3 className="text-xl font-semibold mb-4 text-gray-800">Articles liés</h3>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="/blog/pourquoi-aiguille-cable-bloquent-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                    <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                    
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 leading-tight">Pourquoi l'aiguille et le câble bloquent dans le fourreau télécom ?</h4>
-                      <p className="text-sm text-gray-500 mt-1">Découvrez les causes et solutions</p>
-                    </div>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                    <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                    
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 leading-tight">Qui appeler pour le débouchage d'un fourreau télécom ?</h4>
-                      <p className="text-sm text-gray-500 mt-1">Les professionnels à contacter</p>
-                    </div>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/quand-realiser-tranchee-fibre-optique" className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                    <div className="w-16 h-16 relative flex-shrink-0 mr-3">
-                    
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 leading-tight">Quand faut-il réaliser une tranchée pour la fibre ?</h4>
-                      <p className="text-sm text-gray-500 mt-1">Guide complet et conseils</p>
-                    </div>
-                  </Link>
-                </li>
-              </ul>
+              <div className="space-y-4">
+                <Link href="/blog/pourquoi-aiguille-cable-bloquent-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-3 rounded-lg transition-colors group">
+                  <div className="w-16 h-16 relative flex-shrink-0 mr-4 rounded-md overflow-hidden">
+                    <Image 
+                      src="/images/blog/cable-bloque-fourreau-telecom.jpg" 
+                      alt="Câble bloqué dans fourreau télécom" 
+                      fill 
+                      className="object-cover" 
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 leading-tight group-hover:text-construction-orange transition-colors">Pourquoi l'aiguille et le câble bloquent dans le fourreau télécom ?</h4>
+                    <p className="text-sm text-gray-500 mt-1">Découvrez les causes principales de blocage et les solutions</p>
+                  </div>
+                </Link>
+
+                <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="flex items-start hover:bg-gray-50 p-3 rounded-lg transition-colors group">
+                  <div className="w-16 h-16 relative flex-shrink-0 mr-4 rounded-md overflow-hidden">
+                    <Image 
+                      src="/images/blog/debouchage-fourreau-telecom.jpg" 
+                      alt="Débouchage fourreau télécom" 
+                      fill 
+                      className="object-cover" 
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 leading-tight group-hover:text-construction-orange transition-colors">Qui appeler pour le débouchage d'un fourreau télécom ?</h4>
+                    <p className="text-sm text-gray-500 mt-1">Guide complet pour choisir le bon professionnel</p>
+                  </div>
+                </Link>
+
+                <Link href="/blog/detection-regard-ptt" className="flex items-start hover:bg-gray-50 p-3 rounded-lg transition-colors group">
+                  <div className="w-16 h-16 relative flex-shrink-0 mr-4 rounded-md overflow-hidden">
+                    <Image 
+                      src="/images/blog/detection-regard-ptt.jpeg" 
+                      alt="Détection regard PTT" 
+                      fill 
+                      className="object-cover" 
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 leading-tight group-hover:text-construction-orange transition-colors">Pourquoi réaliser la détection de votre regard PTT ?</h4>
+                    <p className="text-sm text-gray-500 mt-1">Localisation précise pour débloquer votre fibre</p>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

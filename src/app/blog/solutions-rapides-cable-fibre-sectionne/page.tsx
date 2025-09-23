@@ -982,36 +982,36 @@ export default function CableFibreSectionne() {
                   </div>
                 </Link>
                 
-                <Link href="/blog/top-5-causes-blocage-fourreau-telecom" className="group">
+                <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="group">
                   <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden h-full transition-transform group-hover:-translate-y-1">
                     <div className="relative h-48">
                       <Image 
-                        src="/images/blog/causes-blocage-fourreau.jpg" 
-                        alt="Causes de blocage dans un fourreau télécom" 
+                        src="/images/blog/debouchage-fourreau-telecom.jpg" 
+                        alt="Qui appeler pour le débouchage d'un fourreau télécom" 
                         fill
                         className="object-cover"
                       />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-lg text-neutral-dark group-hover:text-construction-orange transition-colors">Top 5 causes de blocage dans un fourreau télécom</h3>
-                      <p className="text-gray-600 text-sm mt-2">Identifiez les principales causes de blocage dans les fourreaux télécom et leurs solutions.</p>
+                      <h3 className="font-semibold text-lg text-neutral-dark group-hover:text-construction-orange transition-colors">Qui appeler pour le débouchage d'un fourreau télécom ?</h3>
+                      <p className="text-gray-600 text-sm mt-2">Fourreau télécom bouché ? Découvrez quel professionnel contacter pour déboucher votre gaine efficacement.</p>
                     </div>
                   </div>
                 </Link>
                 
-                <Link href="/blog/comment-localiser-regard-telecom-introuvable" className="group">
+                <Link href="/blog/detection-regard-ptt" className="group">
                   <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden h-full transition-transform group-hover:-translate-y-1">
                     <div className="relative h-48">
                       <Image 
-                        src="/images/blog/localisation-regard-telecom.jpg" 
-                        alt="Localisation d'un regard télécom" 
+                        src="/images/blog/detection-regard-ptt.jpeg" 
+                        alt="Détection regard PTT" 
                         fill
                         className="object-cover"
                       />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-lg text-neutral-dark group-hover:text-construction-orange transition-colors">Comment localiser un regard télécom introuvable ?</h3>
-                      <p className="text-gray-600 text-sm mt-2">Méthodes et outils pour retrouver un regard télécom enterré ou dissimulé.</p>
+                      <h3 className="font-semibold text-lg text-neutral-dark group-hover:text-construction-orange transition-colors">Pourquoi réaliser la détection de votre regard PTT ?</h3>
+                      <p className="text-gray-600 text-sm mt-2">Un regard PTT introuvable bloque votre raccordement ? Découvrez pourquoi et comment nos experts le localisent rapidement.</p>
                     </div>
                   </div>
                 </Link>

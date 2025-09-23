@@ -584,15 +584,14 @@ export default function DetectionRegardPTT() {
                       className="drop-shadow-md"
                     />
                   </div>
-                  <div className="mt-6 bg-construction-orange text-white p-4 rounded-lg text-center">
-                    <div className="flex items-center justify-center mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <span className="text-xl font-bold">07.87.17.91.86</span>
-                    </div>
-                    <p className="uppercase text-sm font-semibold">Pour tout renseignement contactez-nous</p>
-                  </div>
+                  <a 
+                    href="tel:+33631372701" 
+                    className="mt-6 bg-construction-orange hover:bg-orange-600 text-white p-4 rounded-lg text-center shadow-md hover:shadow-lg transition-all duration-200 block"
+                    title="Appeler maintenant"
+                  >
+                    <p className="text-xl font-bold">06 31 37 27 01</p>
+                    <p className="text-sm font-medium opacity-90">Pour tout renseignement contactez-nous</p>
+                  </a>
                 </div>
                 
                 <div className="md:w-3/5">
@@ -613,14 +612,7 @@ export default function DetectionRegardPTT() {
                       <p className="font-bold text-construction-orange">Occitanie</p>
                       <p className="text-sm text-gray-600">Montpellier, Toulouse</p>
                     </div>
-                    <div className="bg-white p-3 rounded-lg shadow-sm text-center">
-                      <p className="font-bold text-construction-orange">Rhône-Alpes</p>
-                      <p className="text-sm text-gray-600">Lyon, Grenoble</p>
-                    </div>
-                    <div className="bg-white p-3 rounded-lg shadow-sm text-center">
-                      <p className="font-bold text-construction-orange">Île-de-France</p>
-                      <p className="text-sm text-gray-600">Paris, Versailles</p>
-                    </div>
+                    
                   </div>
                   
                   <div className="mt-6 bg-gray-100 p-4 rounded-lg border-l-4 border-construction-orange">

@@ -559,6 +559,48 @@ export default function QuiPeutResoudreProblemeInstallationFibre() {
                 </div>
               </div>
             </section>
+
+            {/* Articles similaires */}
+            <div className="border-t border-gray-200 pt-10">
+              <h2 className="text-2xl font-bold mb-6 text-gray-800">À lire également</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/detection-regard-ptt" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/blog/detection-regard-ptt.jpeg" alt="Détection regard PTT" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Pourquoi réaliser la détection de votre regard PTT ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Un regard PTT introuvable bloque votre raccordement ? Découvrez pourquoi et comment nos experts le localisent rapidement.</p>
+                    </div>
+                  </Link>
+                </div>
+                
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/blog/debouchage-fourreau-telecom.jpg" alt="Qui appeler pour déboucher un fourreau télécom" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Qui appeler pour le débouchage d'un fourreau télécom ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Fourreau télécom bouché ? Découvrez quel professionnel contacter pour déboucher votre gaine efficacement.</p>
+                    </div>
+                  </Link>
+                </div>
+                
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/pourquoi-aiguille-cable-bloquent-fourreau-telecom" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/blog/cable-bloque-fourreau-telecom.jpg" alt="Pourquoi l'aiguille et le câble bloquent dans le fourreau télécom" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Pourquoi l'aiguille et le câble bloquent dans le fourreau télécom ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Découvrez les causes principales de blocage d'aiguille ou de câble dans un fourreau télécom et les solutions.</p>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </article>
       </main>

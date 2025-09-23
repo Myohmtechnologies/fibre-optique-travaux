@@ -649,9 +649,52 @@ export default function DebouchageArticle() {
                 </div>
               </div>
             </div>
+
+            {/* Articles similaires */}
+            <div className="border-t border-gray-200 pt-10">
+              <h2 className="text-2xl font-bold mb-6 text-gray-800">À lire également</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/detection-regard-ptt" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/blog/detection-regard-ptt.jpeg" alt="Détection regard PTT" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Pourquoi réaliser la détection de votre regard PTT ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Un regard PTT introuvable bloque votre raccordement ? Découvrez pourquoi et comment nos experts le localisent rapidement.</p>
+                    </div>
+                  </Link>
+                </div>
+                
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/comment-deboucher-reparer-fourreau-gaine" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/blog/debouchage-fourreau.jpg" alt="Déboucher un fourreau télécom" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Comment déboucher un fourreau bloqué ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Le guide complet pour comprendre, localiser et résoudre un problème de gaine ou fourreau bouché.</p>
+                    </div>
+                  </Link>
+                </div>
+                
+                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border">
+                  <Link href="/blog/pourquoi-confier-travaux-telecom-entreprise" className="block">
+                    <div className="relative h-48">
+                      <Image src="/images/nos-service.png" alt="Pourquoi confier ses travaux télécom à une entreprise" fill style={{objectFit: "cover"}}/>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg text-gray-800 hover:text-construction-orange">Pourquoi confier vos travaux télécom à notre entreprise ?</h3>
+                      <p className="text-sm text-gray-600 mt-2">Découvrez notre expertise et notre garantie de réussite à 100% pour votre raccordement fibre optique.</p>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </article>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -167,10 +167,14 @@ export default function DeboucherReparerFourreau() {
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="md:w-2/5">
                     <Image src="/images/carte-paca.png" alt="Carte de France des zones d'intervention" width={400} height={400} className="drop-shadow-md mx-auto"/>
-                    <div className="mt-6 bg-construction-orange text-white p-4 rounded-lg text-center shadow-lg">
-                      <p className="text-2xl font-bold">07.87.17.91.86</p>
-                      <p className="uppercase text-sm font-semibold">Contactez-nous pour une intervention</p>
-                    </div>
+                    <a 
+                      href="tel:+33631372701" 
+                      className="mt-6 bg-construction-orange hover:bg-orange-600 text-white p-4 rounded-lg text-center shadow-lg hover:shadow-xl transition-all duration-200 block group"
+                      title="Appeler maintenant"
+                    >
+                      <p className="text-2xl font-bold group-hover:scale-105 transition-transform">06 31 37 27 01</p>
+                      <p className="uppercase text-sm font-semibold opacity-90 group-hover:opacity-100">📞 Contactez-nous pour une intervention</p>
+                    </a>
                   </div>
                   <div className="md:w-3/5">
                     <p className="text-lg mb-4">Nous intervenons principalement en <strong>PACA, Occitanie, Auvergne-Rhône-Alpes et Île-de-France</strong>.</p>
@@ -233,13 +237,13 @@ export default function DeboucherReparerFourreau() {
 
                   {/* Card 2 */}
                   <article className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border">
-                    <Link href="/blog/comment-trouver-regard-france-telecom" className="block">
+                    <Link href="/blog/qui-appeler-debouchage-fourreau-telecom" className="block">
                       <div className="relative h-48">
-                        <Image src="/images/blog/regard-france-telecom.jpg" alt="Comment trouver un regard France Télécom ?" fill className="object-cover" />
+                        <Image src="/images/blog/debouchage-fourreau-telecom.jpg" alt="Qui appeler pour le débouchage d'un fourreau télécom" fill className="object-cover" />
                       </div>
                       <div className="p-4">
-                        <h3 className="font-bold text-lg text-gray-800 mb-1">Comment trouver un regard France Télécom ?</h3>
-                        <p className="text-sm text-gray-600">Le technicien vous demande de trouver le regard France Télécom ? Suivez notre guide pour le localiser sur votre propriété.</p>
+                        <h3 className="font-bold text-lg text-gray-800 mb-1">Qui appeler pour le débouchage d'un fourreau télécom ?</h3>
+                        <p className="text-sm text-gray-600">Fourreau télécom bouché ? Découvrez quel professionnel contacter pour déboucher votre gaine efficacement.</p>
                       </div>
                     </Link>
                   </article>

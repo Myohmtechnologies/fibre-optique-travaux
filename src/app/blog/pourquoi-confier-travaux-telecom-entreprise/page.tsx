@@ -186,13 +186,17 @@ export default function ConfierTravauxEntreprise() {
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="md:w-2/5">
                     <Image src="/images/carte-paca.png" alt="Carte de France des zones d'intervention" width={400} height={400} className="drop-shadow-md mx-auto"/>
-                    <div className="mt-6 bg-construction-orange text-white p-4 rounded-lg text-center shadow-lg">
-                      <p className="text-2xl font-bold">07.87.17.91.86</p>
-                      <p className="uppercase text-sm font-semibold">Contactez-nous pour une intervention</p>
-                    </div>
+                    <a 
+                      href="tel:+33631372701" 
+                      className="mt-6 bg-construction-orange hover:bg-orange-600 text-white p-4 rounded-lg text-center shadow-md hover:shadow-lg transition-all duration-200 block"
+                      title="Appeler maintenant"
+                    >
+                      <p className="text-xl font-bold">06 31 37 27 01</p>
+                      <p className="text-sm font-medium opacity-90">Contactez-nous pour une intervention</p>
+                    </a>
                   </div>
                   <div className="md:w-3/5">
-                    <p className="text-lg mb-4">Nous intervenons principalement en <strong>PACA, Occitanie, Auvergne-Rhône-Alpes et Île-de-France</strong>.</p>
+                    <p className="text-lg mb-4">Nous intervenons principalement partout dans la region  <strong>PACA</strong>.</p>
                     <p className="text-lg mb-4">Grâce à notre expertise, nous garantissons une solution fiable pour tout problème de fourreau bouché ou endommagé, avec une intervention sous 48h dans les grandes agglomérations.</p>
                   </div>
                 </div>
