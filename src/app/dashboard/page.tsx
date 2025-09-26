@@ -368,18 +368,18 @@ export default function Dashboard() {
       <Sidebar />
       
       <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Tableau de bord</h1>
-            <div className="flex space-x-4">
+        <div className="p-4 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 md:mb-8 space-y-4 sm:space-y-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Tableau de bord</h1>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
               <button 
-                className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
+                className="px-3 py-2 md:px-4 md:py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors text-sm md:text-base w-full sm:w-auto"
                 onClick={() => fetchQuotes()}
               >
                 Actualiser
               </button>
               <button 
-                className="px-4 py-2 bg-fiber-gray text-white rounded-md hover:bg-fiber-gray/90 transition-colors"
+                className="px-3 py-2 md:px-4 md:py-2 bg-fiber-gray text-white rounded-md hover:bg-fiber-gray/90 transition-colors text-sm md:text-base w-full sm:w-auto"
                 onClick={() => {/* Fonction de déconnexion */}}
               >
                 Déconnexion
@@ -393,12 +393,12 @@ export default function Dashboard() {
           </div>
 
           {/* Demandes récentes */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-800">Demandes récentes</h2>
+          <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6 md:mb-8">
+            <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-800">Demandes récentes</h2>
               <Link 
                 href="/dashboard/quotes"
-                className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium"
+                className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium self-start sm:self-auto"
               >
                 Voir toutes les demandes
               </Link>
@@ -420,17 +420,18 @@ export default function Dashboard() {
           {/* Messages de contact */}
           {contactMessages && contactMessages.length > 0 ? (
             <div className="mt-6">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-2 sm:space-y-0">
                 <h3 className="text-lg font-semibold text-gray-800">Messages de Contact</h3>
                 <Link 
                   href="/dashboard/contact" 
-                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors"
+                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors self-start sm:self-auto"
                 >
                   Voir tous les messages
                 </Link>
               </div>
               
-              <div className="overflow-x-auto">
+              {/* Version desktop - Tableau */}
+              <div className="hidden lg:block overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
@@ -440,6 +441,7 @@ export default function Dashboard() {
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -458,20 +460,61 @@ export default function Dashboard() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {getStatusPill(message.status)}
                         </td>
-                       
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {renderActionButtons(message)}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+
+              {/* Version mobile - Cards */}
+              <div className="lg:hidden bg-white rounded-xl shadow-md overflow-hidden">
+                <div className="divide-y divide-gray-200">
+                  {contactMessages.slice(0, 5).map((message, index) => (
+                    <div key={index} className="p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-medium text-gray-900 truncate">{message.name}</h4>
+                          <p className="text-sm text-gray-500">{message.email}</p>
+                          <p className="text-sm text-gray-500">{message.phone}</p>
+                        </div>
+                        <div className="flex-shrink-0 ml-3">
+                          {getStatusPill(message.status)}
+                        </div>
+                      </div>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs text-gray-400">Adresse:</p>
+                        <p className="text-sm text-gray-600">{`${message.address}, ${message.postalCode}`}</p>
+                      </div>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs text-gray-400">Message:</p>
+                        <p className="text-sm text-gray-600 line-clamp-2">{message.message}</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-400">
+                          {new Date(message.createdAt).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', ' ')}
+                        </span>
+                        <div className="flex space-x-2">
+                          {renderActionButtons(message)}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           ) : (
             <div className="mt-6">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-2 sm:space-y-0">
                 <h3 className="text-lg font-semibold text-gray-800">Messages de Contact</h3>
                 <Link 
                   href="/dashboard/contact" 
-                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors"
+                  className="text-sm text-fiber-orange hover:text-fiber-orange/80 transition-colors self-start sm:self-auto"
                 >
                   Voir tous les messages
                 </Link>
@@ -483,26 +526,26 @@ export default function Dashboard() {
           )}
 
           {/* Réalisations */}
-          <div className="mt-6 bg-white rounded-xl shadow-md overflow-hidden mb-8">
-            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-800">Réalisations</h2>
+          <div className="mt-6 bg-white rounded-xl shadow-md overflow-hidden mb-6 md:mb-8">
+            <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-800">Réalisations</h2>
               <Link 
                 href="/dashboard/realizations"
-                className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium"
+                className="text-fiber-orange hover:text-fiber-orange/80 text-sm font-medium self-start sm:self-auto"
               >
                 Gérer les réalisations
               </Link>
             </div>
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <p className="text-gray-600">
                 Gérez vos réalisations et projets terminés pour les mettre en avant sur votre site.
               </p>
               <div className="mt-4">
                 <Link 
                   href="/dashboard/realizations"
-                  className="inline-flex items-center px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors w-full sm:w-auto text-sm md:text-base"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 h-4 md:h-5 md:w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                   Ajouter une réalisation
@@ -513,25 +556,25 @@ export default function Dashboard() {
 
           {/* Information sur le service de déblocage d'installation fibre */}
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-800">Service de déblocage d'installation fibre</h2>
+            <div className="p-4 md:p-6 border-b border-gray-200">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-800">Service de déblocage d'installation fibre</h2>
             </div>
-            <div className="p-6">
-              <div className="bg-blue-50 p-4 rounded-md">
+            <div className="p-4 md:p-6">
+              <div className="bg-blue-50 p-3 md:p-4 rounded-md">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="h-4 w-4 md:h-5 md:w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <div className="ml-3 flex-1 md:flex md:justify-between">
-                    <p className="text-sm text-blue-700">
+                  <div className="ml-3 flex-1">
+                    <p className="text-xs md:text-sm text-blue-700">
                       Rappel : Ce service n'est pas un service d'urgence mais un service de déblocage qui permet au client de ne pas attendre un nouveau rendez-vous avec son opérateur.
                     </p>
                   </div>
                 </div>
               </div>
-              <p className="mt-4 text-gray-600">
+              <p className="mt-4 text-sm md:text-base text-gray-600">
                 Le site propose un service spécifique pour débloquer les installations de fibre optique lorsque le technicien de l'opérateur ne peut pas finaliser l'installation en raison de travaux nécessaires (perçage, passage de gaines, etc.).
               </p>
             </div>
@@ -539,15 +582,15 @@ export default function Dashboard() {
 
           {/* Modal pour afficher les détails d'une demande */}
           {selectedRequest && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <motion.div 
-                className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4"
+                className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
               >
-                <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-gray-800">Détails de la demande</h3>
+                <div className="p-4 md:p-6 border-b border-gray-200 flex justify-between items-center">
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-800">Détails de la demande</h3>
                   <button 
                     onClick={() => setSelectedRequest(null)}
                     className="text-gray-500 hover:text-gray-700"
@@ -557,8 +600,8 @@ export default function Dashboard() {
                     </svg>
                   </button>
                 </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="p-4 md:p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Nom</p>
                       <p className="font-medium">{selectedRequest.fullName}</p>
@@ -600,13 +643,13 @@ export default function Dashboard() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-end space-x-3 mt-6">
+                  <div className="flex flex-col md:flex-row justify-end space-y-2 md:space-y-0 md:space-x-3 mt-6">
                     <button 
                       onClick={() => {
                         updateRequestStatus(selectedRequest._id?.toString() || '', 'cancelled');
                         setSelectedRequest(null);
                       }}
-                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 w-full md:w-auto"
                     >
                       Annuler la demande
                     </button>
@@ -620,7 +663,7 @@ export default function Dashboard() {
                         updateRequestStatus(selectedRequest._id?.toString() || '', nextStatus);
                         setSelectedRequest(null);
                       }}
-                      className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90"
+                      className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 w-full md:w-auto"
                     >
                       {selectedRequest.status === 'new' && 'Marquer comme contacté'}
                       {selectedRequest.status === 'contacted' && 'Planifier RDV'}
@@ -636,15 +679,15 @@ export default function Dashboard() {
           {/* Modal pour gérer un message de contact */}
                     {/* Modal pour VOIR un message de contact */}
           {isViewModalOpen && selectedMessage && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <motion.div 
-                className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-6"
+                className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 md:p-6"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Détails du Message</h3>
-                <div className="space-y-2 text-sm">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">Détails du Message</h3>
+                <div className="space-y-2 text-xs md:text-sm">
                   <p><strong>Nom:</strong> {selectedMessage.name}</p>
                   <p><strong>Email:</strong> {selectedMessage.email}</p>
                   <p><strong>Téléphone:</strong> {selectedMessage.phone}</p>
@@ -655,7 +698,7 @@ export default function Dashboard() {
                   {selectedMessage.appointmentDate && <p><strong>Date RDV:</strong> {new Date(selectedMessage.appointmentDate).toLocaleString('fr-FR')}</p>}
                 </div>
                 <div className="mt-6 flex justify-end">
-                                    <button onClick={closeViewModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Fermer</button>
+                                    <button onClick={closeViewModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 w-full md:w-auto">Fermer</button>
                 </div>
               </motion.div>
             </div>
@@ -663,14 +706,14 @@ export default function Dashboard() {
 
                     {/* Modal pour MODIFIER un message de contact (Planifier RDV) */}
           {isEditModalOpen && selectedMessage && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <motion.div 
-                className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-6"
+                className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 md:p-6"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
               >
-                                <h3 className="text-xl font-semibold text-gray-800 mb-4">Planifier un RDV pour {selectedMessage.name}</h3>
+                                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">Planifier un RDV pour {selectedMessage.name}</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Notes</label>
@@ -691,9 +734,9 @@ export default function Dashboard() {
                     />
                   </div>
                 </div>
-                <div className="mt-6 flex justify-end space-x-3">
-                                    <button onClick={closeEditModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annuler</button>
-                  <button onClick={handleUpdateContactMessage} className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90">Enregistrer</button>
+                <div className="mt-6 flex flex-col md:flex-row justify-end space-y-2 md:space-y-0 md:space-x-3">
+                                    <button onClick={closeEditModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 w-full md:w-auto">Annuler</button>
+                  <button onClick={handleUpdateContactMessage} className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 w-full md:w-auto">Enregistrer</button>
                 </div>
               </motion.div>
             </div>

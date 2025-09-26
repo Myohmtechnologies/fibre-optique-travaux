@@ -311,21 +311,21 @@ export default function QuotesPage() {
       <Sidebar />
       
       <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Demandes de devis</h1>
-            <div className="flex space-x-4">
+        <div className="p-4 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 md:mb-8 space-y-4 sm:space-y-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Demandes de devis</h1>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
               <button 
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors flex items-center"
+                className="px-3 py-2 md:px-4 md:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors flex items-center justify-center text-sm md:text-base"
                 onClick={openAddLeadModal}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
                 Ajouter un lead
               </button>
               <button 
-                className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors"
+                className="px-3 py-2 md:px-4 md:py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 transition-colors text-sm md:text-base"
                 onClick={() => fetchQuotes()}
               >
                 Actualiser
@@ -334,7 +334,7 @@ export default function QuotesPage() {
           </div>
 
           {/* Filtres et recherche */}
-          <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+          <div className="bg-white rounded-xl shadow-md p-4 md:p-6 mb-6 md:mb-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-1">
@@ -446,108 +446,190 @@ export default function QuotesPage() {
                   'Aucune demande de devis pour le moment.'}
               </div>
             ) : (
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Client
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Environnement
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Type
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Opérateur
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Statut
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {sortedRequests.map((request) => {
-                    const envInfo = getEnvironmentInfo(request.environment);
-                    const housingInfo = getHousingTypeInfo(request.housingType);
-                    const operatorInfo = getOperatorInfo(request.operator);
-                    const statusInfo = getStatusInfo(request.status);
-                    
-                    return (
-                      <tr key={request._id?.toString()} className="hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedRequest(request)}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {formatDate(request.createdAt)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{request.fullName}</div>
-                          <div className="text-sm text-gray-500">{request.phone}</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <span className="text-xl mr-2">{envInfo.icon}</span>
-                            <span className="text-sm text-gray-900">{envInfo.name}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <span className="text-xl mr-2">{housingInfo.icon}</span>
-                            <span className="text-sm text-gray-900">{housingInfo.name}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {operatorInfo.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusInfo.color}`}>
-                            {statusInfo.name}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedRequest(request);
-                            }} 
-                            className="text-fiber-orange hover:text-fiber-orange/80 mr-3"
-                          >
-                            Voir
-                          </button>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const nextStatus = 
-                                request.status === 'new' ? 'contacted' :
-                                request.status === 'contacted' ? 'scheduled' :
-                                request.status === 'scheduled' ? 'completed' : 'completed';
-                              
-                              // Si on passe à scheduled, ouvrir la modale d'édition
-                              if (request.status === 'contacted' && nextStatus === 'scheduled') {
-                                openEditModal(request);
-                              } else {
-                                updateRequestStatus(request._id?.toString() || '', nextStatus);
-                              }
-                            }} 
-                            className="text-blue-600 hover:text-blue-900"
-                            disabled={request.status === 'completed' || request.status === 'cancelled'}
-                          >
-                            {request.status === 'new' && 'Contacter'}
-                            {request.status === 'contacted' && 'En cours'}
-                            {request.status === 'scheduled' && 'Terminer'}
-                            {request.status === 'completed' && 'Terminé'}
-                            {request.status === 'cancelled' && 'Annulé'}
-                          </button>
-                        </td>
+              <>
+                {/* Version desktop - Tableau */}
+                <div className="hidden lg:block">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Client
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Environnement
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Type
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Opérateur
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Statut
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Actions
+                        </th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {sortedRequests.map((request) => {
+                        const envInfo = getEnvironmentInfo(request.environment);
+                        const housingInfo = getHousingTypeInfo(request.housingType);
+                        const operatorInfo = getOperatorInfo(request.operator);
+                        const statusInfo = getStatusInfo(request.status);
+                        
+                        return (
+                          <tr key={request._id?.toString()} className="hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedRequest(request)}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {formatDate(request.createdAt)}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm font-medium text-gray-900">{request.fullName}</div>
+                              <div className="text-sm text-gray-500">{request.phone}</div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="flex items-center">
+                                <span className="text-xl mr-2">{envInfo.icon}</span>
+                                <span className="text-sm text-gray-900">{envInfo.name}</span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="flex items-center">
+                                <span className="text-xl mr-2">{housingInfo.icon}</span>
+                                <span className="text-sm text-gray-900">{housingInfo.name}</span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {operatorInfo.name}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusInfo.color}`}>
+                                {statusInfo.name}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedRequest(request);
+                                }} 
+                                className="text-fiber-orange hover:text-fiber-orange/80 mr-3"
+                              >
+                                Voir
+                              </button>
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const nextStatus = 
+                                    request.status === 'new' ? 'contacted' :
+                                    request.status === 'contacted' ? 'scheduled' :
+                                    request.status === 'scheduled' ? 'completed' : 'completed';
+                                  
+                                  // Si on passe à scheduled, ouvrir la modale d'édition
+                                  if (request.status === 'contacted' && nextStatus === 'scheduled') {
+                                    openEditModal(request);
+                                  } else {
+                                    updateRequestStatus(request._id?.toString() || '', nextStatus);
+                                  }
+                                }} 
+                                className="text-blue-600 hover:text-blue-900"
+                                disabled={request.status === 'completed' || request.status === 'cancelled'}
+                              >
+                                {request.status === 'new' && 'Contacter'}
+                                {request.status === 'contacted' && 'En cours'}
+                                {request.status === 'scheduled' && 'Terminer'}
+                                {request.status === 'completed' && 'Terminé'}
+                                {request.status === 'cancelled' && 'Annulé'}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Version mobile - Cards */}
+                <div className="lg:hidden">
+                  <div className="divide-y divide-gray-200">
+                    {sortedRequests.map((request) => {
+                      const envInfo = getEnvironmentInfo(request.environment);
+                      const housingInfo = getHousingTypeInfo(request.housingType);
+                      const operatorInfo = getOperatorInfo(request.operator);
+                      const statusInfo = getStatusInfo(request.status);
+                      
+                      return (
+                        <div key={request._id?.toString()} className="p-4 hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedRequest(request)}>
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-sm font-medium text-gray-900 truncate">{request.fullName}</h3>
+                              <p className="text-sm text-gray-500">{request.phone}</p>
+                              <p className="text-xs text-gray-400 mt-1">{formatDate(request.createdAt)}</p>
+                            </div>
+                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusInfo.color} flex-shrink-0`}>
+                              {statusInfo.name}
+                            </span>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-3 mb-3">
+                            <div className="flex items-center text-sm">
+                              <span className="mr-2">{envInfo.icon}</span>
+                              <span className="text-gray-600 truncate">{envInfo.name}</span>
+                            </div>
+                            <div className="flex items-center text-sm">
+                              <span className="mr-2">{housingInfo.icon}</span>
+                              <span className="text-gray-600 truncate">{housingInfo.name}</span>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">{operatorInfo.name}</span>
+                            <div className="flex space-x-2">
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedRequest(request);
+                                }} 
+                                className="px-3 py-1 text-xs bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90"
+                              >
+                                Voir
+                              </button>
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const nextStatus = 
+                                    request.status === 'new' ? 'contacted' :
+                                    request.status === 'contacted' ? 'scheduled' :
+                                    request.status === 'scheduled' ? 'completed' : 'completed';
+                                  
+                                  // Si on passe à scheduled, ouvrir la modale d'édition
+                                  if (request.status === 'contacted' && nextStatus === 'scheduled') {
+                                    openEditModal(request);
+                                  } else {
+                                    updateRequestStatus(request._id?.toString() || '', nextStatus);
+                                  }
+                                }} 
+                                className="px-3 py-1 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled={request.status === 'completed' || request.status === 'cancelled'}
+                              >
+                                {request.status === 'new' && 'Contacter'}
+                                {request.status === 'contacted' && 'En cours'}
+                                {request.status === 'scheduled' && 'Terminer'}
+                                {request.status === 'completed' && 'Terminé'}
+                                {request.status === 'cancelled' && 'Annulé'}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -557,9 +639,9 @@ export default function QuotesPage() {
       {selectedRequest && !isEditModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">Détails de la demande</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800">Détails de la demande</h2>
                 <button 
                   onClick={() => setSelectedRequest(null)}
                   className="text-gray-400 hover:text-gray-500"
@@ -571,8 +653,8 @@ export default function QuotesPage() {
               </div>
             </div>
             
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="p-4 md:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Informations client</h3>
                   <div className="space-y-3">
@@ -671,7 +753,7 @@ export default function QuotesPage() {
               
               <div className="border-t border-gray-200 pt-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Changer le statut</h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2">
                   {statuses.map(status => (
                     <button
                       key={status.id}
@@ -697,10 +779,10 @@ export default function QuotesPage() {
               </div>
             </div>
             
-            <div className="p-6 border-t border-gray-200 flex justify-end">
+            <div className="p-4 md:p-6 border-t border-gray-200 flex justify-end">
               <button
                 onClick={() => setSelectedRequest(null)}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors w-full md:w-auto"
               >
                 Fermer
               </button>
@@ -711,14 +793,14 @@ export default function QuotesPage() {
       
       {/* Modal d'édition pour planifier un RDV */}
       {isEditModalOpen && selectedRequest && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <motion.div 
-            className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-6"
+            className="bg-white rounded-xl shadow-xl max-w-2xl w-full p-4 md:p-6"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Planifier un RDV pour {selectedRequest.fullName}</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">Planifier un RDV pour {selectedRequest.fullName}</h3>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Notes</label>
@@ -739,9 +821,9 @@ export default function QuotesPage() {
                 />
               </div>
             </div>
-            <div className="mt-6 flex justify-end space-x-3">
-              <button onClick={closeEditModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annuler</button>
-              <button onClick={handleUpdateQuote} className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90">Enregistrer</button>
+            <div className="mt-6 flex flex-col md:flex-row justify-end space-y-2 md:space-y-0 md:space-x-3">
+              <button onClick={closeEditModal} className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 w-full md:w-auto">Annuler</button>
+              <button onClick={handleUpdateQuote} className="px-4 py-2 bg-fiber-orange text-white rounded-md hover:bg-fiber-orange/90 w-full md:w-auto">Enregistrer</button>
             </div>
           </motion.div>
         </div>
@@ -756,9 +838,9 @@ export default function QuotesPage() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">Ajouter un lead manuellement</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800">Ajouter un lead manuellement</h2>
                 <button 
                   onClick={closeAddLeadModal}
                   className="text-gray-400 hover:text-gray-500"
@@ -770,8 +852,8 @@ export default function QuotesPage() {
               </div>
             </div>
             
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 md:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {/* Informations client */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-medium text-gray-900">Informations client</h3>
@@ -899,16 +981,16 @@ export default function QuotesPage() {
               </div>
             </div>
             
-            <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
+            <div className="p-4 md:p-6 border-t border-gray-200 flex flex-col md:flex-row justify-end space-y-2 md:space-y-0 md:space-x-3">
               <button
                 onClick={closeAddLeadModal}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors w-full md:w-auto"
               >
                 Annuler
               </button>
               <button
                 onClick={handleAddLead}
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors w-full md:w-auto"
               >
                 Ajouter le lead
               </button>
