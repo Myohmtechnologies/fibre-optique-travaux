@@ -173,7 +173,7 @@ export default function Tarifs() {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Devis gratuit pour les travaux</p>
+                        <p className="font-semibold text-gray-900">Proposition d'un devis pour les travaux nécessaires</p>
                         <p className="text-sm text-gray-600">Conseils techniques personnalisés inclus</p>
                       </div>
                     </div>
