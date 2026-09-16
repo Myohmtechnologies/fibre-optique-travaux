@@ -13,6 +13,17 @@ export type StaticBlogPost = {
 // Ajoutez ici toute nouvelle page statique pour qu'elle remonte dans /blog
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
   {
+    _id: 'static-aide-raccordement-fibre-2026',
+    title: 'Aide raccordement fibre 2026 : jusqu’à 1 200 € pour vos travaux',
+    slug: 'aide-raccordement-fibre-2026',
+    excerpt:
+      "Votre raccordement fibre est impossible (fourreau bouché, regard introuvable) ? Découvrez la nouvelle aide financière de l'État gérée par l'ASP : forfaits de 400 €, 800 € ou 1 200 €, conditions d'éligibilité et démarches.",
+    image: '/images/blog/aides-de-letat.png',
+    author: 'Expert Fibre Optique',
+    date: '2026-03-01T00:00:00.000Z',
+    categories: ['aide état', 'raccordement fibre', 'travaux', 'ASP', 'guide 2026'],
+  },
+  {
     _id: 'static-solutions-rapides-cable-fibre-sectionne',
     title: 'Comment sont réparées les fibres optiques coupées ou vandalisées',
     slug: 'solutions-rapides-cable-fibre-sectionne',
